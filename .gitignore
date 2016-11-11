@@ -1,8 +1,9 @@
 *.iml
 /local.properties
-.idea/
-build/
-app/libs/
-libs/
+/.idea
+.DS_Store
+/build
+.gitignore
+proguard-rules.pro
+/gradlew.bat
 /.gradle/
-/gradle/
