@@ -14,4 +14,20 @@
     tools:context="by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.UserRoomActivity"
     tools:showIn="@layout/app_bar_user_room">
 
+
+    <TextView
+        android:text="Hello User in room"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="20dp"
+
+        android:textSize="30sp"
+
+        android:id="@+id/textView2"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>
