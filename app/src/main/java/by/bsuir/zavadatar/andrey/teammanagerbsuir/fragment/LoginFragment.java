@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.UserRoomActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -64,9 +67,10 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private Button mSingIn;
+    private Context mContext;
     private View mProgressView;
     private View mLoginFormView;
-    private Context mContext;
 
     /**
      * Метод создания фрагмента и построения информации в нём.
@@ -96,12 +100,23 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    
                     return true;
                 }
                 return false;
             }
         });
+
+        mSingIn = (Button) view.findViewById(R.id.email_sign_in_button);
+        mSingIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptLogin();
+            }
+        });
+
+        mLoginFormView = view.findViewById(R.id.login_form);
+        mProgressView = view.findViewById(R.id.login_progress);
 
         return view;
     }
@@ -327,16 +342,12 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
+            if(DUMMY_CREDENTIALS[0].equals(mEmail) &&
+                    DUMMY_CREDENTIALS[1].equals(mPassword))
+                return true;
+            else{
+                return false;
             }
-
-            // TODO: register the new account here.
-            return true;
         }
 
         @Override
@@ -346,7 +357,8 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
 
             if (success) {
 
-                //TODO-Andrey если успешный вход
+                startActivity(UserRoomActivity.newIntent(getActivity()));
+                
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
