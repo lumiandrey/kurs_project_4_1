@@ -7,8 +7,12 @@
     <string name="error_incorrect_password">Пароль не корректно введен</string>
     <string name="error_invalid_email">Логин некорректен</string>
     <string name="error_invalid_password">Пароль очень короткий</string>
-    <string name="permission_rationale">Разрешения контактов необходимы для обеспечения почтовых завершений.</string>
+    <string name="permission_rationale">Разрешение чтения контактов необходимы для обеспечения чтения списка электронных почт.</string>
     <string name="prompt_email">Логин или электронная почта</string>
     <string name="prompt_password">Пароль</string>
     <string name="title_activity_login">Авторизация</string>
+    <string name="navigation_drawer_close">Закрыть нафигационную панель</string>
+    <string name="navigation_drawer_open">Открыть навигационную панель</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_user_room">Кабинет пользователя</string>
 </resources>
