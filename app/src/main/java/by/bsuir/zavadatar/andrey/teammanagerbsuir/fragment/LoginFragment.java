@@ -51,10 +51,10 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
 
     /**
      * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
+     * TODO-Andrey: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "root", "root"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -204,12 +204,13 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        //return email.contains("@");
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     /**
