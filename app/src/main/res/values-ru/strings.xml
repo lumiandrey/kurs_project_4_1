@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Team manager</string>
+    <string name="error_field_required">Это поле обязательно к заполнению</string>
+    <string name="action_sign_in">Вход</string>
+    <string name="action_sign_in_short">Вход</string>
+    <string name="error_incorrect_password">Пароль не корректно введен</string>
+    <string name="error_invalid_email">Логин некорректен</string>
+    <string name="error_invalid_password">Пароль очень короткий</string>
+    <string name="permission_rationale">Разрешения контактов необходимы для обеспечения почтовых завершений.</string>
+    <string name="prompt_email">Логин или электронная почта</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="title_activity_login">Авторизация</string>
+</resources>
