@@ -15,4 +15,5 @@
     <string name="navigation_drawer_open">Открыть навигационную панель</string>
     <string name="action_settings">Настройки</string>
     <string name="title_activity_user_room">Кабинет пользователя</string>
+    <string name="list_task_empty">Список пустой. Нажмите для создания новой задачи</string>
 </resources>
