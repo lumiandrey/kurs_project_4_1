@@ -1,14 +1,25 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.entity;
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
+
 /**
  * Created by Andrey on 27.11.2016.
  */
 public class TaskEntity {
+
+    private static final String TAG = TaskEntity.class.getName();
+
     private Integer idTask;
     private String name;
     private String description;
-    private String dateBegin;
-    private String dateEnd;
+    private Date dateBegin;
+    private Date dateEnd;
     private Integer done;
     private Integer progress;
     private int idTypeTask;
@@ -38,20 +49,47 @@ public class TaskEntity {
         this.description = description;
     }
 
-    public String getDateBegin() {
+    public Date getDateBegin() {
         return dateBegin;
     }
 
-    public void setDateBegin(String dateBegin) {
+    public String getDateBeginString(){
+        return DateConvert.getDate(dateBegin);
+    }
+
+    public void setDateBegin(Date dateBegin) {
         this.dateBegin = dateBegin;
     }
 
-    public String getDateEnd() {
+    public void setDateBegin(String dateBegin) {
+        try {
+            this.dateBegin = DateConvert.getDate(dateBegin);
+        } catch (ParseException e) {
+            Log.e(TAG, "Error parse date");
+            this.dateBegin = new Date();
+        }
+    }
+
+    public Date getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(String dateEnd) {
+    public String getDateEndString(){
+        return DateConvert.getDate(dateEnd);
+    }
+
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public void setDateEnd(String dateEnd) {
+
+        try {
+            this.dateEnd = DateConvert.getDate(dateEnd);
+        } catch (ParseException e) {
+            Log.e(TAG, "Error parse date");
+            this.dateBegin = new Date();
+        }
     }
 
     public Integer getDone() {
@@ -85,6 +123,12 @@ public class TaskEntity {
     public void setIdPersonAdd(int idPersonAdd) {
         this.idPersonAdd = idPersonAdd;
     }
+
+    public boolean isDone(){
+        return done != 0;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
