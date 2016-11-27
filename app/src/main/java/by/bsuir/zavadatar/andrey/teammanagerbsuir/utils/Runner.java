@@ -2,6 +2,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.utils;
 
 import android.app.Application;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import org.acra.ACRA;
@@ -25,7 +26,10 @@ public class Runner extends Application {
         super.onCreate();
 
         Lookup lookup = Lookup.getInstance();
-        lookup.put(new ApplicationBaseHelper(getApplicationContext()));
+
+        SQLiteDatabase sqLiteDatabase = new ApplicationBaseHelper(getApplicationContext()).getWritableDatabase();
+
+        lookup.put(sqLiteDatabase);
 
         Log.d(TAG, "Create Application");
     }
