@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.db;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db;
 
 /**
  * Created by Andrey on 27.11.2016.
