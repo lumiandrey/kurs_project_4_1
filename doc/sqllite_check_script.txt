@@ -1,0 +1,128 @@
+CREATE TABLE country (
+	id_country integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name_country string ,
+	key_contry string ,
+	key_phone string 
+)
+
+CREATE TABLE city ( 
+	id_city integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name string,
+	code_phone string,
+	id_country integer NOT NULL,
+	FOREIGN KEY (id_country) REFERENCES country(id_country)
+)
+
+CREATE TABLE department (
+	id_department integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name_department string 
+)
+
+CREATE TABLE post (
+	id_post integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name_post string NOT NULL,
+	rate FLOAT 
+)
+
+CREATE TABLE type_user (
+	id_type integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name string NOT NULL,
+	access_level integer NOT NULL
+)
+
+CREATE TABLE user (
+	id_user integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	login string NOT NULL,
+	password string NOT NULL,
+	id_type_user integer NOT NULL,
+	FOREIGN KEY (id_type_user) REFERENCES type_user(id_type)
+)
+
+CREATE TABLE person (
+	id_person integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	surname string ,
+	name string ,
+	patronymic string,
+	date_of_birth DATE,
+	sex string,
+	e_mail string,
+	id_user integer NOT NULL,
+	id_post integer NOT NULL,
+	id_department integer NOT NULL,
+	id_city integer NOT NULL,
+	mobile_phone string,
+	home_phone string,
+	FOREIGN KEY (id_user) REFERENCES user(id_user),
+	FOREIGN KEY (id_post) REFERENCES post(id_post),
+	FOREIGN KEY (id_department) REFERENCES department(id_department),
+	FOREIGN KEY (id_city) REFERENCES city(id_city)
+)
+
+CREATE TABLE type_task (
+	id_type_task integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name_type string NOT NULL
+)
+
+CREATE TABLE task (
+	id_task integer PRIMARY KEY AUTOINCREMENT,
+	name string ,
+	description string,
+	date_begin DATE ,
+	date_end DATE,
+	done integer,
+	progress integer,
+	id_type_task integer NOT NULL,
+	id_person_add integer NOT NULL,
+	FOREIGN KEY (id_type_task) REFERENCES type_task(id_type_task),
+	FOREIGN KEY (id_person_add) REFERENCES person(id_person)
+	
+)
+
+CREATE TABLE has_task_person (
+	id_has_task_person integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	id_task integer NOT NULL,
+	id_person integer NOT NULL,
+	FOREIGN KEY (id_person) REFERENCES person(id_person),
+	FOREIGN KEY (id_task) REFERENCES task(id_task)
+)
+
+CREATE TABLE type_activity (
+	id_type_activity integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name_activity string NOT NULL
+)
+
+CREATE TABLE log_time_task (
+	id_log integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	date_log DATE NOT NULL,
+	discription string ,
+	links_ext_stor string,
+	id_type_activity integer NOT NULL,
+	id_has_task_person integer NOT NULL,
+	FOREIGN KEY (id_type_activity) REFERENCES type_activity(id_type_activity),
+	FOREIGN KEY (id_has_task_person) REFERENCES has_task_person(id_has_task_person)
+)
+
+ALTER TABLE city ADD CONSTRAINT city_fk0 FOREIGN KEY id_country REFERENCES country(id_country)
+
+ALTER TABLE has_task_person ADD CONSTRAINT has_task_person_fk0 FOREIGN KEY id_task REFERENCES taskid_task
+
+ALTER TABLE has_task_person ADD CONSTRAINT has_task_person_fk1 FOREIGN KEY id_person REFERENCES personid_person
+
+ALTER TABLE log_time_task ADD CONSTRAINT log_time_task_fk0 FOREIGN KEY id_type_activity REFERENCES type_activityid_type_activity
+
+ALTER TABLE log_time_task ADD CONSTRAINT log_time_task_fk1 FOREIGN KEY id_has_task_person REFERENCES has_task_personid_has_task_person
+
+ALTER TABLE person ADD CONSTRAINT person_fk0 FOREIGN KEY id_user) REFERENCES userid_user
+
+ALTER TABLE person ADD CONSTRAINT person_fk1 FOREIGN KEY id_post) REFERENCES postid_post
+
+ALTER TABLE person ADD CONSTRAINT person_fk2 FOREIGN KEY id_department) REFERENCES departmentid_department
+
+ALTER TABLE person ADD CONSTRAINT person_fk3 FOREIGN KEY id_city) REFERENCES cityid_city
+
+ALTER TABLE task ADD CONSTRAINT task_fk0 FOREIGN KEY id_type_task) REFERENCES type_taskid_type_task
+
+ALTER TABLE task ADD CONSTRAINT task_fk1 FOREIGN KEY id_person_add) REFERENCES personid_person
+
+ALTER TABLE user ADD CONSTRAINT user_fk0 FOREIGN KEY id_type_user) REFERENCES type_userid_type
+
