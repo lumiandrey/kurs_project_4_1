@@ -22,6 +22,7 @@ public class UserCursorWrapper extends CursorWrapper {
     public UserCursorWrapper(Cursor cursor) {
         super(cursor);
     }
+
     public UserEntity getUser(){
 
         UserEntity userEntity = new UserEntity();
