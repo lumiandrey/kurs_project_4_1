@@ -22,8 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserRoomActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".UserRoomActivity">
+        </activity>
+        <activity
+            android:name=".TaskListFragmentActivity">
         </activity>
     </application>
 
