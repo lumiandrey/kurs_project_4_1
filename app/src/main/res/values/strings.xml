@@ -22,4 +22,10 @@
     <string name="title_activity_login">Sign in</string>
 
     <string name="list_task_empty">List empty\n Click for create.</string>
+    <string name="tasks_title_menu_room">Tasks</string>
+
+    <!-- nav bar person -->
+    <string name="nav_bar_title_my_task">My Tasks</string>
+    <string name="nav_bar_title_done_task">Done Tasks</string>
+    <string name="nav_bar_title_current_tasks">Current Tasks</string>
 </resources>
