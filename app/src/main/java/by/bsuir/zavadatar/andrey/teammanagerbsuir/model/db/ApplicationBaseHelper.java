@@ -17,6 +17,9 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "timebase.db";
 
+    private static final String TEXT_TYPE = " TEXT";
+    private static final String INT_TYPE = " TEXT";
+
     public ApplicationBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
@@ -40,7 +43,7 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper {
                 CityTable.Colums.NAME + " string," +
                 CityTable.Colums.CODE_PHONE + " string," +
                 CityTable.Colums.ID_COUNTRY + " integer NOT NULL," +
-                "FOREIGN KEY (id_country) REFERENCES country(id_country)" +
+                CityTable.REF_COUNTRY +
                 ")");
 
         Log.d(TAG, "create table (city successfully)");
@@ -77,7 +80,7 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper {
                 UserTable.Colums.LOGIN + " string NOT NULL," +
                 UserTable.Colums.PASSWORD + " string NOT NULL," +
                 UserTable.Colums.ID_TYPE_USER + " integer NOT NULL," +
-                "FOREIGN KEY (id_type_user) REFERENCES type_user(id_type)"+
+                UserTable.REF_TYPE_USER +
                 ")");
 
         Log.d(TAG, "create table (user successfully)");
@@ -97,10 +100,10 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper {
                 PersonTable.Colums.ID_CITY + " integer NOT NULL," +
                 PersonTable.Colums.MOBILE_PHONE + " string," +
                 PersonTable.Colums.HOME_PHONE + " string," +
-                "FOREIGN KEY (id_user) REFERENCES user(id_user)," +
-                "FOREIGN KEY (id_post) REFERENCES post(id_post)," +
-                "FOREIGN KEY (id_department) REFERENCES department(id_department)," +
-                "FOREIGN KEY (id_city) REFERENCES city(id_city)"+
+                PersonTable.REF_USER + ',' +
+                PersonTable.REF_POST + ',' +
+                PersonTable.REF_DEPARTMENT + ',' +
+                PersonTable.REF_CITY +
                 ")");
 
         Log.d(TAG, "create table (person successfully)");
@@ -123,8 +126,8 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper {
                 TaskTable.Colums.PROGRESS + " integer," +
                 TaskTable.Colums.ID_TYPE_TASK + " integer NOT NULL," +
                 TaskTable.Colums.ID_PERSON_ADD + " integer NOT NULL," +
-                "FOREIGN KEY (id_type_task) REFERENCES type_task(id_type_task)," +
-                "FOREIGN KEY (id_person_add) REFERENCES person(id_person)"+
+                TaskTable.REF_TYPE_TASK + ',' +
+                TaskTable.REF_PERSON_ADD +
                 ")");
 
         Log.d(TAG, "create table (task successfully)");
@@ -134,8 +137,8 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper {
                 " integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
                 HasTaskPersonTable.Colums.ID_TASK + " integer NOT NULL," +
                 HasTaskPersonTable.Colums.ID_PERSON + " integer NOT NULL," +
-                "FOREIGN KEY (id_person) REFERENCES person(id_person)," +
-                "FOREIGN KEY (id_task) REFERENCES task(id_task)"+
+                HasTaskPersonTable.REF_PERSON + ',' +
+                HasTaskPersonTable.REF_TASK +
                 ")");
 
         Log.d(TAG, "create table (has_task_person successfully)");
@@ -154,8 +157,8 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper {
                 LogTimeTaskTable.Colums.LINKS_EXT_STOR + " string," +
                 LogTimeTaskTable.Colums.ID_TYPE_ACTIVITY + " integer NOT NULL," +
                 LogTimeTaskTable.Colums.ID_HAS_TASK_PERSON + " integer NOT NULL," +
-                "FOREIGN KEY (id_type_activity) REFERENCES type_activity(id_type_activity)," +
-                "FOREIGN KEY (id_has_task_person) REFERENCES has_task_person(id_has_task_person)"+
+                LogTimeTaskTable.REF_TYPE_ACTIVITY + ',' +
+                LogTimeTaskTable.REF_HAS_TASK_PERSON +
                 ")");
 
         Log.d(TAG, "create table (log_time_task successfully)");
