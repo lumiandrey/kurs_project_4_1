@@ -1,11 +1,8 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.UserEntity;
@@ -22,7 +19,9 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
 public class UserDaoLite implements UserDao{
 
     public static final String TAG = UserDaoLite.class.getName();
-    SQLiteDatabase mDatabase;
+    public static final String MSG_ERROR_READ = "Error read to data base UserDao";
+
+    private SQLiteDatabase mDatabase;
 
     public UserDaoLite(){
 
@@ -52,6 +51,8 @@ public class UserDaoLite implements UserDao{
             }
             cursorWrapper.moveToFirst();
             result = cursorWrapper.getUser();
+        } catch (Exception e){
+            Log.e(TAG, MSG_ERROR_READ, e);
         }
 
         return result;
@@ -67,6 +68,8 @@ public class UserDaoLite implements UserDao{
             }
             cursorWrapper.moveToFirst();
             result = cursorWrapper.getUser();
+        } catch (Exception e){
+            Log.e(TAG, MSG_ERROR_READ, e);
         }
 
         return result;
