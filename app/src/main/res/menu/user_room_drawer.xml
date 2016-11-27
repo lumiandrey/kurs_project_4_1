@@ -20,20 +20,20 @@
             android:title="Tools"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/tasks_title_menu_room">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_all_tasks_this_person"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
+                android:title="@string/nav_bar_title_my_task"/>
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_done_tasks_this_person"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
+                android:title="@string/nav_bar_title_done_task"/>
             <item
-                android:id="@+id/crash_report_send"
+                android:id="@+id/nav_current_tasks_this_person"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Exception"/>
+                android:title="@string/nav_bar_title_current_tasks"/>
         </menu>
     </item>
 
