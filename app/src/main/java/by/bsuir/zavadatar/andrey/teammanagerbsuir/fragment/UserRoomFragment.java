@@ -1,6 +1,7 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskListFragmentActivity;
 
 /**
  * Created by Andrey on 26.11.2016.
@@ -85,6 +87,9 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
         int id = item.getItemId();
 
         switch (id){
+            case R.id.nav_all_tasks_this_person:{
+                startActivity(new Intent(mContext, TaskListFragmentActivity.class));
+            } break;
             default:
                 Log.d(TAG, "Default Action (no action)");
         }
