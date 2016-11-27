@@ -41,7 +41,6 @@ public class UserDaoLite implements UserDao{
         return userEntity;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public UserEntity read(int id) {
 
@@ -58,7 +57,6 @@ public class UserDaoLite implements UserDao{
         return result;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public UserEntity read(String login) {
         UserEntity result = null;
