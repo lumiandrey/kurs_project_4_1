@@ -37,4 +37,11 @@
         </menu>
     </item>
 
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/lot_out_person"
+              android:icon="@drawable/ic_action_name"
+              android:title="@string/nav_bar_title_log_out"
+            />
+    </group>
+
 </menu>
