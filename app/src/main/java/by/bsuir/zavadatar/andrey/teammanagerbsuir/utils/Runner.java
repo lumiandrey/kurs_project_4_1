@@ -9,6 +9,8 @@ import org.acra.ReportField;
 import org.acra.config.ACRAConfiguration;
 import org.acra.config.ConfigurationBuilder;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationBaseHelper;
+
 /**
  * Created by Andrey on 26.11.2016.
  */
@@ -21,6 +23,9 @@ public class Runner extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Lookup lookup = Lookup.getInstance();
+        lookup.put(new ApplicationBaseHelper(getApplicationContext()));
 
         Log.d(TAG, "Create Application");
     }
