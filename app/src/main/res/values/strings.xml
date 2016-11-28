@@ -29,4 +29,8 @@
     <string name="nav_bar_title_done_task">Done Tasks</string>
     <string name="nav_bar_title_current_tasks">Current Tasks</string>
     <string name="nav_bar_title_log_out">Log out</string>
+
+    <string name="date_picker_title">Date of crime:</string>
+
+    <string name="time_picker_title">Time of crime:</string>
 </resources>
