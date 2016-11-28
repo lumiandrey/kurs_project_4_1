@@ -10,11 +10,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.TaskFragment;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 
 /**
  * Created by Andrey on 12.11.2016.
@@ -26,7 +29,7 @@ public class TaskPagerActivity extends AppCompatActivity {
     private static final String TAG = TaskPagerActivity.class.getName();
 
     private ViewPager mViewPager;
-    private List<TaskEntity> mCrimes;
+    private List<TaskEntity> mTaskEntities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class TaskPagerActivity extends AppCompatActivity {
         int taskId = getIntent().getIntExtra(EXTRA_TASK_ID, 0);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_task_pager_view_pager);
-        //получаем набор данных — контейнер List объектов .
+        mTaskEntities = TaskService.mTaskEntities;
 
         FragmentManager fragmentManager = getSupportFragmentManager();//получаем экземпляр FragmentManager для активности.
 
@@ -44,15 +47,15 @@ public class TaskPagerActivity extends AppCompatActivity {
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
             /**
-             * получает экземпляр Crime для заданной позиции в наборе данных,
+             * получает экземпляр Task для заданной позиции в наборе данных,
              * после чего использует его идентификатор для создания и возвращения
-             * правильно настроенного экземпляра CrimeFragment .
+             * правильно настроенного экземпляра Fragment .
              * @param position - позиция в списке
              * @return - настроенный фрагмент
              */
             @Override
             public Fragment getItem(int position) {
-                TaskEntity crime = mCrimes.get(position);
+                TaskEntity crime = mTaskEntities.get(position);
                 return TaskFragment.newInstance(crime.getIdTask());
             }
 
@@ -62,25 +65,25 @@ public class TaskPagerActivity extends AppCompatActivity {
              */
             @Override
             public int getCount() {
-                return mCrimes.size();
+                return mTaskEntities.size();
             }
         });
 
         //ищет с определенным индексом объект и запускает именно его
-        for (int i = 0; i < mCrimes.size(); i++) {
-            if (mCrimes.get(i).getIdTask().equals(taskId)) {
+        for (int i = 0; i < mTaskEntities.size(); i++) {
+            if (mTaskEntities.get(i).getIdTask().equals(taskId)) {
                 mViewPager.setCurrentItem(i);
                 break;
             }
         }
 
-        Log.d(TAG, "called CrimePagerActivity");
+        Log.d(TAG, "called TaskPagerActivity");
     }
 
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
+    public static Intent newIntent(Context packageContext, int taskId) {
         Intent intent = new Intent(packageContext, TaskPagerActivity.class);
 
-        intent.putExtra(EXTRA_TASK_ID, crimeId);
+        intent.putExtra(EXTRA_TASK_ID, taskId);
 
         return intent;
     }

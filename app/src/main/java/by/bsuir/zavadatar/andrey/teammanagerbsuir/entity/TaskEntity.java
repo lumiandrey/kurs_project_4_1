@@ -25,6 +25,21 @@ public class TaskEntity {
     private int idTypeTask;
     private int idPersonAdd;
 
+    public TaskEntity(){
+    }
+
+    public TaskEntity(Integer idTask, String name, String description, Date dateBegin, Date dateEnd, Integer done, Integer progress, int idTypeTask, int idPersonAdd) {
+        this.idTask = idTask;
+        this.name = name;
+        this.description = description;
+        this.dateBegin = dateBegin;
+        this.dateEnd = dateEnd;
+        this.done = done;
+        this.progress = progress;
+        this.idTypeTask = idTypeTask;
+        this.idPersonAdd = idPersonAdd;
+    }
+
     public Integer getIdTask() {
         return idTask;
     }

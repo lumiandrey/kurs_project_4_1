@@ -33,4 +33,9 @@
     <string name="date_picker_title">Date of crime:</string>
 
     <string name="time_picker_title">Time of crime:</string>
+
+    <plurals name="subtitle_plural">
+        <item quantity="one">%1$x task</item>
+        <item quantity="other">%1$x tasks</item>
+    </plurals>
 </resources>

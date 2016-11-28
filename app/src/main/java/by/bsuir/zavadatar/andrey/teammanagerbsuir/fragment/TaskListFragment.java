@@ -22,7 +22,9 @@ import java.util.List;
 
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskPagerActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 
 
 /**
@@ -36,7 +38,7 @@ public class TaskListFragment extends Fragment {
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
     public static final String CREATE_TASK_INTENT = "create task intent";
 
-    private RecyclerView mCrimeRecyclerView;
+    private RecyclerView mTaskRecyclerView;
     private TaskAdapter mAdapter;
     private boolean mSubtitleVisible;//для хранения признака видимости подзаголовка.
     private TextView mMessageEmpty;
@@ -78,10 +80,10 @@ public class TaskListFragment extends Fragment {
 
         });
 
-        mCrimeRecyclerView = (RecyclerView) view
+        mTaskRecyclerView = (RecyclerView) view
                 .findViewById(R.id.task_recycler_view);
 
-        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager
+        mTaskRecyclerView.setLayoutManager(new LinearLayoutManager
                 (getActivity()));
 
         updateUI();
@@ -117,13 +119,39 @@ public class TaskListFragment extends Fragment {
 
     private void updateUI() {
 
+        List<TaskEntity> entities = TaskService.mTaskEntities;
+
+        if(entities.size() < 1){
+            mMessageEmpty.setVisibility(View.VISIBLE);
+        } else {
+            mMessageEmpty.setVisibility(View.GONE);
+        }
+
+        if (mAdapter == null) {
+
+            mAdapter = new TaskAdapter(entities);
+            mTaskRecyclerView.setAdapter(mAdapter);
+
+        } else {
+            mAdapter.setTaskEntities(entities);
+            mAdapter.notifyDataSetChanged();
+
+        }
 
     }
 
     private void updateSubtitle() {
 
+
+        int crimeCount = TaskService.mTaskEntities.size();
+        String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeCount, crimeCount);
+
+        if (!mSubtitleVisible) {
+            subtitle = null;
+        }
+
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setSubtitle(0);
+        activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
     /**
@@ -165,8 +193,10 @@ public class TaskListFragment extends Fragment {
         @Override
         public void onClick(View v) {
 
-            //TODO-Andrey add task intent
-            Toast.makeText(getContext(), "GO TO Page details Task", Toast.LENGTH_LONG).show();
+            Intent intent = TaskPagerActivity.newIntent(getActivity(),
+                    mTaskEntity.getIdTask());
+
+            startActivityForResult(intent, REQUEST_CRIME);
 
         }
     }
