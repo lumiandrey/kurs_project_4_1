@@ -11,13 +11,13 @@ import java.util.Date;
 public class DateConvert {
 
     public static String getDate(Date date){
-        return new SimpleDateFormat("dd MM yyyy").format(date);
+        return new SimpleDateFormat("HH:mm:ss dd MM yyyy").format(date);
     }
 
     public static Date getDate(String date) throws ParseException {
 
         SimpleDateFormat format = new SimpleDateFormat();
-        format.applyPattern("dd.mm.yyyy");
+        format.applyPattern("HH:mm:ss dd.mm.yyyy");
         return format.parse(date);
     }
 }
