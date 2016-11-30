@@ -16,8 +16,12 @@ public class DateConvert {
 
     public static Date getDate(String date) throws ParseException {
 
-        SimpleDateFormat format = new SimpleDateFormat();
-        format.applyPattern("HH:mm:ss dd.mm.yyyy");
-        return format.parse(date);
+        if(date.length() > 8) {
+            SimpleDateFormat format = new SimpleDateFormat();
+            format.applyPattern("HH:mm:ss dd.mm.yyyy");
+            return format.parse(date);
+        } else {
+            return null;
+        }
     }
 }
