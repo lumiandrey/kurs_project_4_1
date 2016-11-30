@@ -1,8 +1,11 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.PersonEntity;
+
 /**
- * Created by Andrey on 01.12.2016.
+ * Created by Andrey on 29.11.2016.
  */
 
-public interface PersonDao {
+public interface PersonDao extends BaseDao<PersonEntity> {
+
 }
