@@ -8,8 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppThemeCustom" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/dark_red</item>
+        <item name="colorAccent">@color/gray</item>
+        <item name="android:colorBackground">@color/soothing_blue</item>
+    </style>
+
+    <style name="TeamButton" parent="android:style/Widget.Holo.Button">
+        <item name="android:background">#98303F9F</item>
+    </style>
 
 </resources>
