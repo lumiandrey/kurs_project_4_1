@@ -16,26 +16,20 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
  * Created by Andrey on 27.11.2016.
  */
 
-public class UserDaoLite implements UserDao{
+public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
 
     public static final String TAG = UserDaoLite.class.getName();
     public static final String MSG_ERROR_READ = "Error read to data base UserDao";
 
-    private SQLiteDatabase mDatabase;
 
     public UserDaoLite(){
-
-        mDatabase = Lookup.getInstance().lookup(SQLiteDatabase.class);
+        super();
     }
 
     @Override
     public UserEntity create(UserEntity userEntity) {
 
-        ContentValues values = getContentValuesNotId(userEntity);
-
-        mDatabase.insert(UserTable.NAME, null, values);
-
-        Log.d(TAG, "add crime" + userEntity.toString());
+        super.create(userEntity, UserTable.NAME);
 
         return userEntity;
     }
@@ -43,31 +37,33 @@ public class UserDaoLite implements UserDao{
     @Override
     public UserEntity read(int id) {
 
-        UserEntity result = null;
-
-        try (UserCursorWrapper cursorWrapper = queryCrimesWhere(UserTable.Colums.ID_USER + " = ?", new String[]{String.valueOf(id)})) {
-            if (cursorWrapper.getCount() == 0) {
-                return null;
-            }
-            cursorWrapper.moveToFirst();
-            result = cursorWrapper.getUser();
-        } catch (Exception e){
-            Log.e(TAG, MSG_ERROR_READ, e);
-        }
-
-        return result;
+        return readUser(UserTable.Colums.ID_USER + " = ?", new String[]{String.valueOf(id)});
     }
 
     @Override
     public UserEntity read(String login) {
+
+        return readUser(UserTable.Colums.LOGIN + " = ?", new String[]{login});
+    }
+
+    private UserEntity readUser(final String WHERE_CLAUSE, final String[] WHERE_ARG){
+
         UserEntity result = null;
 
-        try (UserCursorWrapper cursorWrapper = queryCrimesWhere(UserTable.Colums.LOGIN + " = ?", new String[]{login})) {
+        try (UserCursorWrapper cursorWrapper =
+                     new UserCursorWrapper(
+
+                             queryCrimesWhere(
+                                     UserTable.NAME, WHERE_CLAUSE, WHERE_ARG))) {
+
             if (cursorWrapper.getCount() == 0) {
-                return null;
+
+                result = null;
+            } else {
+
+                cursorWrapper.moveToFirst();
+                result = cursorWrapper.getUser();
             }
-            cursorWrapper.moveToFirst();
-            result = cursorWrapper.getUser();
         } catch (Exception e){
             Log.e(TAG, MSG_ERROR_READ, e);
         }
@@ -78,23 +74,20 @@ public class UserDaoLite implements UserDao{
     @Override
     public UserEntity update(UserEntity userEntity) {
 
-        ContentValues values = getContentValuesNotId(userEntity);
-
-        mDatabase.update(UserTable.NAME, values,
+        return super.update(userEntity, UserTable.NAME,
                 UserTable.Colums.ID_USER + " = ?",
                 new String[] {String.valueOf(userEntity.getIdUser())});
-
-        Log.d(TAG, "update crime" + userEntity.toString());
-
-        return userEntity;
     }
 
     @Override
-    public UserEntity delete(UserEntity userEntity) {
-        return null;
+    public int delete(UserEntity userEntity) {
+
+        return super.delete(UserTable.NAME, UserTable.Colums.ID_USER + " = ?",
+                new String[] {String.valueOf(userEntity.getIdUser())});
     }
 
-    private ContentValues getContentValuesNotId(UserEntity userEntity) {
+    @Override
+    protected ContentValues getContentValuesNotId(UserEntity userEntity) {
 
         ContentValues values = new ContentValues();
 
@@ -105,7 +98,8 @@ public class UserDaoLite implements UserDao{
         return values;
     }
 
-    private ContentValues getContentValuesWithId(UserEntity userEntity) {
+    @Override
+    protected ContentValues getContentValuesWithId(UserEntity userEntity) {
 
         ContentValues values = getContentValuesNotId(userEntity);
 
@@ -114,19 +108,5 @@ public class UserDaoLite implements UserDao{
         return values;
     }
 
-    private UserCursorWrapper queryCrimesWhere(String whereClause, String[] whereArgs) {
-
-        Cursor cursor = mDatabase.query(
-                UserTable.NAME, //name table
-                null, // Columns - null выбирает все столбцы
-                whereClause, //where if
-                whereArgs,//if args
-                null, // groupBy
-                null, // having
-                null // orderBy
-        );
-
-        return new UserCursorWrapper(cursor);
-    }
 
 }
