@@ -59,21 +59,20 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "root", "root"
     };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+
     private LoginFragment.UserLoginTask mAuthTask = null;
 
-    // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button mSingIn;
+    private Button mRegistration;
     private Context mContext;
     private View mProgressView;
     private View mLoginFormView;
 
     /**
      * Метод создания фрагмента и построения информации в нём.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -81,7 +80,6 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         super.onCreate(savedInstanceState);
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,6 +110,14 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
             @Override
             public void onClick(View v) {
                 attemptLogin();
+            }
+        });
+
+        mRegistration = (Button) view.findViewById(R.id.new_registration_login_btn);
+        mRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO-Andrey called registration activityq
             }
         });
 
@@ -151,9 +157,6 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         return false;
     }
 
-    /**
-     * Callback received when a permissions request has been completed.
-     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -164,36 +167,26 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         }
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
         }
 
-        // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
 
-        // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -205,12 +198,10 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+
             showProgress(true);
             mAuthTask = new LoginFragment.UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
@@ -228,14 +219,10 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         return password.length() > 3;
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -257,34 +244,43 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
+
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
+    /**
+     * Show email account device user.
+     *
+     * Retrieve data rows for the device user's 'profile' contact.
+     * Select only email addresses.
+     * Show primary email addresses first. Note that there won't be
+     * a primary email address if the user hasn't specified one.
+     * @param i
+     * @param bundle
+     * @return
+     */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(mContext,
-                // Retrieve data rows for the device user's 'profile' contact.
+
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), LoginFragment.ProfileQuery.PROJECTION,
 
-                // Select only email addresses.
                 ContactsContract.Contacts.Data.MIMETYPE +
                         " = ?", new String[]{ContactsContract.CommonDataKinds.Email
                 .CONTENT_ITEM_TYPE},
 
-                // Show primary email addresses first. Note that there won't be
-                // a primary email address if the user hasn't specified one.
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         List<String> emails = new ArrayList<>();
+
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast()) {
             emails.add(cursor.getString(LoginFragment.ProfileQuery.ADDRESS));
             cursor.moveToNext();
@@ -299,7 +295,7 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext,
                 android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
@@ -314,7 +310,6 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         };
 
         int ADDRESS = 0;
-        int IS_PRIMARY = 1;
     }
 
     /**
@@ -335,19 +330,24 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            boolean result = false;
+
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                return false;
+                result = false;
             }
 
             if(DUMMY_CREDENTIALS[0].equals(mEmail) &&
                     DUMMY_CREDENTIALS[1].equals(mPassword))
-                return true;
+                result = true;
             else{
-                return false;
+                result = false;
             }
+
+            result = true;
+            return result;
         }
 
         @Override

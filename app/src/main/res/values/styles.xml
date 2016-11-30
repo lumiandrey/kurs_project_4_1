@@ -14,15 +14,24 @@
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="AppThemeCustom" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/red</item>
-        <item name="colorPrimaryDark">@color/dark_red</item>
-        <item name="colorAccent">@color/gray</item>
-        <item name="android:colorBackground">@color/soothing_blue</item>
+    <style name="AppThemeCustom" parent="Theme.AppCompat.Light">
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:colorBackground">@color/background</item>
+
+        <item name="android:textColorPrimary">@color/primary_text_material_light</item>
+        <item name="android:textColorPrimaryInverse">@color/primary_text_material_dark</item>
+
+        <item name="android:textColorSecondary">@color/secondary_text_material_light</item>
+        <item name="android:textColorSecondaryInverse">@color/secondary_text_material_dark</item>
+
+        <item name="android:buttonStyle">@style/TeamButton</item>
     </style>
 
     <style name="TeamButton" parent="android:style/Widget.Holo.Button">
-        <item name="android:background">#98303F9F</item>
+        <item name="android:background">#ace853ff</item>
     </style>
 
 </resources>

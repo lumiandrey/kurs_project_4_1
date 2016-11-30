@@ -1,7 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/id_task_fragment_task_text_view"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_margin="@dimen/activity_default_margin"
+
+                android:gravity="center"
+
+                android:text="id_task"
+                />
+
+            <EditText
+                android:id="@+id/name_task_fragment_edit_text"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:inputType="textPersonName"
+
+                android:ems="10"
+
+                android:enabled="false"
+
+                android:layout_weight="1"
+
+                android:gravity="center"
+
+                android:layout_margin="@dimen/activity_default_margin"
+
+                android:text="Name Task"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/add_person_name_task_fragment_text_view"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:text="Add Person name task"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/task_fragment_progress_bar"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_weight="4"
+
+                android:layout_margin="@dimen/activity_default_margin"
+
+                style="?android:attr/progressBarStyleHorizontal"/>
+
+            <CheckBox
+                android:id="@+id/done_task_fragment_check_box"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_default_margin"
+
+                android:text="Done"/>
+        </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/description_task_fragment_task_edit_text"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                tools:inputType="textMultiLine"
+
+                android:enabled="false"
+
+                android:layout_margin="@dimen/activity_default_margin"
+
+                android:text="Description task"
+                />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/date_begin_task_fragment_btn"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:enabled="false"
+
+                android:layout_margin="@dimen/activity_default_margin"
+
+                android:text="Date begin"/>
+
+            <Button
+                android:id="@+id/date_end_task_fragment_btn"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:enabled="false"
+
+                android:layout_margin="@dimen/activity_default_margin"
+
+                android:text="Date end"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</ScrollView>

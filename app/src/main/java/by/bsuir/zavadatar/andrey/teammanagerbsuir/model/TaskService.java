@@ -19,7 +19,7 @@ public class TaskService {
                 date, new Date(date.getTime()*60*60*60*60), 0, 20, 1, 1));
 
         add(new TaskEntity(2, "create curs project", "create application for Android control time in curs project",
-                date, new Date(date.getTime()*60*60*60*30), 0, 20, 1, 1));
+                date, new Date(date.getTime()*60*60*60*30), 0, 50, 1, 1));
     }};
 
     public static TaskEntity fintTaskBiId(int id){

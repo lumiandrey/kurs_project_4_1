@@ -69,7 +69,11 @@ public class TaskEntity {
     }
 
     public String getDateBeginString(){
-        return DateConvert.getDate(dateBegin);
+        String date;
+        if(dateBegin != null)
+            date = DateConvert.getDate(dateBegin);
+        else date = "Date begin";
+        return date;
     }
 
     public void setDateBegin(Date dateBegin) {
@@ -90,7 +94,11 @@ public class TaskEntity {
     }
 
     public String getDateEndString(){
-        return DateConvert.getDate(dateEnd);
+        String date;
+        if(dateBegin != null)
+            date = DateConvert.getDate(dateEnd);
+        else date = "Date begin";
+        return date;
     }
 
     public void setDateEnd(Date dateEnd) {
@@ -103,7 +111,7 @@ public class TaskEntity {
             this.dateEnd = DateConvert.getDate(dateEnd);
         } catch (ParseException e) {
             Log.e(TAG, "Error parse date");
-            this.dateBegin = new Date();
+            this.dateBegin = null;
         }
     }
 
