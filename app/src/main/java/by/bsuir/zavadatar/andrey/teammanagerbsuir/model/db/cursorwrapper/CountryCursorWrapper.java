@@ -3,8 +3,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.CountryEntity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CountryEntity;
 
 import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
 
