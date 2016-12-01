@@ -27,7 +27,7 @@ public class Runner extends Application {
 
         Lookup lookup = Lookup.getInstance();
 
-        SQLiteDatabase sqLiteDatabase = new ApplicationBaseHelper(getApplicationContext()).getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = ApplicationBaseHelper.getInstance(getApplicationContext()).getWritableDatabase();
 
         lookup.put(sqLiteDatabase);
 
