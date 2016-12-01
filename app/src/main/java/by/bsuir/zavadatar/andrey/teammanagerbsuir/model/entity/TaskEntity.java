@@ -1,9 +1,8 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.entity;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
 import android.util.Log;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;

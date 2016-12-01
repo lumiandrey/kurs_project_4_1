@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.entity;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
 /**
  * Created by Andrey on 27.11.2016.
