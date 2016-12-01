@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.Entity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Lookup;
@@ -31,8 +32,12 @@ abstract class AbstractDaoBase<T extends Entity>{
 
     protected AbstractDaoBase() {
 
-        mDatabase = Lookup.getInstance().lookup(SQLiteDatabase.class);
+        mDatabase = Lookup.getInstance().lookup(ApplicationHelper.class).getWritableDatabase();
 
+    }
+
+    final public void setSQLiteDataBase(SQLiteDatabase mDatabase){
+        this.mDatabase = mDatabase;
     }
 
     final protected T create(T entity, final String NAME_TABLE) {
@@ -93,8 +98,7 @@ abstract class AbstractDaoBase<T extends Entity>{
 
         }
 
-
-        return null;
+        return (List<T>) tList;
     }
 
 
@@ -121,6 +125,10 @@ abstract class AbstractDaoBase<T extends Entity>{
         return mDatabase.delete(NAME_TABLE, WHERE_CLAUSE, WHERE_ARG);
     }
 
+    final protected int deleteAll(final String NAME_TABLE){
+
+       return delete(NAME_TABLE, null, null);
+    }
     private CursorWrapper queryCrimesWhere(final String NAME_TABLE,
                                              final String[] COLUMNS,
                                            final String WHERE_CLAUSE,
