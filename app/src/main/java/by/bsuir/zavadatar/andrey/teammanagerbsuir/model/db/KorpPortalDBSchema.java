@@ -31,7 +31,7 @@ public class KorpPortalDBSchema {
         }
 
         public static final String REF_COUNTRY =  "FOREIGN KEY (" + Colums.ID_COUNTRY +
-                ") REFERENCES " + CountryTable.NAME + '(' + CountryTable.Colums.ID_COUNTRY +')';
+                ") REFERENCES " + CountryTable.NAME + '(' + CountryTable.Colums.ID_COUNTRY +')' + "  ON UPDATE CASCADE";
 
     }
 
@@ -85,7 +85,7 @@ public class KorpPortalDBSchema {
         }
 
         public static final String REF_TYPE_USER = "FOREIGN KEY (" + Colums.ID_TYPE_USER +
-                ") REFERENCES " + TypeUserTable.NAME + '(' + TypeUserTable.Colums.ID_TYPE +')';
+                ") REFERENCES " + TypeUserTable.NAME + '(' + TypeUserTable.Colums.ID_TYPE +')' + "  ON UPDATE CASCADE";
 
     }
 
@@ -110,13 +110,13 @@ public class KorpPortalDBSchema {
         }
 
         public static final String REF_USER = "FOREIGN KEY (" + Colums.ID_USER +
-                ") REFERENCES " + UserTable.NAME + '(' + UserTable.Colums.ID_USER +')';
+                ") REFERENCES " + UserTable.NAME + '(' + UserTable.Colums.ID_USER +')' + "  ON UPDATE CASCADE";
         public static final String REF_POST = "FOREIGN KEY (" + Colums.ID_POST +
-                ") REFERENCES " + PostTable.NAME + '(' + PostTable.Colums.ID_POST +')';
+                ") REFERENCES " + PostTable.NAME + '(' + PostTable.Colums.ID_POST +')' + "  ON UPDATE CASCADE";
         public static final String REF_DEPARTMENT = "FOREIGN KEY (" + Colums.ID_DEPARTMENT +
-                ") REFERENCES " + DepartmentTable.NAME + '(' + DepartmentTable.Colums.ID_DEPARTMENT +')';
+                ") REFERENCES " + DepartmentTable.NAME + '(' + DepartmentTable.Colums.ID_DEPARTMENT +')' + "  ON UPDATE CASCADE";
         public static final String REF_CITY = "FOREIGN KEY (" + Colums.ID_CITY +
-                ") REFERENCES " + CityTable.NAME + '(' + CityTable.Colums.ID_CITY +')';
+                ") REFERENCES " + CityTable.NAME + '(' + CityTable.Colums.ID_CITY +')' + "  ON UPDATE CASCADE";
 
     }
 
@@ -149,9 +149,9 @@ public class KorpPortalDBSchema {
         }
 
         public static final String REF_TYPE_TASK = "FOREIGN KEY (" + Colums.ID_TYPE_TASK +
-                ") REFERENCES " + TypeTaskTable.NAME + '(' + TypeTaskTable.Colums.ID_TYPE_TASK +')';
+                ") REFERENCES " + TypeTaskTable.NAME + '(' + TypeTaskTable.Colums.ID_TYPE_TASK +')' + "  ON UPDATE CASCADE";
         public static final String REF_PERSON_ADD = "FOREIGN KEY (" + Colums.ID_PERSON_ADD +
-                ") REFERENCES " + PersonTable.NAME + '(' + PersonTable.Colums.ID_PERSON +')';
+                ") REFERENCES " + PersonTable.NAME + '(' + PersonTable.Colums.ID_PERSON +')' + "  ON UPDATE CASCADE";
 
     }
 
@@ -166,9 +166,9 @@ public class KorpPortalDBSchema {
         }
 
         public static final String REF_PERSON = "FOREIGN KEY (" + Colums.ID_PERSON +
-                ") REFERENCES " + PersonTable.NAME + '(' + PersonTable.Colums.ID_PERSON +')';
+                ") REFERENCES " + PersonTable.NAME + '(' + PersonTable.Colums.ID_PERSON +')' + "  ON UPDATE CASCADE";
         public static final String REF_TASK = "FOREIGN KEY (" + Colums.ID_TASK +
-                ") REFERENCES " + TaskTable.NAME + '(' + TaskTable.Colums.ID_TASK +')';
+                ") REFERENCES " + TaskTable.NAME + '(' + TaskTable.Colums.ID_TASK +')' + "  ON UPDATE CASCADE";
 
 
     }
@@ -199,9 +199,9 @@ public class KorpPortalDBSchema {
         }
 
         public static final String REF_TYPE_ACTIVITY = "FOREIGN KEY (" + Colums.ID_TYPE_ACTIVITY +
-                ") REFERENCES " + TypeActivityTable.NAME + '(' + TypeActivityTable.Colums.ID_TYPE_ACTIVITY +')';
+                ") REFERENCES " + TypeActivityTable.NAME + '(' + TypeActivityTable.Colums.ID_TYPE_ACTIVITY +')' + "  ON UPDATE CASCADE";
         public static final String REF_HAS_TASK_PERSON = "FOREIGN KEY (" + Colums.ID_HAS_TASK_PERSON +
-                ") REFERENCES " + HasTaskPersonTable.NAME + '(' + HasTaskPersonTable.Colums.ID_HAS_TASK_PERSON +')';
+                ") REFERENCES " + HasTaskPersonTable.NAME + '(' + HasTaskPersonTable.Colums.ID_HAS_TASK_PERSON +')' + "  ON UPDATE CASCADE";
 
 
     }
