@@ -10,7 +10,7 @@ import org.acra.ReportField;
 import org.acra.config.ACRAConfiguration;
 import org.acra.config.ConfigurationBuilder;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationBaseHelper;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 
 /**
  * Created by Andrey on 26.11.2016.
@@ -27,7 +27,7 @@ public class Runner extends Application {
 
         Lookup lookup = Lookup.getInstance();
 
-        SQLiteDatabase sqLiteDatabase = ApplicationBaseHelper.getInstance(getApplicationContext()).getWritableDatabase();
+        ApplicationHelper sqLiteDatabase = ApplicationHelper.getInstance(getApplicationContext());
 
         lookup.put(sqLiteDatabase);
 
