@@ -40,15 +40,11 @@ abstract class AbstractDaoBase<T extends Entity>{
         this.mDatabase = mDatabase;
     }
 
-    final protected T create(T entity, final String NAME_TABLE) {
+    final protected long create(T entity, final String NAME_TABLE) {
 
         ContentValues values = getContentValuesNotId(entity);
 
-        mDatabase.insert(NAME_TABLE, null, values);
-
-        Log.d(TAG, "add entity = " + entity.toString());
-
-        return entity;
+        return mDatabase.insert(NAME_TABLE, null, values);
     }
 
     final protected List<T> create(List<T> entities, final String NAME_TABLE){

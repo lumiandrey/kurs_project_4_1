@@ -2,11 +2,9 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.UserCursorWrapper;
@@ -29,11 +27,9 @@ public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
     }
 
     @Override
-    public UserEntity create(UserEntity userEntity) {
+    public long create(UserEntity userEntity) {
 
-        super.create(userEntity, NAME_TABLE);
-
-        return userEntity;
+        return super.create(userEntity, NAME_TABLE);
     }
 
     @Override

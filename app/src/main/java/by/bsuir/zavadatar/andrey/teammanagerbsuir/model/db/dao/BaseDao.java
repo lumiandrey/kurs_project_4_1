@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BaseDao <T>{
 
-    T create(T userEntity);
+    long create(T userEntity);
     List<T> create(List<T> entities);
     List<T> reads();
     T read(int id);

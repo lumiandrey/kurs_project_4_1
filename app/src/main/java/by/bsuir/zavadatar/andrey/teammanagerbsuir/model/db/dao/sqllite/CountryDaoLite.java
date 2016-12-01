@@ -27,11 +27,9 @@ public class CountryDaoLite extends AbstractDaoBase<CountryEntity> implements Co
     }
 
     @Override
-    public CountryEntity create(CountryEntity userEntity) {
+    public long create(CountryEntity userEntity) {
 
-        super.create(userEntity, NAME_TABLE);
-
-        return userEntity;
+        return super.create(userEntity, NAME_TABLE);
     }
 
     @Override
