@@ -39,6 +39,15 @@ public class CityDaoLiteTest {
         mCityDaoLite = new CityDaoLite();
         mCityDaoLite.setSQLiteDataBase(mDataSource);
 
+        createCountriesAndCities();
+    }
+
+    public void createCountriesAndCities(){
+        CountryEntity entity = new CountryEntity(1, "Belarus", "BY", "375");
+
+        CityEntity cityEntity = new CityEntity(1, "Minsk", "17", (int) mCountryDaoLite.create(entity));
+
+        mCityDaoLite.create(cityEntity);
     }
 
     @After
@@ -52,8 +61,6 @@ public class CityDaoLiteTest {
 
     @Test
     public void create() throws Exception {
-
-        createCountry();
 
         List<CountryEntity> listCountry = mCountryDaoLite.reads();
 
@@ -71,30 +78,14 @@ public class CityDaoLiteTest {
 
         assertTrue(before < after);
 
-       /* CountryEntity entity = new CountryEntity(1, "Belarus", "BY", "375");
-
-        List<CountryEntity> list = mCountryDaoLite.reads();
-
-        int before = list.size();
-
-        mCountryDaoLite.create(entity);
-
-        list = mCountryDaoLite.reads();
-
-        int after = list.size();
-
-        assertTrue(before < after);*/
-
     }
 
     @Test
     public void read() throws Exception {
 
-        create();
+        List<CityEntity> list = mCityDaoLite.reads();
 
-        List<CountryEntity> list = mCountryDaoLite.reads();
-
-        CountryEntity entity = mCountryDaoLite.read(list.get(0).getIdCountry());
+        CityEntity entity = mCityDaoLite.read(list.get(0).getIdCity());
 
         assertTrue(entity.equals(list.get(0)));
 
@@ -103,20 +94,18 @@ public class CityDaoLiteTest {
     @Test
     public void update() throws Exception {
 
-        create();
+        List<CityEntity> list = mCityDaoLite.reads();
 
-        List<CountryEntity> list = mCountryDaoLite.reads();
+        CityEntity entity = list.get(0);
 
-        CountryEntity entity = list.get(0);
-
-        CountryEntity updateEntity = mCountryDaoLite.read(list.get(0).getIdCountry());
+        CityEntity updateEntity = mCityDaoLite.read(list.get(0).getIdCity());
 
         assertTrue(entity.equals(updateEntity));
 
-        updateEntity.setNameCountry("New Name" + Math.random()*100);
-        mCountryDaoLite.update(updateEntity);
+        updateEntity.setName("New Name" + Math.random()*100);
+        mCityDaoLite.update(updateEntity);
 
-        updateEntity = mCountryDaoLite.read(updateEntity.getIdCountry());
+        updateEntity = mCityDaoLite.read(updateEntity.getIdCountry());
 
         assertTrue(!entity.equals(updateEntity));
     }
@@ -124,22 +113,26 @@ public class CityDaoLiteTest {
     @Test
     public void createList() throws Exception {
 
+        List<CountryEntity> listCountry = mCountryDaoLite.reads();
+
+        final int idCountry = listCountry.get(0).getIdCountry();
+
         //читаем все записи из базы
-        List<CountryEntity> list = mCountryDaoLite.reads();
+        List<CityEntity> list = mCityDaoLite.reads();
         //Сохраняем результат
         int before = list.size();
 
-        list = new ArrayList<CountryEntity>(){{
-            add(new CountryEntity(1, "Belarus", "BY", "375"));
-            add(new CountryEntity(2, "Russia", "RU", "9"));
-            add(new CountryEntity(3, "Ukraine", "UA", "65"));
+        list = new ArrayList<CityEntity>(){{
+            add(new CityEntity(1, "Belarus", "BY", idCountry));
+            add(new CityEntity(2, "Russia", "RU", idCountry));
+            add(new CityEntity(3, "Ukraine", "UA", idCountry));
         }};
 
         //Создаем новые записи в базе
-        mCountryDaoLite.create(list);
+        mCityDaoLite.create(list);
 
         //читаем все страны из базы
-        list = mCountryDaoLite.reads();
+        list = mCityDaoLite.reads();
         //Сохраняем результат
         int after = list.size();
 
@@ -151,17 +144,21 @@ public class CityDaoLiteTest {
     @Test
     public void delete() throws Exception {
 
-        CountryEntity countryEntity = new CountryEntity(1, "Belarus", "BY", "375");
+        List<CountryEntity> listCountry = mCountryDaoLite.reads();
+
+        final int idCountry = listCountry.get(0).getIdCountry();
+
+        CityEntity cityEntity = new CityEntity(1, "Belarus", "BY", idCountry);
         //Вставляем в базу
-        mCountryDaoLite.create(countryEntity);
+        mCityDaoLite.create(cityEntity);
         //читаем все записи из базы
-        List<CountryEntity> list = mCountryDaoLite.reads();
+        List<CityEntity> list = mCityDaoLite.reads();
         //Сохраняем результат
         int before = list.size();
 
-        mCountryDaoLite.delete(list.get(0));
+        mCityDaoLite.delete(list.get(0));
         //читаем все записи из базы
-        list = mCountryDaoLite.reads();
+        list = mCityDaoLite.reads();
         //Сохраняем результат
         int after = list.size();
 
@@ -171,28 +168,34 @@ public class CityDaoLiteTest {
     @Test
     public void reads() throws Exception {
 
-        createList();
+        List<CountryEntity> listCountry = mCountryDaoLite.reads();
 
-        //читаем все страны из базы
-        List<CountryEntity> list = mCountryDaoLite.reads();
+        final int idCountry = listCountry.get(0).getIdCountry();
+
+
+        List<CityEntity> list;
+
+        list = new ArrayList<CityEntity>(){{
+            add(new CityEntity(1, "Belarus", "BY", idCountry));
+            add(new CityEntity(2, "Russia", "RU", idCountry));
+            add(new CityEntity(3, "Ukraine", "UA", idCountry));
+        }};
+
+        //Создаем новые записи в базе
+        mCityDaoLite.create(list);
+
+        //читаем все из базы
+        list = mCityDaoLite.reads();
         //Сохраняем результат
         assertTrue(list.size() != 0);
     }
 
     @Test
     public void deleteAll() throws Exception {
-        mCountryDaoLite.deleteAll();
-        List<CountryEntity> rate = mCountryDaoLite.reads();
+        mCityDaoLite.deleteAll();
+        List<CityEntity> rate = mCityDaoLite.reads();
 
         assertThat(rate.size(), is(0));
-    }
-
-    public void createCountry() throws Exception {
-
-        CountryEntity entity = new CountryEntity(1, "Belarus", "BY", "375");
-
-        mCountryDaoLite.create(entity);
-
     }
 
 }
