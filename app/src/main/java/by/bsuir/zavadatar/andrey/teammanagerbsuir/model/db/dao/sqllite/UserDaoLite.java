@@ -103,5 +103,9 @@ public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
         return super.reads(NAME_TABLE);
     }
 
+    @Override
+    public void deleteAll(){
+        super.deleteAll(NAME_TABLE);
+    }
 
 }
