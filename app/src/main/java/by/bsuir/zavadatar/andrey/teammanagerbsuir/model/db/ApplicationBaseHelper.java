@@ -14,14 +14,22 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
 public class ApplicationBaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = ApplicationBaseHelper.class.getName();
+    private static ApplicationBaseHelper mInstance = null;
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "timebase.db";
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String INT_TYPE = " TEXT";
 
-    public ApplicationBaseHelper(Context context) {
+    private ApplicationBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
+    }
+
+    public static ApplicationBaseHelper getInstance(Context context){
+        if(mInstance == null){
+            mInstance = new ApplicationBaseHelper(context);
+        }
+        return mInstance;
     }
 
     @Override
