@@ -1,7 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper;
 
 import android.database.Cursor;
-import android.database.CursorWrapper;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CityEntity;
 
@@ -11,7 +10,7 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
  * Created by Andrey on 27.11.2016.
  */
 
-public class CityCursorWrapper extends CursorWrapper {
+public class CityCursorWrapper extends BaseCustomCursorWrapper<CityEntity> {
 
     /**
      * Creates a cursor wrapper.
@@ -22,7 +21,8 @@ public class CityCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public CityEntity getCity(){
+    @Override
+    public CityEntity getData(){
 
         CityEntity cityEntity = new CityEntity();
 

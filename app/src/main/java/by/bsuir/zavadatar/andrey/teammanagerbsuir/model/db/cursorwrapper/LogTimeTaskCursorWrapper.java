@@ -1,7 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper;
 
 import android.database.Cursor;
-import android.database.CursorWrapper;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.LogTimeTaskTable;
@@ -10,7 +9,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.Lo
  * Created by Andrey on 27.11.2016.
  */
 
-public class LogTimeTaskCursorWrapper extends CursorWrapper {
+public class LogTimeTaskCursorWrapper extends BaseCustomCursorWrapper<LogTimeTaskEntity> {
     /**
      * Creates a cursor wrapper.
      *
@@ -20,7 +19,8 @@ public class LogTimeTaskCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public LogTimeTaskEntity getLogTimeTask(){
+    @Override
+    public LogTimeTaskEntity getData(){
 
         LogTimeTaskEntity entity = new LogTimeTaskEntity();
 

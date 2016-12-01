@@ -1,7 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper;
 
 import android.database.Cursor;
-import android.database.CursorWrapper;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 
@@ -11,7 +10,7 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
  * Created by Andrey on 27.11.2016.
  */
 
-public class UserCursorWrapper extends CursorWrapper {
+public class UserCursorWrapper extends BaseCustomCursorWrapper<UserEntity> {
 
     /**
      * Creates a cursor wrapper.
@@ -22,7 +21,8 @@ public class UserCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public UserEntity getUser(){
+    @Override
+    public UserEntity getData(){
 
         UserEntity userEntity = new UserEntity();
 
