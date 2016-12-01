@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 
 /**
  * Created by Andrey on 28.11.2016.
