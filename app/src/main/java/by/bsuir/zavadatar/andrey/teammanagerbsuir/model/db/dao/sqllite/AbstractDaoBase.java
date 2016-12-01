@@ -12,7 +12,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Lookup;
  * Created by Andrey on 29.11.2016.
  */
 
-public abstract class AbstractDaoBase<T>{
+abstract class AbstractDaoBase<T>{
 
     public static final String TAG = AbstractDaoBase.class.getName();
     public static final String MSG_ERROR_READ = "Error read to data base UserDao";
@@ -69,17 +69,19 @@ public abstract class AbstractDaoBase<T>{
     }
 
     protected CursorWrapper queryCrimesWhere(final String NAME_TABLE,
+                                             final String[] COLUMNS,
                                            final String WHERE_CLAUSE,
-                                           final String[] WHERE_ARG) {
+                                           final String[] WHERE_ARG,
+                                             final String ORDER) {
 
         Cursor cursor = mDatabase.query(
                 NAME_TABLE, //name table
-                null, // Columns - null выбирает все столбцы
+                COLUMNS, // Columns - null выбирает все столбцы
                 WHERE_CLAUSE, //where if
                 WHERE_ARG,//if args
                 null, // groupBy
                 null, // having
-                null // orderBy
+                ORDER // orderBy
         );
 
         return new CursorWrapper(cursor);
