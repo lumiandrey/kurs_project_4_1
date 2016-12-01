@@ -18,7 +18,7 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
 
 public class CityDaoLite extends AbstractDaoBase<CityEntity> implements CityDao {
 
-    public static final String TAG = CountryDaoLite.class.getName();
+    public static final String TAG = CityDaoLite.class.getName();
     public static final String NAME_TABLE = CityTable.NAME;
     public static final String ID_WHERE = CityTable.Colums.ID_CITY;
 
