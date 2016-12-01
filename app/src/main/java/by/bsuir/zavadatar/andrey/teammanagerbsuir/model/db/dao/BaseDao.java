@@ -14,4 +14,5 @@ public interface BaseDao <T>{
     T read(int id);
     T update(T userEntity);
     int delete(T userEntity);
+    void deleteAll();
 }
