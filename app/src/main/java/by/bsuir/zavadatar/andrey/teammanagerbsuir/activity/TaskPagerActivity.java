@@ -10,12 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.TaskFragment;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 

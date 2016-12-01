@@ -23,7 +23,7 @@ import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskPagerActivity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 
 

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import java.util.Date;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 
 /**
