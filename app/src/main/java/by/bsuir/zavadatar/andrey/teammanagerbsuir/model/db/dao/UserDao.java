@@ -1,6 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.UserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 
 /**
  * Created by Andrey on 27.11.2016.
