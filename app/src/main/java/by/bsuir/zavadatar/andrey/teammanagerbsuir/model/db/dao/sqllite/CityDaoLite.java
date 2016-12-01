@@ -43,14 +43,14 @@ public class CityDaoLite extends AbstractDaoBase<CityEntity> implements CityDao 
 
         return super.update(userEntity, NAME_TABLE,
                 ID_WHERE + " = ?",
-                new String[] {String.valueOf(userEntity.getIdCountry())});
+                new String[] {String.valueOf(userEntity.getIdCity())});
     }
 
     @Override
     public int delete(CityEntity userEntity) {
 
         return super.delete(NAME_TABLE, ID_WHERE + " = ?",
-                new String[] {String.valueOf(userEntity.getIdCountry())});
+                new String[] {String.valueOf(userEntity.getIdCity())});
     }
 
     @Override
