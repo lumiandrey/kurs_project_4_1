@@ -21,7 +21,6 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
 public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
 
     public static final String TAG = UserDaoLite.class.getName();
-    public static final String MSG_ERROR_READ = "Error read to data base UserDao";
     public static final String NAME_TABLE = UserTable.NAME;
     public static final String ID_WHERE = UserTable.Colums.ID_USER;
 
