@@ -7,6 +7,14 @@ public class TypeActivityEntity implements Entity{
     private int idTypeActivity;
     private String nameActivity;
 
+    public TypeActivityEntity() {
+    }
+
+    public TypeActivityEntity(int idTypeActivity, String nameActivity) {
+        this.idTypeActivity = idTypeActivity;
+        this.nameActivity = nameActivity;
+    }
+
     public int getIdTypeActivity() {
         return idTypeActivity;
     }

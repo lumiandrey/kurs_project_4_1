@@ -7,6 +7,14 @@ public class DepartmentEntity implements Entity{
     private int idDepartment;
     private String nameDepartment;
 
+    public DepartmentEntity() {
+    }
+
+    public DepartmentEntity(int idDepartment, String nameDepartment) {
+        this.idDepartment = idDepartment;
+        this.nameDepartment = nameDepartment;
+    }
+
     public int getIdDepartment() {
         return idDepartment;
     }

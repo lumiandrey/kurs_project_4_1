@@ -8,6 +8,15 @@ public class PostEntity implements Entity{
     private String namePost;
     private Double rate;
 
+    public PostEntity() {
+    }
+
+    public PostEntity(int idPost, String namePost, Double rate) {
+        this.idPost = idPost;
+        this.namePost = namePost;
+        this.rate = rate;
+    }
+
     public int getIdPost() {
         return idPost;
     }

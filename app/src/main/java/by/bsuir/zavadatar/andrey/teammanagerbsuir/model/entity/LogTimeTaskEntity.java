@@ -11,6 +11,23 @@ public class LogTimeTaskEntity implements Entity{
     private int idTypeActivity;
     private int idHasTaskPerson;
 
+    public LogTimeTaskEntity() {
+    }
+
+    public LogTimeTaskEntity(int idLog,
+                             String dateLog,
+                             String discription,
+                             String linksExtStor,
+                             int idTypeActivity,
+                             int idHasTaskPerson) {
+        this.idLog = idLog;
+        this.dateLog = dateLog;
+        this.discription = discription;
+        this.linksExtStor = linksExtStor;
+        this.idTypeActivity = idTypeActivity;
+        this.idHasTaskPerson = idHasTaskPerson;
+    }
+
     public int getIdLog() {
         return idLog;
     }

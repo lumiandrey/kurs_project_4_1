@@ -7,6 +7,14 @@ public class TypeTaskEntity implements Entity{
     private int idTypeTask;
     private String nameType;
 
+    public TypeTaskEntity() {
+    }
+
+    public TypeTaskEntity(int idTypeTask, String nameType) {
+        this.idTypeTask = idTypeTask;
+        this.nameType = nameType;
+    }
+
     public int getIdTypeTask() {
         return idTypeTask;
     }

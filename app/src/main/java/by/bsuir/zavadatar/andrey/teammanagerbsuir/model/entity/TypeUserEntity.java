@@ -8,6 +8,15 @@ public class TypeUserEntity implements Entity{
     private String name;
     private int accessLevel;
 
+    public TypeUserEntity() {
+    }
+
+    public TypeUserEntity(int idType, String name, int accessLevel) {
+        this.idType = idType;
+        this.name = name;
+        this.accessLevel = accessLevel;
+    }
+
     public int getIdType() {
         return idType;
     }

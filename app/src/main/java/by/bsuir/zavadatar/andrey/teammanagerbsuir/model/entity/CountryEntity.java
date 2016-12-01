@@ -9,6 +9,15 @@ public class CountryEntity implements Entity{
     private String keyContry;
     private String keyPhone;
 
+    public CountryEntity(){}
+
+    public CountryEntity(int idCountry, String nameCountry, String keyContry, String keyPhone) {
+        this.idCountry = idCountry;
+        this.nameCountry = nameCountry;
+        this.keyContry = keyContry;
+        this.keyPhone = keyPhone;
+    }
+
     public int getIdCountry() {
         return idCountry;
     }

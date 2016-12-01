@@ -9,6 +9,16 @@ public class CityEntity implements Entity {
     private String codePhone;
     private int idCountry;
 
+    public CityEntity() {
+    }
+
+    public CityEntity(int idCity, String name, String codePhone, int idCountry) {
+        this.idCity = idCity;
+        this.name = name;
+        this.codePhone = codePhone;
+        this.idCountry = idCountry;
+    }
+
     public int getIdCity() {
         return idCity;
     }

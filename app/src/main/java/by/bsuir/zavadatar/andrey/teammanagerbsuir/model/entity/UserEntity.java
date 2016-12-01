@@ -9,6 +9,16 @@ public class UserEntity implements Entity{
     private String password;
     private int idTypeUser;
 
+    public UserEntity() {
+    }
+
+    public UserEntity(int idUser, String login, String password, int idTypeUser) {
+        this.idUser = idUser;
+        this.login = login;
+        this.password = password;
+        this.idTypeUser = idTypeUser;
+    }
+
     public int getIdUser() {
         return idUser;
     }

@@ -8,6 +8,15 @@ public class HasTaskPersonEntity implements Entity{
     private int idTask;
     private int idPerson;
 
+    public HasTaskPersonEntity() {
+    }
+
+    public HasTaskPersonEntity(int idHasTaskPerson, int idTask, int idPerson) {
+        this.idHasTaskPerson = idHasTaskPerson;
+        this.idTask = idTask;
+        this.idPerson = idPerson;
+    }
+
     public int getIdHasTaskPerson() {
         return idHasTaskPerson;
     }

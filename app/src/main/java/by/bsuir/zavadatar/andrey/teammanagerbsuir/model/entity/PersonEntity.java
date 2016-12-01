@@ -18,6 +18,37 @@ public class PersonEntity implements Entity{
     private String mobilePhone;
     private String homePhone;
 
+    public PersonEntity() {
+    }
+
+    public PersonEntity(int idPerson,
+                        String surname,
+                        String name,
+                        String patronymic,
+                        String dateOfBirth,
+                        String sex,
+                        String eMail,
+                        int idUser,
+                        int idPost,
+                        int idDepartment,
+                        int idCity,
+                        String mobilePhone,
+                        String homePhone) {
+        this.idPerson = idPerson;
+        this.surname = surname;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.eMail = eMail;
+        this.idUser = idUser;
+        this.idPost = idPost;
+        this.idDepartment = idDepartment;
+        this.idCity = idCity;
+        this.mobilePhone = mobilePhone;
+        this.homePhone = homePhone;
+    }
+
     public int getIdPerson() {
         return idPerson;
     }
