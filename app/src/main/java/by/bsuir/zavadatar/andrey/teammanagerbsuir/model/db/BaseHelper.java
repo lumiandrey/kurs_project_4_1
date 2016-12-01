@@ -11,25 +11,23 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
  * Created by Andrey on 27.11.2016.
  */
 
-public class ApplicationBaseHelper extends SQLiteOpenHelper {
+abstract public class BaseHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = ApplicationBaseHelper.class.getName();
-    private static ApplicationBaseHelper mInstance = null;
-    private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "timebase.db";
+    private static final String TAG = BaseHelper.class.getName();
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String INT_TYPE = " TEXT";
 
-    private ApplicationBaseHelper(Context context) {
+    protected BaseHelper(Context context,
+                         final String DATABASE_NAME,
+                         final SQLiteDatabase.CursorFactory cursorFactory,
+                         final int VERSION) {
+
         super(context, DATABASE_NAME, null, VERSION);
     }
 
-    public static ApplicationBaseHelper getInstance(Context context){
-        if(mInstance == null){
-            mInstance = new ApplicationBaseHelper(context);
-        }
-        return mInstance;
+    public void close(){
+        super.close();
     }
 
     @Override
