@@ -56,7 +56,7 @@ abstract class AbstractDaoBase<T extends Entity>{
     }
 
 
-    final protected Entity read(final String NAME_TABLE,
+    final protected T read(final String NAME_TABLE,
                            final String WHERE_CLAUSE,
                            final String[] WHERE_ARG) {
 
@@ -74,7 +74,7 @@ abstract class AbstractDaoBase<T extends Entity>{
             Log.e(TAG, MSG_ERROR_READ, e);
         }
 
-        return result;
+        return (T) result;
     }
 
     public List<T> reads(final String NAME_TABLE) {
