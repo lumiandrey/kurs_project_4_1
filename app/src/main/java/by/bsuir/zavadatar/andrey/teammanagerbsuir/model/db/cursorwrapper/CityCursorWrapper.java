@@ -29,7 +29,7 @@ public class CityCursorWrapper extends BaseCustomCursorWrapper<CityEntity> {
         cityEntity.setIdCity(getInt(getColumnIndex(CityTable.Colums.ID_CITY)));
         cityEntity.setName(getString(getColumnIndex(CityTable.Colums.NAME)));
         cityEntity.setCodePhone(getString(getColumnIndex(CityTable.Colums.CODE_PHONE)));
-        cityEntity.setIdCountry(getInt(getColumnIndex(CityTable.Colums.ID_CITY)));
+        cityEntity.setIdCountry(getInt(getColumnIndex(CityTable.Colums.ID_COUNTRY)));
 
         return cityEntity;
     }
