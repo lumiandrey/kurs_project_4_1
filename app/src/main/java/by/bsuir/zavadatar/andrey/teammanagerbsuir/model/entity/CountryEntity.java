@@ -3,7 +3,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class CountryEntity {
+public class CountryEntity implements Entity{
     private int idCountry;
     private String nameCountry;
     private String keyContry;

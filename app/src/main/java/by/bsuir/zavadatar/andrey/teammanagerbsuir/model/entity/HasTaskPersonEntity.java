@@ -3,7 +3,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class HasTaskPersonEntity {
+public class HasTaskPersonEntity implements Entity{
     private int idHasTaskPerson;
     private int idTask;
     private int idPerson;

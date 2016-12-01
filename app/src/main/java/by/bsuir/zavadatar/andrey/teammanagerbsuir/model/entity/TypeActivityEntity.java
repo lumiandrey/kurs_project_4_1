@@ -3,7 +3,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class TypeActivityEntity {
+public class TypeActivityEntity implements Entity{
     private int idTypeActivity;
     private String nameActivity;
 

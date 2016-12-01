@@ -3,7 +3,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class LogTimeTaskEntity {
+public class LogTimeTaskEntity implements Entity{
     private int idLog;
     private String dateLog;
     private String discription;

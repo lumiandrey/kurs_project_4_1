@@ -10,7 +10,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class TaskEntity {
+public class TaskEntity implements Entity{
 
     private static final String TAG = TaskEntity.class.getName();
 

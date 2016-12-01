@@ -3,7 +3,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class TypeUserEntity {
+public class TypeUserEntity implements Entity{
     private int idType;
     private String name;
     private int accessLevel;
