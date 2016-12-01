@@ -6,19 +6,26 @@ import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.Entity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Lookup;
 
 /**
  * Created by Andrey on 29.11.2016.
  */
 
-abstract class AbstractDaoBase<T>{
+abstract class AbstractDaoBase<T extends Entity>{
 
-    public static final String TAG = AbstractDaoBase.class.getName();
-    public static final String MSG_ERROR_READ = "Error read to data base UserDao";
+    private static final String TAG = AbstractDaoBase.class.getName();
+    private static final String MSG_ERROR_READ = "Error read to database ";
+    private static final String SQL_SELECT_ALL_QUERY = "SELECT * FROM ";
 
     protected abstract ContentValues getContentValuesNotId(T value);
     protected abstract ContentValues getContentValuesWithId(T value);
+    protected abstract BaseCustomCursorWrapper<T> getCursorWrapper(Cursor cursor);
 
     private SQLiteDatabase mDatabase;
 
@@ -28,7 +35,7 @@ abstract class AbstractDaoBase<T>{
 
     }
 
-    protected T create(T entity, final String NAME_TABLE) {
+    final protected T create(T entity, final String NAME_TABLE) {
 
         ContentValues values = getContentValuesNotId(entity);
 
@@ -39,13 +46,59 @@ abstract class AbstractDaoBase<T>{
         return entity;
     }
 
+    final protected List<T> create(List<T> entities, final String NAME_TABLE){
 
-    protected T read(int id) {
+        for(T entity: entities){
+            create(entity, NAME_TABLE);
+        }
+
+        return entities;
+    }
+
+
+    final protected Entity read(final String NAME_TABLE,
+                           final String WHERE_CLAUSE,
+                           final String[] WHERE_ARG) {
+
+        Entity result = null;
+
+        try (BaseCustomCursorWrapper cursorWrapper =
+                     getCursorWrapper(queryCrimesWhere(NAME_TABLE, null, WHERE_CLAUSE, WHERE_ARG, null))) {
+
+            if (cursorWrapper.getCount() != 0) {
+
+                cursorWrapper.moveToFirst();
+                result = cursorWrapper.getData();
+            }
+            } catch (Exception e){
+            Log.e(TAG, MSG_ERROR_READ, e);
+        }
+
+        return result;
+    }
+
+    public List<T> reads(final String NAME_TABLE) {
+
+        List<Entity> tList = new ArrayList<>();
+
+        try(BaseCustomCursorWrapper cursorWrapper =
+        getCursorWrapper(mDatabase.rawQuery(SQL_SELECT_ALL_QUERY+ NAME_TABLE, null))){
+
+            if(cursorWrapper.moveToFirst()){
+                do {
+                    // Adding to list
+                    tList.add(cursorWrapper.getData());
+                } while (cursorWrapper.moveToNext());
+            }
+
+        }
+
+
         return null;
     }
 
 
-    protected T update(T entity,
+    final protected T update(T entity,
                        final String NAME_TABLE,
                        final String WHERE_CLAUSE,
                        final String[] WHERE_ARG) {
@@ -63,12 +116,12 @@ abstract class AbstractDaoBase<T>{
     }
 
 
-    protected int delete(final String NAME_TABLE, final String WHERE_CLAUSE, final String[] WHERE_ARG) {
+    final protected int delete(final String NAME_TABLE, final String WHERE_CLAUSE, final String[] WHERE_ARG) {
 
         return mDatabase.delete(NAME_TABLE, WHERE_CLAUSE, WHERE_ARG);
     }
 
-    protected CursorWrapper queryCrimesWhere(final String NAME_TABLE,
+    private CursorWrapper queryCrimesWhere(final String NAME_TABLE,
                                              final String[] COLUMNS,
                                            final String WHERE_CLAUSE,
                                            final String[] WHERE_ARG,
