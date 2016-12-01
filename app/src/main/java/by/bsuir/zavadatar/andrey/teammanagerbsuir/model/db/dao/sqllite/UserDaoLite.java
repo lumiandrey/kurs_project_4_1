@@ -2,13 +2,15 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.entity.UserEntity;
+import java.util.List;
+
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.UserCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.UserDao;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Lookup;
 
 import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
 
@@ -20,7 +22,8 @@ public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
 
     public static final String TAG = UserDaoLite.class.getName();
     public static final String MSG_ERROR_READ = "Error read to data base UserDao";
-
+    public static final String NAME_TABLE = UserTable.NAME;
+    public static final String ID_WHERE = UserTable.Colums.ID_USER;
 
     public UserDaoLite(){
         super();
@@ -29,7 +32,7 @@ public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
     @Override
     public UserEntity create(UserEntity userEntity) {
 
-        super.create(userEntity, UserTable.NAME);
+        super.create(userEntity, NAME_TABLE);
 
         return userEntity;
     }
@@ -37,52 +40,27 @@ public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
     @Override
     public UserEntity read(int id) {
 
-        return readUser(UserTable.Colums.ID_USER + " = ?", new String[]{String.valueOf(id)});
+        return super.read(NAME_TABLE, ID_WHERE + " = ?", new String[]{String.valueOf(id)});
     }
 
     @Override
     public UserEntity read(String login) {
 
-        return readUser(UserTable.Colums.LOGIN + " = ?", new String[]{login});
-    }
-
-    private UserEntity readUser(final String WHERE_CLAUSE, final String[] WHERE_ARG){
-
-        UserEntity result = null;
-
-        try (UserCursorWrapper cursorWrapper =
-                     new UserCursorWrapper(
-
-                             queryCrimesWhere(
-                                     UserTable.NAME, WHERE_CLAUSE, WHERE_ARG))) {
-
-            if (cursorWrapper.getCount() == 0) {
-
-                result = null;
-            } else {
-
-                cursorWrapper.moveToFirst();
-                result = cursorWrapper.getUser();
-            }
-        } catch (Exception e){
-            Log.e(TAG, MSG_ERROR_READ, e);
-        }
-
-        return result;
+        return super.read(NAME_TABLE, UserTable.Colums.LOGIN + " = ?", new String[]{login});
     }
 
     @Override
     public UserEntity update(UserEntity userEntity) {
 
-        return super.update(userEntity, UserTable.NAME,
-                UserTable.Colums.ID_USER + " = ?",
+        return super.update(userEntity, NAME_TABLE,
+                ID_WHERE + " = ?",
                 new String[] {String.valueOf(userEntity.getIdUser())});
     }
 
     @Override
     public int delete(UserEntity userEntity) {
 
-        return super.delete(UserTable.NAME, UserTable.Colums.ID_USER + " = ?",
+        return super.delete(NAME_TABLE, ID_WHERE + " = ?",
                 new String[] {String.valueOf(userEntity.getIdUser())});
     }
 
@@ -106,6 +84,24 @@ public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
         values.put(UserTable.Colums.ID_USER, userEntity.getIdUser());
 
         return values;
+    }
+
+    @Override
+    protected BaseCustomCursorWrapper<UserEntity> getCursorWrapper(Cursor cursor) {
+        return new UserCursorWrapper(cursor);
+    }
+
+    @Override
+    public List<UserEntity> create(List<UserEntity> entities) {
+
+
+        return super.create(entities, NAME_TABLE);
+    }
+
+    @Override
+    public List<UserEntity> reads() {
+
+        return super.reads(NAME_TABLE);
     }
 
 
