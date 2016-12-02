@@ -1,57 +1,57 @@
 CREATE TABLE country (
-id_country integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-name_country string ,
-key_contry string ,
-key_phone string 
+id_country INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name_country TEXT ,
+key_contry TEXT ,
+key_phone TEXT 
 )
 
 CREATE TABLE city ( 
-id_city integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-name string,
-code_phone string,
-id_country integer NOT NULL,
-FOREIGN KEY (id_country) REFERENCES country(id_country)
+id_city INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name TEXT,
+code_phone TEXT,
+id_country INTEGER NOT NULL,
+ FOREIGN KEY (id_country) REFERENCES country(id_country)
 )
 
 CREATE TABLE department (
-id_department integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-name_department string 
+id_department INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name_department TEXT 
 )
 
 CREATE TABLE post (
-id_post integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-name_post string NOT NULL,
+id_post INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name_post TEXT NOT NULL,
 rate FLOAT 
 )
 
 CREATE TABLE type_user (
-id_type integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-name string NOT NULL,
-access_level integer NOT NULL
+id_type INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name TEXT NOT NULL,
+access_level INTEGER NOT NULL
 )
 
 CREATE TABLE user (
-id_user integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-login string NOT NULL,
-password string NOT NULL,
-id_type_user integer NOT NULL,
+id_user INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+login TEXT NOT NULL,
+password TEXT NOT NULL,
+id_type_user INTEGER NOT NULL,
 FOREIGN KEY (id_type_user) REFERENCES type_user(id_type)
 )
 
 CREATE TABLE person (
-id_person integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-surname string ,
-name string ,
-patronymic string,
+id_person INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+surname TEXT ,
+name TEXT ,
+patronymic TEXT,
 date_of_birth DATE,
-sex string,
-e_mail string,
-id_user integer NOT NULL,
-id_post integer NOT NULL,
-id_department integer NOT NULL,
-id_city integer NOT NULL,
-mobile_phone string,
-home_phone string,
+sex TEXT,
+e_mail TEXT,
+id_user INTEGER NOT NULL,
+id_post INTEGER NOT NULL,
+id_department INTEGER NOT NULL,
+id_city INTEGER NOT NULL,
+mobile_phone TEXT,
+home_phone TEXT,
 FOREIGN KEY (id_user) REFERENCES user(id_user),
 FOREIGN KEY (id_post) REFERENCES post(id_post),
 FOREIGN KEY (id_department) REFERENCES department(id_department),
@@ -59,45 +59,45 @@ FOREIGN KEY (id_city) REFERENCES city(id_city)
 )
 
 CREATE TABLE type_task (
-id_type_task integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-name_type string NOT NULL
+id_type_task INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name_type TEXT NOT NULL
 )
 
 CREATE TABLE task (
-id_task integer PRIMARY KEY AUTOINCREMENT,
-name string ,
-description string,
+id_task INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+name TEXT ,
+description TEXT,
 date_begin DATE ,
 date_end DATE,
-done integer,
-progress integer,
-id_type_task integer NOT NULL,
-id_person_add integer NOT NULL,
+done INTEGER,
+progress INTEGER,
+id_type_task INTEGER NOT NULL,
+id_person_add INTEGER NOT NULL,
 FOREIGN KEY (id_type_task) REFERENCES type_task(id_type_task),
 FOREIGN KEY (id_person_add) REFERENCES person(id_person)
 
 )
 
 CREATE TABLE has_task_person (
-id_has_task_person integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-id_task integer NOT NULL,
-id_person integer NOT NULL,
+id_has_task_person INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+id_task INTEGER NOT NULL,
+id_person INTEGER NOT NULL,
 FOREIGN KEY (id_person) REFERENCES person(id_person),
 FOREIGN KEY (id_task) REFERENCES task(id_task)
 )
 
 CREATE TABLE type_activity (
-id_type_activity integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-name_activity string NOT NULL
+id_type_activity INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+name_activity TEXT NOT NULL
 )
 
 CREATE TABLE log_time_task (
-id_log integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+id_log INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 date_log DATE NOT NULL,
-description string ,
-links_ext_stor string,
-id_type_activity integer NOT NULL,
-id_has_task_person integer NOT NULL,
+description TEXT ,
+links_ext_stor TEXT,
+id_type_activity INTEGER NOT NULL,
+id_has_task_person INTEGER NOT NULL,
 FOREIGN KEY (id_type_activity) REFERENCES type_activity(id_type_activity),
 FOREIGN KEY (id_has_task_person) REFERENCES has_task_person(id_has_task_person)
 )
