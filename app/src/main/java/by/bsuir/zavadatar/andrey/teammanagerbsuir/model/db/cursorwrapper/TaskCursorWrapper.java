@@ -33,6 +33,7 @@ public class TaskCursorWrapper extends BaseCustomCursorWrapper<TaskEntity> {
         entity.setDone(getInt(getColumnIndex(TaskTable.Colums.DONE)));
         entity.setIdTypeTask(getInt(getColumnIndex(TaskTable.Colums.ID_TYPE_TASK)));
         entity.setIdPersonAdd(getInt(getColumnIndex(TaskTable.Colums.ID_PERSON_ADD)));
+        entity.setProgress(getInt(getColumnIndex(TaskTable.Colums.PROGRESS)));
 
         return entity;
     }
