@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.CountryDao;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.UserDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CityDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CountryDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.DepartmentDaoLite;
@@ -13,6 +14,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PostDaoLi
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeActivityDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeTaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeUserDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.UserDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.CityStorageInit;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.CountryStorageInit;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.DepartmentStorageInit;
@@ -20,6 +22,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.PostStorage
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.TypeActivityStorageInit;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.TypeTaskSorageInit;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.TypeUserStorageInit;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.UserStorageInit;
 
 import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
 
@@ -222,5 +225,8 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
 
         TypeUserDaoLite typeUserDaoLite = new TypeUserDaoLite(db);
         typeUserDaoLite.create(new TypeUserStorageInit().getData());
+
+        UserDao userDao = new UserDaoLite(db);
+        userDao.create(new UserStorageInit().getData(typeUserDaoLite.reads()));
     }
 }
