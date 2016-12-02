@@ -2,9 +2,11 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.CountryCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.CountryDao;
@@ -22,8 +24,12 @@ public class CountryDaoLite extends AbstractDaoBase<CountryEntity> implements Co
     public static final String NAME_TABLE = CountryTable.NAME;
     public static final String ID_WHERE = CountryTable.Colums.ID_COUNTRY;
 
-    public CountryDaoLite() {
-        super();
+    public CountryDaoLite(BaseHelper mDatabase) {
+        super(mDatabase);
+    }
+
+    public CountryDaoLite(SQLiteDatabase mDatabase) {
+        super(mDatabase);
     }
 
     @Override

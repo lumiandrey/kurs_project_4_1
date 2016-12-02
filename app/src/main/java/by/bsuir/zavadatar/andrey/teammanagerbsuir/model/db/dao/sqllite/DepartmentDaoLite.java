@@ -2,9 +2,11 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.DepartmentCursorWrapper;
@@ -23,14 +25,18 @@ public class DepartmentDaoLite extends AbstractDaoBase<DepartmentEntity> impleme
     public static final String NAME_TABLE = DepartmentTable.NAME;
     public static final String ID_WHERE = DepartmentTable.Colums.ID_DEPARTMENT;
 
-    public DepartmentDaoLite() {
-        super();
+    public DepartmentDaoLite(BaseHelper mDatabase) {
+        super(mDatabase);
     }
 
     @Override
     public long create(DepartmentEntity userEntity) {
 
         return super.create(userEntity, NAME_TABLE);
+    }
+
+    public DepartmentDaoLite(SQLiteDatabase mDatabase) {
+        super(mDatabase);
     }
 
     @Override

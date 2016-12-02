@@ -5,6 +5,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.CountryDao;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CityDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CountryDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.DepartmentDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PostDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeActivityDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeTaskDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeUserDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.CityStorageInit;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.CountryStorageInit;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.DepartmentStorageInit;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.PostStorageInit;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.TypeActivityStorageInit;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.TypeTaskSorageInit;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.startdata.TypeUserStorageInit;
+
 import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
 
 /**
@@ -15,12 +31,14 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = BaseHelper.class.getName();
 
+    protected static Context context;
+
     protected BaseHelper(Context context,
                          final String DATABASE_NAME,
                          final SQLiteDatabase.CursorFactory cursorFactory,
                          final int VERSION) {
 
-        super(context, DATABASE_NAME, null, VERSION);
+        super(context, DATABASE_NAME, cursorFactory, VERSION);
     }
 
     public void close(){
@@ -168,6 +186,8 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "create Base (successfully");
 
+        putDataBase(db);
+
     }
 
     @Override
@@ -179,5 +199,28 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
         db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    private void putDataBase(SQLiteDatabase db){
+        CountryDaoLite countryDao = new CountryDaoLite(db);
+        countryDao.create(new CountryStorageInit().getData());
+
+        CityDaoLite cityDaoLite = new CityDaoLite(db);
+        cityDaoLite.create(new CityStorageInit().getData(countryDao.reads()));
+
+        DepartmentDaoLite departmentDaoLite = new DepartmentDaoLite(db);
+        departmentDaoLite.create(new DepartmentStorageInit().getData());
+
+        PostDaoLite postDaoLite = new PostDaoLite(db);
+        postDaoLite.create(new PostStorageInit().getData());
+
+        TypeActivityDaoLite typeActivityDaoLite = new TypeActivityDaoLite(db);
+        typeActivityDaoLite.create(new TypeActivityStorageInit().getData());
+
+        TypeTaskDaoLite typeTaskDaoLite = new TypeTaskDaoLite(db);
+        typeTaskDaoLite.create(new TypeTaskSorageInit().getData());
+
+        TypeUserDaoLite typeUserDaoLite = new TypeUserDaoLite(db);
+        typeUserDaoLite.create(new TypeUserStorageInit().getData());
     }
 }

@@ -25,11 +25,13 @@ public class Runner extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Lookup lookup = Lookup.getInstance();
+        //ApplicationHelper.setContext(getApplicationContext());
+
+       /* Lookup lookup = Lookup.getInstance();
 
         ApplicationHelper sqLiteDatabase = ApplicationHelper.getInstance(getApplicationContext());
 
-        lookup.put(sqLiteDatabase);
+        lookup.put(sqLiteDatabase);*/
 
         Log.d(TAG, "Create Application");
     }

@@ -2,9 +2,11 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.CityCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.CityDao;
@@ -22,8 +24,12 @@ public class CityDaoLite extends AbstractDaoBase<CityEntity> implements CityDao 
     public static final String NAME_TABLE = CityTable.NAME;
     public static final String ID_WHERE = CityTable.Colums.ID_CITY;
 
-    public CityDaoLite() {
-        super();
+    public CityDaoLite(BaseHelper mDatabase) {
+        super(mDatabase);
+    }
+
+    public CityDaoLite(SQLiteDatabase mDatabase) {
+        super(mDatabase);
     }
 
     @Override

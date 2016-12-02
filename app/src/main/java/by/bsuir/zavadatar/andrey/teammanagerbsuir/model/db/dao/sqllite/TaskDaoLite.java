@@ -2,9 +2,11 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.TaskCursorWrapper;
@@ -23,8 +25,12 @@ public class TaskDaoLite extends AbstractDaoBase<TaskEntity> implements TaskDao 
     public static final String NAME_TABLE = TaskTable.NAME;
     public static final String ID_WHERE = TaskTable.Colums.ID_TASK;
 
-    public TaskDaoLite() {
-        super();
+    public TaskDaoLite(BaseHelper mDatabase) {
+        super(mDatabase);
+    }
+
+    public TaskDaoLite(SQLiteDatabase mDatabase) {
+        super(mDatabase);
     }
 
     @Override

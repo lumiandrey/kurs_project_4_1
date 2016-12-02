@@ -1,6 +1,7 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.Entity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Lookup;
@@ -30,13 +32,13 @@ abstract class AbstractDaoBase<T extends Entity>{
 
     private SQLiteDatabase mDatabase;
 
-    protected AbstractDaoBase() {
+    protected AbstractDaoBase(BaseHelper mDatabase) {
 
-        mDatabase = Lookup.getInstance().lookup(ApplicationHelper.class).getWritableDatabase();
-
+        this.mDatabase = mDatabase.getWritableDatabase();
     }
 
-    final public void setSQLiteDataBase(SQLiteDatabase mDatabase){
+    protected AbstractDaoBase(SQLiteDatabase mDatabase){
+
         this.mDatabase = mDatabase;
     }
 

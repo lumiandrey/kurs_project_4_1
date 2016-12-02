@@ -33,11 +33,9 @@ public class CityDaoLiteTest {
         //RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         mDataSource = ApplicationBaseHelperTest.getInstance(InstrumentationRegistry.getTargetContext()).getWritableDatabase();
 
-        mCountryDaoLite = new CountryDaoLite();
-        mCountryDaoLite.setSQLiteDataBase(mDataSource);
+        mCountryDaoLite = new CountryDaoLite(mDataSource);
 
-        mCityDaoLite = new CityDaoLite();
-        mCityDaoLite.setSQLiteDataBase(mDataSource);
+        mCityDaoLite = new CityDaoLite(mDataSource);
 
         createCountriesAndCities();
     }

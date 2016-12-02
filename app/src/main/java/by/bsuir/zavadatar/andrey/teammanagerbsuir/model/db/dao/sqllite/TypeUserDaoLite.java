@@ -2,9 +2,11 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.TypeUserCursorWrapper;
@@ -23,14 +25,18 @@ public class TypeUserDaoLite extends AbstractDaoBase<TypeUserEntity> implements 
     public static final String NAME_TABLE = TypeUserTable.NAME;
     public static final String ID_WHERE = TypeUserTable.Colums.ID_TYPE;
 
-    public TypeUserDaoLite() {
-        super();
+    public TypeUserDaoLite(BaseHelper mDatabase) {
+        super(mDatabase);
     }
 
     @Override
     public long create(TypeUserEntity entity) {
 
         return super.create(entity, NAME_TABLE);
+    }
+
+    public TypeUserDaoLite(SQLiteDatabase mDatabase) {
+        super(mDatabase);
     }
 
     @Override
