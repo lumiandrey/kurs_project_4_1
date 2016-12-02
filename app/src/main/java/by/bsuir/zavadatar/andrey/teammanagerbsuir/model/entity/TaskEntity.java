@@ -70,7 +70,7 @@ public class TaskEntity implements Entity{
     public String getDateBeginString(){
         String date;
         if(dateBegin != null)
-            date = DateConvert.getDate(dateBegin);
+            date = DateConvert.getDateToString(dateBegin);
         else date = "Date begin";
         return date;
     }
@@ -95,7 +95,7 @@ public class TaskEntity implements Entity{
     public String getDateEndString(){
         String date;
         if(dateBegin != null)
-            date = DateConvert.getDate(dateEnd);
+            date = DateConvert.getDateToString(dateEnd);
         else date = "Date begin";
         return date;
     }

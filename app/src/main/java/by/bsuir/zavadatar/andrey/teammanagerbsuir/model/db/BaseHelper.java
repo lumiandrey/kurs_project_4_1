@@ -15,9 +15,6 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = BaseHelper.class.getName();
 
-    private static final String TEXT_TYPE = " TEXT";
-    private static final String INT_TYPE = " TEXT";
-
     protected BaseHelper(Context context,
                          final String DATABASE_NAME,
                          final SQLiteDatabase.CursorFactory cursorFactory,
@@ -126,8 +123,8 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
                 TaskTable.Colums.ID_TASK + " INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE," +
                 TaskTable.NAME + " string ," +
                 TaskTable.Colums.DESCRIPTION + " TEXT," +
-                TaskTable.Colums.DATE_BEGIN + " DATE ," +
-                TaskTable.Colums.DATE_END + " DATE," +
+                TaskTable.Colums.DATE_BEGIN + " TEXT ," +
+                TaskTable.Colums.DATE_END + " TEXT," +
                 TaskTable.Colums.DONE + " INTEGER," +
                 TaskTable.Colums.PROGRESS + " INTEGER," +
                 TaskTable.Colums.ID_TYPE_TASK + " INTEGER NOT NULL," +
