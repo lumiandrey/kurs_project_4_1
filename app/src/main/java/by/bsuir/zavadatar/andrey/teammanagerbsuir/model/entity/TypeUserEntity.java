@@ -62,4 +62,13 @@ public class TypeUserEntity implements Entity{
         result = 31 * result + accessLevel;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TypeUserEntity{" +
+                "idType=" + idType +
+                ", name='" + name + '\'' +
+                ", accessLevel=" + accessLevel +
+                '}';
+    }
 }

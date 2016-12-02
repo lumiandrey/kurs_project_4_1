@@ -62,4 +62,13 @@ public class PostEntity implements Entity{
         result = 31 * result + (rate != null ? rate.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "PostEntity{" +
+                "idPost=" + idPost +
+                ", namePost='" + namePost + '\'' +
+                ", rate=" + rate +
+                '}';
+    }
 }

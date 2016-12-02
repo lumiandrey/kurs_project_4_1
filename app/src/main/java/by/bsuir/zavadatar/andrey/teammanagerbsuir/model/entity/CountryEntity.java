@@ -73,4 +73,14 @@ public class CountryEntity implements Entity{
         result = 31 * result + (keyPhone != null ? keyPhone.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "CountryEntity{" +
+                "keyPhone='" + keyPhone + '\'' +
+                ", keyContry='" + keyContry + '\'' +
+                ", nameCountry='" + nameCountry + '\'' +
+                ", idCountry=" + idCountry +
+                '}';
+    }
 }

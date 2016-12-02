@@ -50,4 +50,12 @@ public class TypeTaskEntity implements Entity{
         result = 31 * result + (nameType != null ? nameType.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TypeTaskEntity{" +
+                "idTypeTask=" + idTypeTask +
+                ", nameType='" + nameType + '\'' +
+                '}';
+    }
 }

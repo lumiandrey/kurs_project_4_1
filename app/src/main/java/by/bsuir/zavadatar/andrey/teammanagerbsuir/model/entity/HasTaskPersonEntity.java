@@ -62,4 +62,13 @@ public class HasTaskPersonEntity implements Entity{
         result = 31 * result + idPerson;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "HasTaskPersonEntity{" +
+                "idHasTaskPerson=" + idHasTaskPerson +
+                ", idTask=" + idTask +
+                ", idPerson=" + idPerson +
+                '}';
+    }
 }

@@ -51,4 +51,12 @@ public class DepartmentEntity implements Entity{
         result = 31 * result + (nameDepartment != null ? nameDepartment.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "DepartmentEntity{" +
+                "idDepartment=" + idDepartment +
+                ", nameDepartment='" + nameDepartment + '\'' +
+                '}';
+    }
 }

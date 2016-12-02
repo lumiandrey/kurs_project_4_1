@@ -103,4 +103,16 @@ public class LogTimeTaskEntity implements Entity{
         result = 31 * result + idHasTaskPerson;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "LogTimeTaskEntity{" +
+                "idLog=" + idLog +
+                ", dateLog='" + dateLog + '\'' +
+                ", discription='" + discription + '\'' +
+                ", linksExtStor='" + linksExtStor + '\'' +
+                ", idTypeActivity=" + idTypeActivity +
+                ", idHasTaskPerson=" + idHasTaskPerson +
+                '}';
+    }
 }

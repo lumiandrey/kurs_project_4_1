@@ -74,4 +74,14 @@ public class UserEntity implements Entity{
         result = 31 * result + idTypeUser;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "idUser=" + idUser +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", idTypeUser=" + idTypeUser +
+                '}';
+    }
 }

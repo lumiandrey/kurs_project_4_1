@@ -50,4 +50,12 @@ public class TypeActivityEntity implements Entity{
         result = 31 * result + (nameActivity != null ? nameActivity.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TypeActivityEntity{" +
+                "idTypeActivity=" + idTypeActivity +
+                ", nameActivity='" + nameActivity + '\'' +
+                '}';
+    }
 }

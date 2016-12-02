@@ -74,4 +74,14 @@ public class CityEntity implements Entity {
         result = 31 * result + idCountry;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "CityEntity{" +
+                "idCountry=" + idCountry +
+                ", codePhone='" + codePhone + '\'' +
+                ", name='" + name + '\'' +
+                ", idCity=" + idCity +
+                '}';
+    }
 }

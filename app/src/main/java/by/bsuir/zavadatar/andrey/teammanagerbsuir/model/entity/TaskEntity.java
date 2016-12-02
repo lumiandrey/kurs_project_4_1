@@ -183,4 +183,19 @@ public class TaskEntity implements Entity{
         result = 31 * result + idPersonAdd;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TaskEntity{" +
+                "idTask=" + idTask +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", dateBegin=" + dateBegin +
+                ", dateEnd=" + dateEnd +
+                ", done=" + done +
+                ", progress=" + progress +
+                ", idTypeTask=" + idTypeTask +
+                ", idPersonAdd=" + idPersonAdd +
+                '}';
+    }
 }

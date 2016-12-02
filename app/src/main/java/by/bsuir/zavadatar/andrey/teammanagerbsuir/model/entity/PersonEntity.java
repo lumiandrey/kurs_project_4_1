@@ -194,4 +194,23 @@ public class PersonEntity implements Entity{
         result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "PersonEntity{" +
+                "idPerson=" + idPerson +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", sex='" + sex + '\'' +
+                ", eMail='" + eMail + '\'' +
+                ", idUser=" + idUser +
+                ", idPost=" + idPost +
+                ", idDepartment=" + idDepartment +
+                ", idCity=" + idCity +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                '}';
+    }
 }
