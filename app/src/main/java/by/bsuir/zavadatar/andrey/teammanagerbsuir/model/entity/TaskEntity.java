@@ -84,7 +84,7 @@ public class TaskEntity implements Entity{
             this.dateBegin = DateConvert.getDate(dateBegin);
         } catch (ParseException e) {
             Log.e(TAG, "Error parse date");
-            this.dateBegin = new Date();
+            this.dateBegin = null;
         }
     }
 
@@ -110,7 +110,7 @@ public class TaskEntity implements Entity{
             this.dateEnd = DateConvert.getDate(dateEnd);
         } catch (ParseException e) {
             Log.e(TAG, "Error parse date");
-            this.dateBegin = null;
+            this.dateEnd = null;
         }
     }
 
@@ -149,8 +149,6 @@ public class TaskEntity implements Entity{
     public boolean isDone(){
         return done != 0;
     }
-
-
 
     @Override
     public boolean equals(Object o) {
