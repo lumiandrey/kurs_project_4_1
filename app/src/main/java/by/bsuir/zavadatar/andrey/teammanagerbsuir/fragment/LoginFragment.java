@@ -332,25 +332,14 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
             boolean result = false;
 
-           /* try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                result = false;
-            }*/
-
             UserEntity userEntity = mUserDao.read(mEmail);
 
-            if (userEntity.getLogin().equals(mEmail)
-                    && userEntity.getPassword().equals(mPassword))
-                result = true;
-            else{
-                result = false;
-            }
+            result = userEntity != null &&
+                    userEntity.getLogin().equals(mEmail) &&
+                    userEntity.getPassword().equals(mPassword);
 
             return result;
         }
