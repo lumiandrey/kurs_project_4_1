@@ -4,13 +4,13 @@ import android.database.Cursor;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.PersonTable;
 
 /**
  * Created by Andrey on 27.11.2016.
  */
 
-public class PersonCursorWrapper extends BaseCustomCursorWrapper {
+public class PersonCursorWrapper extends BaseCustomCursorWrapper<PersonEntity> {
     /**
      * Creates a cursor wrapper.
      *
@@ -27,11 +27,11 @@ public class PersonCursorWrapper extends BaseCustomCursorWrapper {
 
         entity.setIdPerson(getInt(getColumnIndex(PersonTable.Colums.ID_PERSON)));
         entity.setSurname(getString(getColumnIndex(PersonTable.Colums.SURNAME)));
-        entity.setName(getString(getColumnIndex(PersonTable.Colums.SURNAME)));
-        entity.setPatronymic(getString(getColumnIndex(PersonTable.Colums.SURNAME)));
-        entity.setDateOfBirth(getString(getColumnIndex(PersonTable.Colums.SURNAME)));
-        entity.setSex(getString(getColumnIndex(PersonTable.Colums.SURNAME)));
-        entity.seteMail(getString(getColumnIndex(PersonTable.Colums.SURNAME)));
+        entity.setName(getString(getColumnIndex(PersonTable.Colums.NAME)));
+        entity.setPatronymic(getString(getColumnIndex(PersonTable.Colums.PATRONYMIC)));
+        entity.setDateOfBirth(getString(getColumnIndex(PersonTable.Colums.DATE_OF_BIRTH)));
+        entity.setSex(getString(getColumnIndex(PersonTable.Colums.SEX)));
+        entity.seteMail(getString(getColumnIndex(PersonTable.Colums.E_MAIL)));
         entity.setIdUser(getInt(getColumnIndex(PersonTable.Colums.ID_USER)));
         entity.setIdPost(getInt(getColumnIndex(PersonTable.Colums.ID_POST)));
         entity.setIdDepartment(getInt(getColumnIndex(PersonTable.Colums.ID_DEPARTMENT)));
