@@ -31,11 +31,11 @@
     <string name="nav_bar_title_my_task">My Tasks</string>
     <string name="nav_bar_title_done_task">Done Tasks</string>
     <string name="nav_bar_title_current_tasks">Current Tasks</string>
-    <string name="nav_bar_title_log_out">Log out</string>
+    <string name="nav_bar_title_log_out" translatable="false">Log out</string>
 
-    <string name="date_picker_title">Date of crime:</string>
+    <string name="date_picker_title">Date:</string>
 
-    <string name="time_picker_title">Time of crime:</string>
+    <string name="time_picker_title">Time:</string>
 
     <plurals name="subtitle_plural">
         <item quantity="one">%1$x task</item>

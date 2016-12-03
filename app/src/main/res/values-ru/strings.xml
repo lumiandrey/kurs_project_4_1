@@ -16,4 +16,12 @@
     <string name="action_settings">Настройки</string>
     <string name="title_activity_user_room">Кабинет пользователя</string>
     <string name="list_task_empty">Список пустой. Нажмите для создания новой задачи</string>
+    <string name="nav_bar_title_current_tasks">Актуальные задания</string>
+    <string name="nav_bar_title_done_task">Выполненые задания</string>
+    <string name="nav_bar_title_log_out">Выход</string>
+    <string name="nav_bar_title_my_task">Мои задачи</string>
+    <string name="tasks_title_menu_room">Задачи</string>
+    <string name="time_picker_title">Время</string>
+    <string name="date_picker_title">Дата</string>
+    <string name="action_register_login">Регистрация</string>
 </resources>
