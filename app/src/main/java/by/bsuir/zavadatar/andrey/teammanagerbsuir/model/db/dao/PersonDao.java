@@ -8,4 +8,6 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 
 public interface PersonDao extends BaseDao<PersonEntity> {
 
+    int getPersonIdByUser(int idUser);
+
 }

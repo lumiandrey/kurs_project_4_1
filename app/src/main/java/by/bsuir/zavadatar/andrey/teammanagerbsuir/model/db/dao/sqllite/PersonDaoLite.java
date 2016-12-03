@@ -7,13 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.PersonCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.PersonDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.PersonTable;
 
 /**
  * Created by Andrey on 03.12.2016.
@@ -112,5 +111,11 @@ public class PersonDaoLite extends AbstractDaoBase<PersonEntity> implements Pers
     @Override
     public void deleteAll(){
         super.deleteAll(NAME_TABLE);
+    }
+
+    @Override
+    public int getPersonIdByUser(int idUser) {
+        PersonEntity entity = super.read(NAME_TABLE, PersonTable.Colums.ID_USER + " = ?", new String[]{String.valueOf(idUser)});
+        return (entity != null ? entity.getIdPerson(): -1);
     }
 }
