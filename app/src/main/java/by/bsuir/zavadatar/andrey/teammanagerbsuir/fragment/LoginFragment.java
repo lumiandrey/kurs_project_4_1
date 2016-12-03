@@ -37,6 +37,11 @@ import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.UserRoomActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.UserDao;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.UserDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.CryptoUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -56,9 +61,6 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
      * A dummy authentication store containing known user names and passwords.
      * TODO-Andrey: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "root", "root"
-    };
 
     private LoginFragment.UserLoginTask mAuthTask = null;
 
@@ -176,7 +178,7 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         mPasswordView.setError(null);
 
         String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String password = CryptoUtils.getHasSHA(mPasswordView.getText().toString().getBytes());
 
         boolean cancel = false;
         View focusView = null;
@@ -320,10 +322,12 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
 
         private final String mEmail;
         private final String mPassword;
+        private final UserDao mUserDao;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            mUserDao = new UserDaoLite(ApplicationHelper.getInstance(getActivity().getApplicationContext()));
         }
 
         @Override
@@ -332,21 +336,22 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
 
             boolean result = false;
 
-            try {
+           /* try {
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 result = false;
-            }
+            }*/
 
-            if(DUMMY_CREDENTIALS[0].equals(mEmail) &&
-                    DUMMY_CREDENTIALS[1].equals(mPassword))
+            UserEntity userEntity = mUserDao.read(mEmail);
+
+            if (userEntity.getLogin().equals(mEmail)
+                    && userEntity.getPassword().equals(mPassword))
                 result = true;
             else{
                 result = false;
             }
 
-            result = true;
             return result;
         }
 
