@@ -8,7 +8,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskListFragmentActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 
 /**
  * Created by Andrey on 26.11.2016.
@@ -29,10 +31,15 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
     private static final String TAG = UserRoomFragment.class.getName();
     private Context mContext;
     private DrawerLayout mDrawerLayout;
+    private PersonEntity mPersonEntity;
+
+    private TextView test_user_room;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "create User Room Fragment");
 
     }
 
@@ -45,11 +52,12 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
 
         mContext = inflater.getContext();
 
+        mPersonEntity = ApplicationSettings.sPersonEntity(getContext());
+
+        test_user_room = (TextView) view.findViewById(R.id.test_user_room);
+        test_user_room.setText(mPersonEntity.toString());
+
         mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                mContext, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();*/
 
         NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

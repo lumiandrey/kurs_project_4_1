@@ -18,8 +18,8 @@ import android.widget.TextView;
 import java.util.Date;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 
 /**
  * Created by Андрей on 09.11.2016.
@@ -159,7 +159,7 @@ public class TaskFragment extends Fragment {
     }
 
     private void updateTime() {
-        //mTimeButton.setText(new SimpleDateFormat("HH mm").format( mTaskEntity.getDate()));
+        //mTimeButton.setText(new SimpleDateFormat("HH mm").format( mTaskEntity.getDateAndTime()));
     }
 
     public void finish(){

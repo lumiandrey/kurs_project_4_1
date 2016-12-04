@@ -67,7 +67,7 @@ public class PersonDaoLite extends AbstractDaoBase<PersonEntity> implements Pers
         values.put(PersonTable.Colums.SURNAME, userEntity.getSurname());
         values.put(PersonTable.Colums.NAME, userEntity.getName());
         values.put(PersonTable.Colums.PATRONYMIC, userEntity.getPatronymic());
-        values.put(PersonTable.Colums.DATE_OF_BIRTH, userEntity.getDateOfBirth());
+        values.put(PersonTable.Colums.DATE_OF_BIRTH, userEntity.getDateOfBirthToString());
         values.put(PersonTable.Colums.SEX, userEntity.getSex());
         values.put(PersonTable.Colums.E_MAIL, userEntity.geteMail());
         values.put(PersonTable.Colums.ID_USER, userEntity.getIdUser());
@@ -97,7 +97,6 @@ public class PersonDaoLite extends AbstractDaoBase<PersonEntity> implements Pers
 
     @Override
     public List<PersonEntity> create(List<PersonEntity> entities) {
-
 
         return super.create(entities, NAME_TABLE);
     }

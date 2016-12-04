@@ -1,5 +1,10 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
+import java.text.ParseException;
+import java.util.Date;
+
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
+
 /**
  * Created by Andrey on 27.11.2016.
  */
@@ -8,8 +13,8 @@ public class PersonEntity implements Entity{
     private String surname;
     private String name;
     private String patronymic;
-    private String dateOfBirth;
-    private String sex;
+    private Date dateOfBirth;
+    private Sex sex;
     private String eMail;
     private int idUser;
     private int idPost;
@@ -26,19 +31,19 @@ public class PersonEntity implements Entity{
                         String name,
                         String patronymic,
                         String dateOfBirth,
-                        String sex,
+                        Sex sex,
                         String eMail,
                         int idUser,
                         int idPost,
                         int idDepartment,
                         int idCity,
                         String mobilePhone,
-                        String homePhone) {
+                        String homePhone) throws ParseException {
         this.idPerson = idPerson;
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = DateConvert.getDate(dateOfBirth);
         this.sex = sex;
         this.eMail = eMail;
         this.idUser = idUser;
@@ -81,19 +86,27 @@ public class PersonEntity implements Entity{
         this.patronymic = patronymic;
     }
 
-    public String getDateOfBirth() {
+    public String getDateOfBirthToString() {
+        return DateConvert.getDateToString(dateOfBirth);
+    }
+
+    public Date getDateOfBirth(){
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     public String getSex() {
-        return sex;
+        return sex.name();
     }
 
     public void setSex(String sex) {
+        this.sex = Sex.valueOf(sex);
+    }
+
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 

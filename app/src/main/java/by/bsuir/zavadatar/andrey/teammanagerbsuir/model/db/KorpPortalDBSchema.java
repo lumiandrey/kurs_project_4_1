@@ -96,7 +96,7 @@ public class KorpPortalDBSchema {
         public static final class Colums {
             public static final String ID_PERSON = "_id_person";
             public static final String SURNAME = "surname";
-            public static final String NAME = "name";
+            public static final String NAME = "name_person";
             public static final String PATRONYMIC = "patronymic";
             public static final String DATE_OF_BIRTH = "date_of_birth";
             public static final String SEX = "sex";

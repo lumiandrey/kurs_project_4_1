@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
-
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -17,7 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
@@ -41,9 +39,12 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.UserDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.UserDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.CryptoUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
+
+;
 
 /**
  * Created by Andrey on 26.11.2016.
@@ -318,38 +319,36 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, UserEntity> {
 
-        private final String mEmail;
+        private final String login;
         private final String mPassword;
         private final UserDao mUserDao;
 
         UserLoginTask(String email, String password) {
-            mEmail = email;
+            login = email;
             mPassword = password;
             mUserDao = new UserDaoLite(ApplicationHelper.getInstance(getActivity().getApplicationContext()));
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected UserEntity doInBackground(Void... params) {
 
-            boolean result = false;
-
-            UserEntity userEntity = mUserDao.read(mEmail);
-
-            result = userEntity != null &&
-                    userEntity.getLogin().equals(mEmail) &&
-                    userEntity.getPassword().equals(mPassword);
-
-            return result;
+            return mUserDao.read(login);
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final UserEntity userEntity) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            boolean result = userEntity != null &&
+                    userEntity.getLogin().equals(login) &&
+                    userEntity.getPassword().equals(mPassword);
+
+            if (result){
+
+                ApplicationSettings.saveUser(getActivity().getApplicationContext(), userEntity);
 
                 startActivity(UserRoomActivity.newIntent(getActivity()));
                 

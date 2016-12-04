@@ -3,8 +3,11 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.List;
+
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 
 /**
@@ -14,6 +17,10 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 public class ApplicationSettings {
 
     private static final String NAME = "_timeManagerApplicationSetting";
+    private static final String ID_USER = "_idUser";
+    private static final String ID_PERSON = "_idPerson";
+    private static final String LOGIN_USER = "_loginUser";
+    private static final String PASSWORD = "_password";
 
     public static SharedPreferences getStorageSettings(Context context){
 
@@ -27,15 +34,30 @@ public class ApplicationSettings {
 
         PersonDaoLite daoLite = new PersonDaoLite(ApplicationHelper.getInstance(context));
 
+        List<PersonEntity> list = daoLite.reads();
+
         int idPerson = daoLite.getPersonIdByUser(userEntity.getIdUser());
-        if(idPerson >= 0) {
-            editor.putInt("_idUser", userEntity.getIdUser());
-            editor.putInt("_idPerson", idPerson);
-            editor.putString("_loginUser", userEntity.getLogin());
-            editor.putString("_password", userEntity.getPassword());
+        if(idPerson > 0) {
+            editor.putInt(ID_USER, userEntity.getIdUser());
+            editor.putInt(ID_PERSON, idPerson);
+            editor.putString(LOGIN_USER, userEntity.getLogin());
+            editor.putString(PASSWORD, userEntity.getPassword());
         }
 
         editor.apply();
+    }
 
+    public static PersonEntity sPersonEntity(Context context){
+
+        PersonEntity personEntity = null;
+
+        SharedPreferences sharedPreferences = getStorageSettings(context);
+        PersonDaoLite daoLite = new PersonDaoLite(ApplicationHelper.getInstance(context));
+
+        int idPerson = sharedPreferences.getInt(ID_PERSON, -1);
+        if(idPerson > 0)
+            personEntity = daoLite.read(idPerson);
+
+        return personEntity;
     }
 }

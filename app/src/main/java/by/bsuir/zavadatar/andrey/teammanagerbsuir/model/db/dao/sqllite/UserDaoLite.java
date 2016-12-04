@@ -8,11 +8,11 @@ import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.UserCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.UserDao;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.UserTable;
 
 /**
  * Created by Andrey on 27.11.2016.
@@ -94,7 +94,6 @@ public class UserDaoLite extends AbstractDaoBase<UserEntity> implements UserDao{
 
     @Override
     public List<UserEntity> create(List<UserEntity> entities) {
-
 
         return super.create(entities, NAME_TABLE);
     }

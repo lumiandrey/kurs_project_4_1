@@ -1,7 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +9,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.Entity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Lookup;
 
 /**
  * Created by Andrey on 29.11.2016.
@@ -46,7 +43,7 @@ abstract class AbstractDaoBase<T extends Entity>{
 
         ContentValues values = getContentValuesNotId(entity);
 
-        return mDatabase.insert(NAME_TABLE, null, values);
+        return mDatabase.insertOrThrow(NAME_TABLE, null, values);
     }
 
     final protected List<T> create(List<T> entities, final String NAME_TABLE){
@@ -80,7 +77,7 @@ abstract class AbstractDaoBase<T extends Entity>{
         return (T) result;
     }
 
-    public List<T> reads(final String NAME_TABLE) {
+    final public List<T> reads(final String NAME_TABLE) {
 
         List<Entity> tList = new ArrayList<>();
 

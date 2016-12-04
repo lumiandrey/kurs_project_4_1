@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -23,9 +23,9 @@ public class DateConvertTest {
     @Test
     public void getDate() throws Exception {
 
-        Date date = DateConvert.getDate(dateString);
+        Date date = DateConvert.getDateAndTime(dateString);
 
-        String dateEquals = DateConvert.getDateToString(date);
+        String dateEquals = DateConvert.getDateAndTimeToString(date);
 
         assertTrue(dateEquals.equals(dateString));
 
@@ -34,7 +34,7 @@ public class DateConvertTest {
     @Test
     public void getNullData() throws Exception {
 
-        String date = DateConvert.getDateToString(null);
+        String date = DateConvert.getDateAndTimeToString(null);
 
         assertTrue(date.equals(""));
 
@@ -43,7 +43,7 @@ public class DateConvertTest {
     @Test
     public void getShortDataToString() throws Exception {
 
-        Date date = DateConvert.getDate("15:24:30");
+        Date date = DateConvert.getDateAndTime("15:24:30");
 
         assertTrue(null == date);
 
