@@ -21,7 +21,6 @@ public class UserRoomActivity extends SingleFragmentActivity { //implements Navi
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, UserRoomActivity.class);
 
-
         return intent;
     }
 }

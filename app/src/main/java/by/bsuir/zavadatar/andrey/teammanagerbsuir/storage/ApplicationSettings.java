@@ -19,6 +19,8 @@ public class ApplicationSettings {
     private static final String ID_PERSON = "_idPerson";
     private static final String LOGIN_USER = "_loginUser";
     private static final String PASSWORD = "_password";
+    public static final int DEF_ID_USER = -1;
+    public static final int DEF_ID_PERSON = -1;
 
     public static SharedPreferences getStorageSettings(Context context){
 
@@ -63,7 +65,21 @@ public class ApplicationSettings {
 
         return sharedPreferences.getString(LOGIN_USER, null) != null &&
                 sharedPreferences.getString(PASSWORD, null) != null &&
-                sharedPreferences.getInt(ID_PERSON, -1) != -1 &&
-                sharedPreferences.getInt(ID_USER, -1) != -1;
+                sharedPreferences.getInt(ID_PERSON, DEF_ID_PERSON) != DEF_ID_PERSON &&
+                sharedPreferences.getInt(ID_USER, DEF_ID_USER) != DEF_ID_USER;
+    }
+
+    public static void logOut(Context context){
+
+        SharedPreferences sharedPreferences = getStorageSettings(context);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(ID_USER, DEF_ID_USER);
+        editor.putInt(ID_PERSON, DEF_ID_PERSON);
+        editor.putString(LOGIN_USER, null);
+        editor.putString(PASSWORD, null);
+
+        editor.apply();
+
     }
 }

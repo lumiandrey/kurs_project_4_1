@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -83,8 +82,10 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(ApplicationSettings.isAuthorisation(getContext()))
-            startActivity(new Intent(UserRoomActivity.newIntent(getContext())));
+        if(ApplicationSettings.isAuthorisation(getContext())){
+            gotoRoomPerson();
+        }
+
 
     }
 
@@ -354,7 +355,7 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
 
                 ApplicationSettings.saveUser(getActivity().getApplicationContext(), userEntity);
 
-                startActivity(UserRoomActivity.newIntent(getActivity()));
+                gotoRoomPerson();
                 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -367,5 +368,10 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    private void gotoRoomPerson() {
+        getActivity().finish();
+        startActivity(UserRoomActivity.newIntent(getActivity()));
     }
 }

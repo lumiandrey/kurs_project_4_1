@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.LoginActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskListFragmentActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
@@ -219,7 +220,7 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
 
         mCountryList = new CountryDaoLite(ApplicationHelper.getInstance(getContext())).reads();
         CityEntity cityEntity = new CityDaoLite(ApplicationHelper.getInstance(getContext())).read(mPersonEntity.getIdCity());
-        List<String> listCountry = new ArrayList<>();
+        final List<String> listCountry = new ArrayList<>();
         for(CountryEntity o: mCountryList)
             listCountry.add(o.getNameCountry());
         ArrayAdapter<String> adapterCountry =
@@ -237,7 +238,8 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
                     ArrayAdapter<String> adapterCity;
                     List<String> listCity = new ArrayList<>();
 
-                    mCityList = new CityDaoLite(ApplicationHelper.getInstance(getContext())).reads();
+                    mCityList = new CityDaoLite(ApplicationHelper.getInstance(getContext()))
+                            .getCityByCountry(mCountryList.get(position).getIdCountry());
                     for (CityEntity o : mCityList)
                         listCity.add(o.getName());
                     adapterCity = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listCity);
@@ -315,6 +317,15 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
             case R.id.nav_all_tasks_this_person:{
                 startActivity(new Intent(mContext, TaskListFragmentActivity.class));
             } break;
+            case R.id.nav_add_task_this_person:{
+
+            } break;
+            case R.id.lot_out_person:{
+                ApplicationSettings.logOut(getContext());
+                finish();
+                startActivity(new Intent(LoginActivity.newIntent(getContext())));
+
+            } break;
             default:
                 Log.d(TAG, "Default Action (no action)");
         }
@@ -340,6 +351,10 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
 
 
         }
+    }
+
+    private void finish(){
+        getActivity().finish();
     }
 
     private void updateDate() {

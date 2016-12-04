@@ -97,6 +97,25 @@ abstract class AbstractDaoBase<T extends Entity>{
         return (List<T>) tList;
     }
 
+    final public List<T> reads(final String NAME_TABLE, final String WHERE_CAUSE, final String[] ARG_WHERE) {
+
+        List<Entity> tList = new ArrayList<>();
+
+        try(BaseCustomCursorWrapper cursorWrapper =
+                    getCursorWrapper(queryCrimesWhere(NAME_TABLE, null, WHERE_CAUSE, ARG_WHERE, null))){
+
+            if(cursorWrapper.moveToFirst()){
+                do {
+                    // Adding to list
+                    tList.add(cursorWrapper.getData());
+                } while (cursorWrapper.moveToNext());
+            }
+
+        }
+
+        return (List<T>) tList;
+    }
+
 
     final protected T update(T entity,
                        final String NAME_TABLE,

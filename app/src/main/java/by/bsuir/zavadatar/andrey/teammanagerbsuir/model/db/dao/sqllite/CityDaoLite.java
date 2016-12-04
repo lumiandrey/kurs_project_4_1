@@ -100,6 +100,11 @@ public class CityDaoLite extends AbstractDaoBase<CityEntity> implements CityDao 
     }
 
     @Override
+    public List<CityEntity> getCityByCountry(int idCountry) {
+        return super.reads(NAME_TABLE, CityTable.Colums.ID_COUNTRY + " = ?", new String[]{String.valueOf(idCountry)});
+    }
+
+    @Override
     public void deleteAll(){
         super.deleteAll(NAME_TABLE);
     }
