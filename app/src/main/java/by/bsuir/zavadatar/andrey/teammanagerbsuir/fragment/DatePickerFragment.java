@@ -49,6 +49,7 @@ public class DatePickerFragment extends AppCompatDialogFragment {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         final int hour = calendar.get(Calendar.HOUR);
         final int minute = calendar.get(Calendar.MINUTE);
+        final int second = calendar.get(Calendar.SECOND);
 
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_date, null);
@@ -67,7 +68,7 @@ public class DatePickerFragment extends AppCompatDialogFragment {
                                 int year = mDatePicker.getYear();
                                 int month = mDatePicker.getMonth();
                                 int day = mDatePicker.getMonth();
-                                Date date = new GregorianCalendar(year, month, day, hour, minute).
+                                Date date = new GregorianCalendar(year, month, day, hour, minute, second).
                                         getTime();
                                 sendResult(Activity.RESULT_OK, date);
                             }
@@ -86,5 +87,6 @@ public class DatePickerFragment extends AppCompatDialogFragment {
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
     }
+
 
 }

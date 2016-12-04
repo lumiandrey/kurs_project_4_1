@@ -37,6 +37,18 @@
 
     <string name="time_picker_title">Time:</string>
 
+    <!-- Person room values -->
+    <string name="room_person_photo">user photo</string>
+    <string name="room_person_email">email</string>
+    <string name="room_person_date_of_birth">Date of Birth</string>
+    <string name="room_person_patronymic">Patronymic</string>
+    <string name="room_person_name">Name</string>
+    <string name="room_person_surname">Surname</string>
+    <string name="room_person_mobile_phone">Mobile phone</string>
+    <string name="room_person_home_phone">Home Phone</string>
+    <string name="room_person_department">Department</string>
+    <string name="room_person_post">Post</string>
+
     <plurals name="subtitle_plural">
         <item quantity="one">%1$x task</item>
         <item quantity="other">%1$x tasks</item>

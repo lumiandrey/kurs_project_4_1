@@ -12,4 +12,5 @@
     <dimen name="margin_left_right">16dp</dimen>
 
     <dimen name="size_text_empty">26sp</dimen>
+    <dimen name="room_margin">10dp</dimen>
 </resources>

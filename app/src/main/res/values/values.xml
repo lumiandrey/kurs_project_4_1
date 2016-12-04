@@ -4,7 +4,7 @@
     <color name="primary_material_dark">#be6d48d7</color>
     <color name="background_material_light">#a034d0b6</color>
     <color name="foreground_material_light">#ff8d40</color>
-    <color name="primary_text_default_material_light">#feffffff</color>
+    <color name="primary_text_default_material_light">#fe5b4a49</color>
     <color name="primary_text_default_material_dark">#fdffda89</color>
     <color name="secondary_text_default_material_light">#f3e9fda9</color>
     <color name="secondary_text_default_material_dark">#f2fbf1af</color>

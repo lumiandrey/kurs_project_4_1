@@ -39,6 +39,7 @@ abstract class AbstractDaoBase<T extends Entity>{
         this.mDatabase = mDatabase;
     }
 
+
     final protected long create(T entity, final String NAME_TABLE) {
 
         ContentValues values = getContentValuesNotId(entity);

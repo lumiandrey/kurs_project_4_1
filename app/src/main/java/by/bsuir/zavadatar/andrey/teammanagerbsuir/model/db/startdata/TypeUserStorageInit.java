@@ -17,6 +17,7 @@ public class TypeUserStorageInit {
 
         mEntityList.add(new TypeUserEntity(1, "Admin", 1));
         mEntityList.add(new TypeUserEntity(2, "Worker", 2));
+        mEntityList.add(new TypeUserEntity(3, "Guest", 100_00));
 
         return mEntityList;
     }

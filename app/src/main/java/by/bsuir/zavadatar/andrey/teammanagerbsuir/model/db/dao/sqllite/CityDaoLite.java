@@ -12,7 +12,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.CityCur
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.CityDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CityEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.CityTable;
 
 /**
  * Created by Andrey on 01.12.2016.
