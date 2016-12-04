@@ -18,10 +18,21 @@
     <string name="list_task_empty">Список пустой. Нажмите для создания новой задачи</string>
     <string name="nav_bar_title_current_tasks">Актуальные задания</string>
     <string name="nav_bar_title_done_task">Выполненые задания</string>
-    <string name="nav_bar_title_log_out">Выход</string>
     <string name="nav_bar_title_my_task">Мои задачи</string>
     <string name="tasks_title_menu_room">Задачи</string>
     <string name="time_picker_title">Время</string>
     <string name="date_picker_title">Дата</string>
     <string name="action_register_login">Регистрация</string>
+    <string name="nav_bar_title_create_task">Создать задачу</string>
+    <string name="room_person_date_of_birth">Дата рождения</string>
+    <string name="room_person_department">Отдел</string>
+    <string name="room_person_email">Почтовый ящик</string>
+    <string name="room_person_home_phone">Домашний телефон</string>
+    <string name="room_person_mobile_phone">Мобильный телефон</string>
+    <string name="room_person_name">Имя</string>
+    <string name="room_person_patronymic">Отчество</string>
+    <string name="room_person_photo">Фото пользователя</string>
+    <string name="room_person_post">Должность</string>
+    <string name="room_person_surname">Фамилия</string>
+    <string name="nav_bar_title_log_out">Выход</string>
 </resources>
