@@ -2,15 +2,12 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.utils;
 
 import android.app.Application;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import org.acra.ACRA;
 import org.acra.ReportField;
 import org.acra.config.ACRAConfiguration;
 import org.acra.config.ConfigurationBuilder;
-
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 
 /**
  * Created by Andrey on 26.11.2016.
@@ -25,16 +22,10 @@ public class Runner extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //ApplicationHelper.setContext(getApplicationContext());
-
-       /* Lookup lookup = Lookup.getInstance();
-
-        ApplicationHelper sqLiteDatabase = ApplicationHelper.getInstance(getApplicationContext());
-
-        lookup.put(sqLiteDatabase);*/
-
         Log.d(TAG, "Create Application");
     }
+
+
 
 
     @Override

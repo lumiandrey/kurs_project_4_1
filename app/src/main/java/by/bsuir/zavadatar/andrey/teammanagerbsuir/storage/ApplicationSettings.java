@@ -3,8 +3,6 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.List;
-
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
@@ -34,8 +32,6 @@ public class ApplicationSettings {
 
         PersonDaoLite daoLite = new PersonDaoLite(ApplicationHelper.getInstance(context));
 
-        List<PersonEntity> list = daoLite.reads();
-
         int idPerson = daoLite.getPersonIdByUser(userEntity.getIdUser());
         if(idPerson > 0) {
             editor.putInt(ID_USER, userEntity.getIdUser());
@@ -59,5 +55,15 @@ public class ApplicationSettings {
             personEntity = daoLite.read(idPerson);
 
         return personEntity;
+    }
+
+    public static boolean isAuthorisation(Context context){
+
+        SharedPreferences sharedPreferences = getStorageSettings(context);
+
+        return sharedPreferences.getString(LOGIN_USER, null) != null &&
+                sharedPreferences.getString(PASSWORD, null) != null &&
+                sharedPreferences.getInt(ID_PERSON, -1) != -1 &&
+                sharedPreferences.getInt(ID_USER, -1) != -1;
     }
 }
