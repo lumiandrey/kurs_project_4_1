@@ -9,11 +9,6 @@
     </style>
 
 
-
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
     <style name="AppThemeCustom" parent="Theme.AppCompat.Light">
         <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -21,17 +16,17 @@
 
         <item name="android:colorBackground">@color/background</item>
 
-        <item name="android:textColorPrimary">@color/primary_text_material_light</item>
+        <item name="android:textColorPrimary">@color/primary_text_material_dark</item>
         <item name="android:textColorPrimaryInverse">@color/primary_text_material_dark</item>
 
         <item name="android:textColorSecondary">@color/secondary_text_material_light</item>
         <item name="android:textColorSecondaryInverse">@color/secondary_text_material_dark</item>
 
-        <item name="android:buttonStyle">@style/TeamButton</item>
+        <item name="buttonStyle">@style/TeamButton</item>
     </style>
 
-    <style name="TeamButton" parent="android:style/Widget.Holo.Button">
-        <item name="android:background">#ace853ff</item>
+    <style name="TeamButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/red_button</item>
     </style>
 
 </resources>

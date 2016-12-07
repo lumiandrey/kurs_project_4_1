@@ -54,4 +54,8 @@
         <item quantity="one">%1$x task</item>
         <item quantity="other">%1$x tasks</item>
     </plurals>
+
+    <!-- Log Task time-->
+    <string name="add_log_time_task">Add</string>
+    <string name="description_log_time_task">Description task</string>
 </resources>
