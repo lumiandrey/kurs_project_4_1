@@ -192,7 +192,8 @@ public class KorpPortalDBSchema {
         public static final class Colums {
             public static final String ID_LOG = "_id_log";
             public static final String DATE_LOG = "date_log";
-            public static final String DESCRIPTION = "";
+            public static final String DESCRIPTION = "description";
+            public static final String HOURS = "hours";
             public static final String LINKS_EXT_STOR = "links_ext_stor";
             public static final String ID_TYPE_ACTIVITY = "id_type_activity";
             public static final String ID_HAS_TASK_PERSON = "id_has_task_person";

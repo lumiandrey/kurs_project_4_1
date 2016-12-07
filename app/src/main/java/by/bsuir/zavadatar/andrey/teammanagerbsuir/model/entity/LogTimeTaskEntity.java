@@ -7,6 +7,7 @@ public class LogTimeTaskEntity implements Entity{
     private int idLog;
     private String dateLog;
     private String discription;
+    private float hours;
     private String linksExtStor;
     private int idTypeActivity;
     private int idHasTaskPerson;
@@ -17,12 +18,14 @@ public class LogTimeTaskEntity implements Entity{
     public LogTimeTaskEntity(int idLog,
                              String dateLog,
                              String discription,
+                             float hours,
                              String linksExtStor,
                              int idTypeActivity,
                              int idHasTaskPerson) {
         this.idLog = idLog;
         this.dateLog = dateLog;
         this.discription = discription;
+        this.hours = hours;
         this.linksExtStor = linksExtStor;
         this.idTypeActivity = idTypeActivity;
         this.idHasTaskPerson = idHasTaskPerson;
@@ -91,6 +94,14 @@ public class LogTimeTaskEntity implements Entity{
         if (linksExtStor != null ? !linksExtStor.equals(that.linksExtStor) : that.linksExtStor != null) return false;
 
         return true;
+    }
+
+    public float getHours() {
+        return hours;
+    }
+
+    public void setHours(float hours) {
+        this.hours = hours;
     }
 
     @Override

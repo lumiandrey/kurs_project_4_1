@@ -20,6 +20,7 @@ public class TypeActivityStorageInit {
         mEntityList.add(new TypeActivityEntity(3, "Testing"));
         mEntityList.add(new TypeActivityEntity(4, "Review"));
         mEntityList.add(new TypeActivityEntity(5, "Management"));
+        mEntityList.add(new TypeActivityEntity(6, "Self"));
 
         return mEntityList;
     }

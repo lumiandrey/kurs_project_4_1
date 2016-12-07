@@ -7,13 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.LogTimeTaskCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.LogTimeTaskDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.LogTimeTaskTable;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -68,6 +67,7 @@ public class LogTimeDaoLite extends AbstractDaoBase<LogTimeTaskEntity> implement
         values.put(LogTimeTaskTable.Colums.ID_HAS_TASK_PERSON, userEntity.getIdHasTaskPerson());
         values.put(LogTimeTaskTable.Colums.DATE_LOG, userEntity.getDateLog());
         values.put(LogTimeTaskTable.Colums.DESCRIPTION, userEntity.getDiscription());
+        values.put(LogTimeTaskTable.Colums.HOURS, userEntity.getHours());
         values.put(LogTimeTaskTable.Colums.ID_TYPE_ACTIVITY, userEntity.getIdTypeActivity());
         values.put(LogTimeTaskTable.Colums.LINKS_EXT_STOR, userEntity.getLinksExtStor());
 
