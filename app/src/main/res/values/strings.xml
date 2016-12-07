@@ -58,4 +58,5 @@
     <!-- Log Task time-->
     <string name="add_log_time_task">Add</string>
     <string name="description_log_time_task">Description task</string>
+    <string name="hours_log_time_task">Hours</string>
 </resources>
