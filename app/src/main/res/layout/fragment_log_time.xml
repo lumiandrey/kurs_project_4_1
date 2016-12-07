@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+
+              android:orientation="vertical"
+
+             tools:context="by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.LogTime">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+
+        >
+
+        <TextView
+            android:id="@+id/id_task_log_task_fragment_label"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:gravity="center"
+
+            android:layout_weight="2"
+
+            android:text="ID"/>
+
+        <TextView
+            android:id="@+id/name_task_log_task_fragment_label"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:gravity="center"
+
+            android:layout_weight="7"
+
+            android:text="name task"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/date_log_task_fragment_btn"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:layout_weight="3"
+
+            android:text="Date"
+            />
+
+        <EditText
+            android:id="@+id/hours_log_task_fragment_edit_text"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:layout_weight="7"
+
+            android:text="hours"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/description_log_task_fragment_edit_text"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        tools:inputType="textMultiLine"
+
+        android:enabled="false"
+
+        android:layout_margin="@dimen/activity_default_margin"
+
+        android:text="@string/description_log_time_task"
+        />
+
+    <Spinner
+        android:id="@+id/type_activity_log_task_fragment_spinner"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="@dimen/activity_default_margin"
+        android:textAlignment="center"
+        >
+
+    </Spinner>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="@dimen/activity_default_margin"
+
+        android:layout_gravity="right"
+
+        android:text="@string/add_log_time_task"/>
+
+</LinearLayout>
