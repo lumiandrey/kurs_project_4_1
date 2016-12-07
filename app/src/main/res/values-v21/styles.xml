@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="AppThemeCustom" parent="Theme.AppCompat.Light">
+                <item name="colorPrimaryDark">@color/colorAccent</item>
+                <item name="colorPrimary">@color/colorPrimary</item>
+                <item name="colorAccent">@color/colorAccent</item>
+
+                <item name="android:colorBackground">@color/background</item>
+
+                <item name="android:textColorPrimary">@color/primary_text_material_dark</item>
+                <item name="android:textColorPrimaryInverse">@color/primary_text_material_dark</item>
+
+                <item name="android:textColorSecondary">@color/secondary_text_material_light</item>
+                <item name="android:textColorSecondaryInverse">@color/secondary_text_material_dark</item>
+
+                <item name="android:buttonStyle">@style/TeamButton</item>
+                <item name="android:navigationBarColor">@color/soothing_blue</item>
+                <item name="android:statusBarColor">@android:color/holo_green_light</item>
+        </style>
+</resources>
