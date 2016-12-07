@@ -162,7 +162,7 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TaskTable.NAME + " (" +
                 TaskTable.Colums.ID_TASK + " INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
-                TaskTable.NAME + " string ," +
+                TaskTable.NAME + " TEXT ," +
                 TaskTable.Colums.DESCRIPTION + " TEXT, " +
                 TaskTable.Colums.DATE_BEGIN + " TEXT, " +
                 TaskTable.Colums.DATE_END + " TEXT, " +
@@ -198,6 +198,7 @@ abstract public class BaseHelper extends SQLiteOpenHelper {
                 LogTimeTaskTable.Colums.ID_LOG + " INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
                 LogTimeTaskTable.Colums.DATE_LOG + " TEXT NOT NULL, " +
                 LogTimeTaskTable.Colums.DESCRIPTION + " TEXT, " +
+                LogTimeTaskTable.Colums.HOURS + " FLOAT, " +
                 LogTimeTaskTable.Colums.LINKS_EXT_STOR + " TEXT, " +
                 LogTimeTaskTable.Colums.ID_TYPE_ACTIVITY + " INTEGER NOT NULL, " +
                 LogTimeTaskTable.Colums.ID_HAS_TASK_PERSON + " INTEGER NOT NULL, " +
