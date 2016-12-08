@@ -12,9 +12,9 @@ import android.util.Log;
 
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.TaskFragment;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 
 /**
  * Created by Andrey on 12.11.2016.
@@ -53,7 +53,7 @@ public class TaskPagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 TaskEntity crime = mTaskEntities.get(position);
-                return TaskFragment.newInstance(crime.getIdTask());
+                return TaskFragment.newInstance(crime.getIdTask(), TaskFragment.OperationTask.SHOW);
             }
 
             /**

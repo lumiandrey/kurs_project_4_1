@@ -5,11 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,10 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.LoginActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.SettingApplicationActivity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskListFragmentActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CityDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CountryDaoLite;
@@ -49,14 +43,13 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
  * Created by Andrey on 26.11.2016.
  */
 
-public class UserRoomFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class UserRoomFragment extends Fragment {
 
     private static final String TAG = UserRoomFragment.class.getName();
     private static final int REQUEST_DATE = 1;
     private static final String DIALOG_DATE = "DialogDate";
 
     private Context mContext;
-    private DrawerLayout mDrawerLayout;
     private PersonEntity mPersonEntity;
     private List<CountryEntity> mCountryList = new ArrayList<>();
     private List<CityEntity> mCityList = new ArrayList<>();
@@ -88,7 +81,7 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.user_room, container,
+        View view = inflater.inflate(R.layout.content_user_room, container,
                 false);
 
         mContext = inflater.getContext();
@@ -96,8 +89,6 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
         mPersonEntity = ApplicationSettings.sPersonEntity(getContext());
 
         initView(view);
-
-        mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
 
         return view;
     }
@@ -109,7 +100,6 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
 
         mSurnameTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_surname_aut_comp_tv);
         mSurnameTextView.setText(mPersonEntity.getSurname());
-
 
         mPatronymicTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_patronymic_aut_comp_tv);
         mPatronymicTextView.setText(mPersonEntity.getPatronymic());
@@ -283,8 +273,6 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
         sexArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSexSpinner.setSelection(0);
 
-        NavigationView navigationView = (NavigationView) root.findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
 
@@ -308,36 +296,6 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(@Nullable MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.nav_all_tasks_this_person:{
-                startActivity(new Intent(mContext, TaskListFragmentActivity.class));
-            } break;
-            case R.id.nav_add_task_this_person:{
-
-            } break;
-            case R.id.setting_application_person:{
-                startActivity(new Intent(getActivity(), SettingApplicationActivity.class));
-            } break;
-            case R.id.lot_out_person:{
-                ApplicationSettings.logOut(getContext());
-                finish();
-                startActivity(new Intent(LoginActivity.newIntent(getContext())));
-
-            } break;
-            default:
-                Log.d(TAG, "Default Action (no action)");
-        }
-
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override

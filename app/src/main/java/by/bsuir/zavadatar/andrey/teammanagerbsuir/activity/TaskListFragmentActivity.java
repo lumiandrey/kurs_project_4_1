@@ -8,7 +8,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.TaskListFragment;
  * Created by Andrey on 28.11.2016.
  */
 
-public class TaskListFragmentActivity extends SingleFragmentActivity {
+public class TaskListFragmentActivity extends PersonUseApplicationActivity {
 
     @Override
     protected Fragment createFragment() {
