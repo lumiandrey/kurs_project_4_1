@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -29,15 +30,19 @@ public class TaskFragment extends Fragment {
 
     private final static String TAG = TaskFragment.class.getName();
 
-    private static final String ARG_TASK_ID = "crime_id";
+    private static final String ARG_TASK_ID = "task_id";
     private static final String DIALOG_DATE = "DialogDate";
-    private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_DATE_BEGIN = 111_111_111;
+    private static final int REQUEST_DATE_END = 123_123_123;
     private static final int REQUEST_TIME = 10;
 
     private TaskEntity mTaskEntity;
 
     private Button mDateBeginBtn;
     private Button mDateEndBtn;
+    private Button mAddLogTimeBtn;
+    private Button mShowLogTimeBtn;
+    private Button mAddTaskBtn;
     private EditText mDescriptionEdTx;
     private EditText mNameTaskEdTx;
     private TextView mNameAddPersonTaskTxV;
@@ -46,21 +51,23 @@ public class TaskFragment extends Fragment {
     private ProgressBar mTaskProgressBar;
 
     /**
-     * Мы не заполняем представление фрагмента.
-     * @param savedInstanceState - использует объект Bundle для сохранения и загрузки состояния.
-     */
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+ * Мы не заполняем представление фрагмента.
+ * @param savedInstanceState - использует объект Bundle для сохранения и загрузки состояния.
+ */
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+            super.onCreate(savedInstanceState);
+            setHasOptionsMenu(true);
 
-        int crimeId = getArguments().getInt(ARG_TASK_ID);
+            int crimeId;
 
-        mTaskEntity = TaskService.fintTaskBiId(crimeId);
+            if(getArguments() != null) {
+                crimeId = getArguments().getInt(ARG_TASK_ID);
 
-        //returnResult();
-    }
+                mTaskEntity = TaskService.fintTaskBiId(crimeId);
+            }
+        }
 
     /**
      * в этом методе заполняется макет представления фрагмента, а заполненный объект View возвращается активности-хосту.
@@ -79,6 +86,9 @@ public class TaskFragment extends Fragment {
 
         mDateBeginBtn = (Button) view.findViewById(R.id.date_begin_task_fragment_btn);
         mDateEndBtn = (Button) view.findViewById(R.id.date_end_task_fragment_btn);
+        mAddLogTimeBtn = (Button) view.findViewById(R.id.add_log_time_task_fragment_btn);
+        mShowLogTimeBtn = (Button) view.findViewById(R.id.show_logs_task_fragment_btn);
+        mAddTaskBtn = (Button) view.findViewById(R.id.add_task_fragment_btn);
         mDescriptionEdTx = (EditText) view.findViewById(R.id.description_task_fragment_task_edit_text);
         mNameTaskEdTx = (EditText) view.findViewById(R.id.name_task_fragment_edit_text);
         mNameAddPersonTaskTxV = (TextView) view.findViewById(R.id.add_person_name_task_fragment_text_view);
@@ -95,11 +105,46 @@ public class TaskFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
 
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mTaskEntity.getDateBegin());
-                dialog.setTargetFragment(TaskFragment.this, REQUEST_DATE);
+                dialog.setTargetFragment(TaskFragment.this, REQUEST_DATE_BEGIN);
 
                 dialog.show(manager, DIALOG_DATE);
             }
         });
+
+        mDateEndBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mTaskEntity.getDateBegin());
+                dialog.setTargetFragment(TaskFragment.this, REQUEST_DATE_END);
+
+                dialog.show(manager, DIALOG_DATE);
+            }
+        });
+
+        mAddLogTimeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Add log time!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mShowLogTimeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Show Log Time!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mAddTaskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Add task!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
 
         return view;
     }
@@ -136,7 +181,7 @@ public class TaskFragment extends Fragment {
         }
 
         switch (requestCode){
-            case REQUEST_DATE:{
+            case REQUEST_DATE_BEGIN:{
                 Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
 
                 mTaskEntity.setDateBegin(date);

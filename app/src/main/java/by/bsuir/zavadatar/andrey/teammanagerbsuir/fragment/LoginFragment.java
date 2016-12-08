@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -29,11 +30,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.SettingApplicationActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.UserRoomActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.UserDao;
@@ -121,11 +124,19 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
             }
         });
 
+        (view.findViewById(R.id.choice_language_login)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SettingApplicationActivity.class));
+            }
+        });
+
         mRegistration = (Button) view.findViewById(R.id.new_registration_login_btn);
         mRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO-Andrey called registration activityq
+                Toast.makeText(getContext(), "Register new user!!", Toast.LENGTH_LONG).show();
             }
         });
 

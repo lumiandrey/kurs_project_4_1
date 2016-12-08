@@ -24,6 +24,7 @@
     <string name="date_picker_title">Дата</string>
     <string name="action_register_login">Регистрация</string>
     <string name="nav_bar_title_create_task">Создать задачу</string>
+
     <string name="room_person_date_of_birth">Дата рождения</string>
     <string name="room_person_department">Отдел</string>
     <string name="room_person_email">Почтовый ящик</string>
@@ -34,5 +35,31 @@
     <string name="room_person_photo">Фото пользователя</string>
     <string name="room_person_post">Должность</string>
     <string name="room_person_surname">Фамилия</string>
+
     <string name="nav_bar_title_log_out">Выход</string>
+
+    <!-- Settings application-->
+    <string name="LangDialogTitle">Выберите язык:</string>
+    <string name="LangTitle">Язык</string>
+    <string name="LangSummary">Язык приложения</string>
+    <string-array name="entryvalues_lang">
+        <item>по умолчанию</item>
+        <item>ru</item>
+        <item>en</item>
+    </string-array>
+    <string-array name="entries_lang">
+        <item>Язык аппарата</item>
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
+    <string name="add_log_time_task">Добавить</string>
+    <string name="add_log_time_task_fragment">Отметить время</string>
+    <string name="date_begin_task_fragment">Дата начала</string>
+    <string name="date_end_task_fragment">Дата окончания</string>
+    <string name="description_log_time_task">Опсание задачи</string>
+    <string name="first_category_settings">Первая категория</string>
+    <string name="hours_log_time_task">Часы</string>
+    <string name="show_log_task_fragment">Просмотр отметок</string>
+    <string name="choice_language_login">Выбрать язык</string>
+    <string name="settings_menu">Настройки</string>
 </resources>

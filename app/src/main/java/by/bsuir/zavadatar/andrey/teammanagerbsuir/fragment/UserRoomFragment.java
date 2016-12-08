@@ -32,6 +32,7 @@ import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.LoginActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.SettingApplicationActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskListFragmentActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CityDaoLite;
@@ -276,8 +277,10 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
         }
 
         mSexSpinner = (Spinner) root.findViewById(R.id.room_content_sex_spin);
-        mSexSpinner.setAdapter(new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, Sex.values()));
+        ArrayAdapter<Sex> sexArrayAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, Sex.values());
+        mSexSpinner.setAdapter(sexArrayAdapter);
+        sexArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSexSpinner.setSelection(0);
 
         NavigationView navigationView = (NavigationView) root.findViewById(R.id.nav_view);
@@ -319,6 +322,9 @@ public class UserRoomFragment extends Fragment implements NavigationView.OnNavig
             } break;
             case R.id.nav_add_task_this_person:{
 
+            } break;
+            case R.id.setting_application_person:{
+                startActivity(new Intent(getActivity(), SettingApplicationActivity.class));
             } break;
             case R.id.lot_out_person:{
                 ApplicationSettings.logOut(getContext());

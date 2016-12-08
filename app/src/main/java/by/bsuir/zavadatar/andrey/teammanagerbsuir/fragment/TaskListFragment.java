@@ -20,11 +20,10 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskPagerActivity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 
 
 /**
@@ -255,6 +254,12 @@ public class TaskListFragment extends Fragment {
             mTaskEntities = taskEntities;
         }
 
+    }
+
+    public enum ChoiceActivity {
+        ADD,
+        UPDATE,
+        SHOW
     }
 
 }
