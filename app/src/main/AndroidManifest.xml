@@ -30,6 +30,12 @@
         <activity
             android:name=".TaskPagerActivity">
         </activity>
+        <activity
+            android:name=".SettingApplicationActivity">
+        </activity>
+        <activity
+            android:name=".LogTimeListActivity">
+        </activity>
     </application>
 
 </manifest>

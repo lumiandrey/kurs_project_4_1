@@ -2,12 +2,17 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.utils;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.acra.ACRA;
 import org.acra.ReportField;
 import org.acra.config.ACRAConfiguration;
 import org.acra.config.ConfigurationBuilder;
+
+import java.util.Locale;
 
 /**
  * Created by Andrey on 26.11.2016.
@@ -18,9 +23,22 @@ public class Runner extends Application {
     private final static String TAG = Runner.class.getName();
     public static final String MAIL_TO = "lumiandreylive@gmail.com";
 
+    private SharedPreferences preferences;
+    private Locale locale;
+    private String lang;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        lang = preferences.getString("lang", "default");
+        if (lang.equals("default")) {lang=getResources().getConfiguration().locale.getCountry();}
+        locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, null);
 
         Log.d(TAG, "Create Application");
     }
@@ -56,6 +74,15 @@ public class Runner extends Application {
 
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, null);
+    }
 
     @Override
     public void onTerminate() {

@@ -59,4 +59,26 @@
     <string name="add_log_time_task">Add</string>
     <string name="description_log_time_task">Description task</string>
     <string name="hours_log_time_task">Hours</string>
+    <string name="date_begin_task_fragment">Date begin</string>
+    <string name="date_end_task_fragment">Date end</string>
+    <string name="show_log_task_fragment">Show log</string>
+    <string name="add_log_time_task_fragment">Add Log time</string>
+
+    <!-- Settings application-->
+    <string name="LangDialogTitle">Choose language:</string>
+    <string name="LangTitle">Language</string>
+    <string name="LangSummary">Language application</string>
+    <string name="first_category_settings">First Category</string>
+    <string name="choice_language_login">Choice language</string>
+    <string name="settings_menu">Settings</string>
+    <string-array name="entryvalues_lang">
+        <item>default</item>
+        <item>ru</item>
+        <item>en</item>
+    </string-array>
+    <string-array name="entries_lang">
+        <item>Language devices</item>
+        <item>Russian</item>
+        <item>English</item>
+    </string-array>
 </resources>

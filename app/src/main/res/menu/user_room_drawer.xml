@@ -23,6 +23,13 @@
     </item>
 
     <group android:checkableBehavior="single">
+        <item android:id="@+id/setting_application_person"
+              android:icon="@drawable/ic_settings_application"
+              android:title="@string/settings_menu"
+            />
+    </group>
+
+    <group android:checkableBehavior="single">
         <item android:id="@+id/lot_out_person"
               android:icon="@drawable/ic_action_name"
               android:title="@string/nav_bar_title_log_out"
