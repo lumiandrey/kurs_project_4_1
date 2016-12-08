@@ -5,13 +5,13 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
  */
 public class TypeUserEntity implements Entity{
     private int idType;
-    private String name;
+    private TypeUserName name;
     private int accessLevel;
 
     public TypeUserEntity() {
     }
 
-    public TypeUserEntity(int idType, String name, int accessLevel) {
+    public TypeUserEntity(int idType, TypeUserName name, int accessLevel) {
         this.idType = idType;
         this.name = name;
         this.accessLevel = accessLevel;
@@ -25,12 +25,12 @@ public class TypeUserEntity implements Entity{
         this.idType = idType;
     }
 
-    public String getName() {
-        return name;
+    public String getNameToString() {
+        return name.name();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameToString(String name) {
+        this.name = TypeUserName.valueOf(name);
     }
 
     public int getAccessLevel() {

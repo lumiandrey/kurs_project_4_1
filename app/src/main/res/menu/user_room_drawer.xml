@@ -4,6 +4,10 @@
     <item android:title="@string/tasks_title_menu_room">
         <menu>
             <item
+                android:id="@+id/go_to_home_person"
+                android:icon="@drawable/ic_account_balance_black_24dp"
+                android:title="@string/nav_bar_title_create_task"/>
+            <item
                 android:id="@+id/nav_add_task_this_person"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/nav_bar_title_create_task"/>

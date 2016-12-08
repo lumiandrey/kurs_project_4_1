@@ -7,13 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.TypeUserCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.TypeUserDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.TypeUserTable;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -65,7 +64,7 @@ public class TypeUserDaoLite extends AbstractDaoBase<TypeUserEntity> implements 
 
         ContentValues values = new ContentValues();
 
-        values.put(TypeUserTable.Colums.NAME, entity.getName());
+        values.put(TypeUserTable.Colums.NAME, entity.getNameToString());
         values.put(TypeUserTable.Colums.ACCESS_LEVEL, entity.getAccessLevel());
 
         return values;

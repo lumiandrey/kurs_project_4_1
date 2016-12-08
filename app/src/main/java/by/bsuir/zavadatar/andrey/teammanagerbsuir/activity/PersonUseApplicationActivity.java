@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 
@@ -34,8 +35,10 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_person_room_application);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_person_room_application);
+        navigationView = (NavigationView) findViewById(R.id.nav_view_person_room_application);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.name_person_nav_panel)).setText(ApplicationSettings.getFIO(this));
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.frame_person_room_application);
@@ -44,7 +47,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
             fragment = createFragment();
             if(fragment != null)
                 fm.beginTransaction()
-                        .add(R.id.frame_person_room_application, fragment)
+                        .replace(R.id.frame_person_room_application, fragment)
                         .commit();
         }
 
@@ -63,11 +66,15 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
         int id = item.getItemId();
 
         switch (id){
-            case R.id.nav_all_tasks_this_person:{
-                startActivity(new Intent(getApplicationContext(), TaskListFragmentActivity.class));
+            case R.id.go_to_home_person:{
+                finish();
+                startActivity(UserRoomActivity.newIntent(getApplicationContext()));
             } break;
             case R.id.nav_add_task_this_person:{
 
+            } break;
+            case R.id.nav_all_tasks_this_person:{
+                startActivity(new Intent(getApplicationContext(), TaskListFragmentActivity.class));
             } break;
             case R.id.setting_application_person:{
                 startActivity(new Intent(getApplicationContext(), SettingApplicationActivity.class));

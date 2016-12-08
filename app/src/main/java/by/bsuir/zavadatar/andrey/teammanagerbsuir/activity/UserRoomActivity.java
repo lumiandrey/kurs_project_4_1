@@ -7,7 +7,7 @@ import android.util.Log;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.UserRoomFragment;
 
-public class UserRoomActivity extends PersonUseApplicationActivity {
+public class UserRoomActivity extends PersonUseApplicationActivity { //
 
     private static final String TAG = UserRoomActivity.class.getName();
 

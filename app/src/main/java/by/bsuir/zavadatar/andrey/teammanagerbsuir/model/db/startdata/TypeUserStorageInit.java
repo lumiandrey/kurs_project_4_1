@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserName;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -15,9 +16,9 @@ public class TypeUserStorageInit {
 
     public List<TypeUserEntity> getData() {
 
-        mEntityList.add(new TypeUserEntity(1, "Admin", 1));
-        mEntityList.add(new TypeUserEntity(2, "Worker", 2));
-        mEntityList.add(new TypeUserEntity(3, "Guest", 100_00));
+        mEntityList.add(new TypeUserEntity(1, TypeUserName.Admin, 1));
+        mEntityList.add(new TypeUserEntity(2, TypeUserName.Worker, 2));
+        mEntityList.add(new TypeUserEntity(3, TypeUserName.Guest, 100_00));
 
         return mEntityList;
     }

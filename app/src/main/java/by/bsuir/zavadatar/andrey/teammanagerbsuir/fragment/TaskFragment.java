@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
@@ -213,7 +214,7 @@ public class TaskFragment extends Fragment {
         //getFragmentManager().popBackStackImmediate();
     }
 
-    public static TaskFragment newInstance(int idTask) {
+    public static TaskFragment newInstance(int idTask, OperationTask operationTask) {
         Bundle args = new Bundle();
 
         args.putInt(ARG_TASK_ID, idTask);
@@ -222,5 +223,11 @@ public class TaskFragment extends Fragment {
         fragment.setArguments(args);
 
         return fragment;
+    }
+
+    public enum OperationTask implements Serializable{
+        CREATE,
+        SHOW_OR_UPDATE,
+        SHOW
     }
 }
