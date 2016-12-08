@@ -65,8 +65,8 @@ public class LogTimeDaoLite extends AbstractDaoBase<LogTimeTaskEntity> implement
         ContentValues values = new ContentValues();
 
         values.put(LogTimeTaskTable.Colums.ID_HAS_TASK_PERSON, userEntity.getIdHasTaskPerson());
-        values.put(LogTimeTaskTable.Colums.DATE_LOG, userEntity.getDateLog());
-        values.put(LogTimeTaskTable.Colums.DESCRIPTION, userEntity.getDiscription());
+        values.put(LogTimeTaskTable.Colums.DATE_LOG, userEntity.getDateLogString());
+        values.put(LogTimeTaskTable.Colums.DESCRIPTION, userEntity.getDescription());
         values.put(LogTimeTaskTable.Colums.HOURS, userEntity.getHours());
         values.put(LogTimeTaskTable.Colums.ID_TYPE_ACTIVITY, userEntity.getIdTypeActivity());
         values.put(LogTimeTaskTable.Colums.LINKS_EXT_STOR, userEntity.getLinksExtStor());

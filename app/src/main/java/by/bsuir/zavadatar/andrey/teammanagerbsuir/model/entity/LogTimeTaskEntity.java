@@ -1,12 +1,16 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
+import java.util.Date;
+
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
+
 /**
  * Created by Andrey on 27.11.2016.
  */
 public class LogTimeTaskEntity implements Entity{
     private int idLog;
-    private String dateLog;
-    private String discription;
+    private Date dateLog;
+    private String description;
     private float hours;
     private String linksExtStor;
     private int idTypeActivity;
@@ -16,15 +20,15 @@ public class LogTimeTaskEntity implements Entity{
     }
 
     public LogTimeTaskEntity(int idLog,
-                             String dateLog,
-                             String discription,
+                             Date dateLog,
+                             String description,
                              float hours,
                              String linksExtStor,
                              int idTypeActivity,
                              int idHasTaskPerson) {
         this.idLog = idLog;
         this.dateLog = dateLog;
-        this.discription = discription;
+        this.description = description;
         this.hours = hours;
         this.linksExtStor = linksExtStor;
         this.idTypeActivity = idTypeActivity;
@@ -39,20 +43,24 @@ public class LogTimeTaskEntity implements Entity{
         this.idLog = idLog;
     }
 
-    public String getDateLog() {
+    public String getDateLogString() {
+        return DateConvert.getDateToString(dateLog);
+    }
+
+    public Date getDateLog() {
         return dateLog;
     }
 
-    public void setDateLog(String dateLog) {
+    public void setDateLog(Date dateLog) {
         this.dateLog = dateLog;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLinksExtStor() {
@@ -90,7 +98,7 @@ public class LogTimeTaskEntity implements Entity{
         if (idTypeActivity != that.idTypeActivity) return false;
         if (idHasTaskPerson != that.idHasTaskPerson) return false;
         if (dateLog != null ? !dateLog.equals(that.dateLog) : that.dateLog != null) return false;
-        if (discription != null ? !discription.equals(that.discription) : that.discription != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (linksExtStor != null ? !linksExtStor.equals(that.linksExtStor) : that.linksExtStor != null) return false;
 
         return true;
@@ -108,7 +116,7 @@ public class LogTimeTaskEntity implements Entity{
     public int hashCode() {
         int result = idLog;
         result = 31 * result + (dateLog != null ? dateLog.hashCode() : 0);
-        result = 31 * result + (discription != null ? discription.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (linksExtStor != null ? linksExtStor.hashCode() : 0);
         result = 31 * result + idTypeActivity;
         result = 31 * result + idHasTaskPerson;
@@ -120,7 +128,7 @@ public class LogTimeTaskEntity implements Entity{
         return "LogTimeTaskEntity{" +
                 "idLog=" + idLog +
                 ", dateLog='" + dateLog + '\'' +
-                ", discription='" + discription + '\'' +
+                ", description='" + description + '\'' +
                 ", linksExtStor='" + linksExtStor + '\'' +
                 ", idTypeActivity=" + idTypeActivity +
                 ", idHasTaskPerson=" + idHasTaskPerson +
