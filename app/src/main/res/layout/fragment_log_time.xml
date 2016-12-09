@@ -106,7 +106,7 @@
     </Spinner>
 
     <Button
-        android:id="@+id/add_btn"
+        android:id="@+id/add_log_task_fragment_btn"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

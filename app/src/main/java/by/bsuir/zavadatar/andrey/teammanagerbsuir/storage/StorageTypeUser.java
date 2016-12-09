@@ -11,12 +11,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserEntity;
 
 public class StorageTypeUser {
 
-    private static List<TypeUserEntity> mTypeUserEntityList = null;
-
     public static List<TypeUserEntity> getTypeUser(Context context){
-        if(mTypeUserEntityList == null) {
-            mTypeUserEntityList = new TypeUserDaoLite(ApplicationHelper.getInstance(context)).reads();
-        }
-        return mTypeUserEntityList;
+        return new TypeUserDaoLite(ApplicationHelper.getInstance(context)).reads();
     }
 }

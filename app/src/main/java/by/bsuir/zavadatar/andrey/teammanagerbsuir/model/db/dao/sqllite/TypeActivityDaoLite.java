@@ -1,18 +1,20 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.TypeActivityCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.TypeActivityDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeActivityEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.TypeActivityTable;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -30,6 +32,10 @@ public class TypeActivityDaoLite extends AbstractDaoBase<TypeActivityEntity> imp
 
     public TypeActivityDaoLite(SQLiteDatabase mDatabase) {
         super(mDatabase);
+    }
+
+    public TypeActivityDaoLite(Context context){
+        super(ApplicationHelper.getInstance(context));
     }
 
     @Override

@@ -36,6 +36,9 @@
         <activity
             android:name=".LogTimeListActivity">
         </activity>
+        <activity
+            android:name=".LogTimeSingleActivity">
+        </activity>
     </application>
 
 </manifest>

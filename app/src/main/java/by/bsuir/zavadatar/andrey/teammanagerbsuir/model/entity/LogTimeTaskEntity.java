@@ -17,6 +17,7 @@ public class LogTimeTaskEntity implements Entity{
     private int idHasTaskPerson;
 
     public LogTimeTaskEntity() {
+        dateLog = new Date();
     }
 
     public LogTimeTaskEntity(int idLog,

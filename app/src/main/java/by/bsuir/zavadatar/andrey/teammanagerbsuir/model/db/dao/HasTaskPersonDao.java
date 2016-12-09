@@ -8,4 +8,6 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.HasTaskPersonEnti
 
 public interface HasTaskPersonDao extends BaseDao<HasTaskPersonEntity> {
 
+    int getIDHasByIDPersonIDTask(int personID, int taskID);
+
 }

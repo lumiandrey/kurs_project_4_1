@@ -1,11 +1,13 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.LogTimeTaskCursorWrapper;
@@ -22,7 +24,7 @@ public class LogTimeDaoLite extends AbstractDaoBase<LogTimeTaskEntity> implement
 
     public static final String TAG = LogTimeDaoLite.class.getName();
     public static final String NAME_TABLE = LogTimeTaskTable.NAME;
-    public static final String ID_WHERE = LogTimeTaskTable.Colums.ID_HAS_TASK_PERSON;
+    public static final String ID_WHERE = LogTimeTaskTable.Colums.ID_LOG;
 
     public LogTimeDaoLite(BaseHelper mDatabase) {
         super(mDatabase);
@@ -30,6 +32,10 @@ public class LogTimeDaoLite extends AbstractDaoBase<LogTimeTaskEntity> implement
 
     public LogTimeDaoLite(SQLiteDatabase mDatabase) {
         super(mDatabase);
+    }
+
+    public LogTimeDaoLite(Context context){
+        super(ApplicationHelper.getInstance(context));
     }
 
     @Override

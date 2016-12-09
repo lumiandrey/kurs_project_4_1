@@ -1,19 +1,21 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.HasTaskPersonCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.HasTaskPersonDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.HasTaskPersonEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.HasTaskPersonTable.Colums;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.HasTaskPersonTable.NAME;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -22,11 +24,15 @@ import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSc
 public class HasTaskDaoLite extends AbstractDaoBase<HasTaskPersonEntity> implements HasTaskPersonDao {
 
     public static final String TAG = HasTaskDaoLite.class.getName();
-    public static final String NAME_TABLE = HasTaskPersonTable.NAME;
-    public static final String ID_WHERE = HasTaskPersonTable.Colums.ID_HAS_TASK_PERSON;
+    public static final String NAME_TABLE = NAME;
+    public static final String ID_WHERE = Colums.ID_HAS_TASK_PERSON;
 
     public HasTaskDaoLite(BaseHelper mDatabase) {
         super(mDatabase);
+    }
+
+    public HasTaskDaoLite(Context context){
+        super(ApplicationHelper.getInstance(context));
     }
 
     @Override
@@ -65,8 +71,8 @@ public class HasTaskDaoLite extends AbstractDaoBase<HasTaskPersonEntity> impleme
 
         ContentValues values = new ContentValues();
 
-        values.put(HasTaskPersonTable.Colums.ID_PERSON, userEntity.getIdPerson());
-        values.put(HasTaskPersonTable.Colums.ID_TASK, userEntity.getIdTask());
+        values.put(Colums.ID_PERSON, userEntity.getIdPerson());
+        values.put(Colums.ID_TASK, userEntity.getIdTask());
 
         return values;
     }
@@ -76,7 +82,7 @@ public class HasTaskDaoLite extends AbstractDaoBase<HasTaskPersonEntity> impleme
 
         ContentValues values = getContentValuesNotId(entity);
 
-        values.put(HasTaskPersonTable.Colums.ID_HAS_TASK_PERSON, entity.getIdHasTaskPerson());
+        values.put(Colums.ID_HAS_TASK_PERSON, entity.getIdHasTaskPerson());
 
         return values;
     }
@@ -102,5 +108,16 @@ public class HasTaskDaoLite extends AbstractDaoBase<HasTaskPersonEntity> impleme
     @Override
     public void deleteAll(){
         super.deleteAll(NAME_TABLE);
+    }
+
+    @Override
+    public int getIDHasByIDPersonIDTask(int personID, int taskID) {
+        HasTaskPersonEntity hasTaskPersonEntity = super.read(NAME_TABLE,
+                Colums.ID_PERSON + " =? AND " + Colums.ID_TASK + " =?",
+                new String[]{String.valueOf(personID), String.valueOf(taskID)});
+        int result = -1;
+        if(hasTaskPersonEntity != null)
+            result = hasTaskPersonEntity.getIdHasTaskPerson();
+        return result;
     }
 }

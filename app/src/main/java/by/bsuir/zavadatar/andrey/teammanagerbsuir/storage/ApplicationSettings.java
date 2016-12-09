@@ -105,4 +105,9 @@ public class ApplicationSettings {
 
         return personEntity.getName() + ' ' + personEntity.getPatronymic();
     }
+
+    public static int getIdPersonSystem(Context context){
+
+        return getStorageSettings(context).getInt(ID_PERSON, DEF_ID_PERSON);
+    }
 }

@@ -57,6 +57,7 @@
 
     <!-- Log Task time-->
     <string name="add_log_time_task">Add</string>
+    <string name="update_log_time_task">Update</string>
     <string name="description_log_time_task">Description task</string>
     <string name="hours_log_time_task">Hours</string>
     <string name="date_begin_task_fragment">Date begin</string>
@@ -71,6 +72,7 @@
     <string name="first_category_settings">First Category</string>
     <string name="choice_language_login">Choice language</string>
     <string name="settings_menu">Settings</string>
+    <string name="goto_home_screen_nav_bar">Goto home screen</string>
     <string-array name="entryvalues_lang">
         <item>default</item>
         <item>ru</item>
