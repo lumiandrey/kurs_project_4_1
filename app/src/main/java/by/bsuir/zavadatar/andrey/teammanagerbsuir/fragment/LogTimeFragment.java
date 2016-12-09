@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.LogTimeDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeActivityDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeActivityEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 
 
 public class LogTimeFragment extends Fragment {
@@ -29,10 +34,13 @@ public class LogTimeFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final String ARG_NAME = "Name task";
     private static final String ARG_ID_TASK = "Task id";
+    private static final String ARG_OPERATION = "_logOperation";
+    private static final String ARG_ID_LOG = "_LogTaskID";
 
     private TextView mIdTaskTxV;
     private TextView mNameTaskTxV;
     private Button mDateBtn;
+    private Button mAddBtn;
     private EditText mHours;
     private EditText mDescriptionEdTx;
     private Spinner mTypeActivitySpinner;
@@ -40,12 +48,28 @@ public class LogTimeFragment extends Fragment {
     private LogTimeTaskEntity mLogTimeTaskEntity;
     private String mNameTask;
     private Integer idTask;
+    private Integer idPerson;
+    private Operation mOperation;
     private List<TypeActivityEntity> mActivityEntityList = null;
 
-    public static LogTimeFragment newInstance(String nameTask, Integer idTask){
+    public static LogTimeFragment newInstance(String nameTask, Integer idTask, Operation operation){
         Bundle args = new Bundle();
+
         args.putString(ARG_NAME, nameTask);
         args.putInt(ARG_ID_TASK, idTask);
+        args.putSerializable(ARG_OPERATION, operation);
+
+        LogTimeFragment fragment = new LogTimeFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    public static LogTimeFragment newInstance(int idLog, Operation operation){
+        Bundle args = new Bundle();
+
+        args.putInt(ARG_ID_LOG, idLog);
+        args.putSerializable(ARG_OPERATION, operation);
 
         LogTimeFragment fragment = new LogTimeFragment();
         fragment.setArguments(args);
@@ -62,6 +86,25 @@ public class LogTimeFragment extends Fragment {
         Bundle args = getArguments();
 
         if(args != null) {
+
+            idPerson = ApplicationSettings.getIdPersonSystem(getContext());
+
+            mOperation = (Operation) args.getSerializable(ARG_OPERATION);
+
+            switch (mOperation){
+                case CREATE:{
+                    mLogTimeTaskEntity = new LogTimeTaskEntity();
+                } break;
+                case SHOW_OR_UPDATE: {
+                    //mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                } break;
+                case SHOW:{
+                    //TODO-Andrey блокирование всех элементов ввода, только просмотр
+                    //mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                } break;
+
+            }
+
             mNameTask = args.getString(ARG_NAME);
             idTask = args.getInt(ARG_ID_TASK);
         }
@@ -71,9 +114,10 @@ public class LogTimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_task, container, false);
+        View view = inflater.inflate(R.layout.fragment_log_time, container, false);
 
         mDateBtn = (Button) view.findViewById(R.id.date_log_task_fragment_btn);
+        mAddBtn = (Button) view.findViewById(R.id.add_log_task_fragment_btn);
         mDescriptionEdTx = (EditText) view.findViewById(R.id.description_log_task_fragment_edit_text);
         mHours = (EditText) view.findViewById(R.id.hours_log_task_fragment_edit_text);
         mNameTaskTxV = (TextView) view.findViewById(R.id.name_task_log_task_fragment_label);
@@ -82,6 +126,28 @@ public class LogTimeFragment extends Fragment {
 
         showData();
         updateDate();
+
+        if(mOperation.equals(Operation.CREATE)) {
+            mAddBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int idHas = new HasTaskDaoLite(getContext()).getIDHasByIDPersonIDTask(idPerson, idTask);
+                    if(idHas > 0) {
+                        mLogTimeTaskEntity.setIdHasTaskPerson(idHas);
+                        mLogTimeTaskEntity.setIdLog((int) new LogTimeDaoLite(getContext()).create(mLogTimeTaskEntity));
+                    }
+                }
+            });
+            mAddBtn.setText(R.string.add_log_time_task);
+        } else {
+            mAddBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            mAddBtn.setText(R.string.update_log_time_task);
+        }
 
         mDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +160,6 @@ public class LogTimeFragment extends Fragment {
                 dialog.show(manager, DIALOG_DATE);
             }
         });
-
-
 
         return view;
     }
@@ -112,6 +176,8 @@ public class LogTimeFragment extends Fragment {
 
         }
 
+        mActivityEntityList = new TypeActivityDaoLite(getContext()).reads();
+
         if(mActivityEntityList != null){
 
             final List<String> listTypeActivityString = new ArrayList<>();
@@ -122,9 +188,24 @@ public class LogTimeFragment extends Fragment {
                     new ArrayAdapter<>(getContext(),
                             android.R.layout.simple_spinner_item,
                             listTypeActivityString.toArray(new String[listTypeActivityString.size()]));
-
-            adapterActivity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mTypeActivitySpinner.setAdapter(adapterActivity);
+            adapterActivity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            mTypeActivitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view,
+                                           int position, long id) {
+
+                    mLogTimeTaskEntity.setIdTypeActivity(mActivityEntityList.get(position).getIdTypeActivity());
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
         }
 
     }

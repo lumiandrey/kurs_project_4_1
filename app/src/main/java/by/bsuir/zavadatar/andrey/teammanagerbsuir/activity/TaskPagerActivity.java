@@ -12,9 +12,11 @@ import android.util.Log;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.TaskFragment;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 
 /**
  * Created by Andrey on 12.11.2016.
@@ -31,6 +33,11 @@ public class TaskPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(!ApplicationSettings.isAuthorisation(this)){
+            gotoLoginPage();
+        }
+
         setContentView(R.layout.activity_tasks_pager);
 
         int taskId = getIntent().getIntExtra(EXTRA_TASK_ID, 0);
@@ -52,8 +59,26 @@ public class TaskPagerActivity extends AppCompatActivity {
              */
             @Override
             public Fragment getItem(int position) {
-                TaskEntity crime = mTaskEntities.get(position);
-                return TaskFragment.newInstance(crime.getIdTask(), TaskFragment.OperationTask.SHOW);
+                TaskEntity task = mTaskEntities.get(position);
+
+                Operation operation = Operation.SHOW;
+
+                switch (ApplicationSettings.getAccessLevelName(getApplicationContext())){
+                    case Admin:{
+                        operation = Operation.SHOW_OR_UPDATE;
+                    } break;
+                    case Worker:
+                    case Guest:{
+                        if(task.getIdPersonAdd() == ApplicationSettings.getIdPersonSystem(getApplicationContext()))
+                            operation = Operation.SHOW_OR_UPDATE;
+                        else
+                            operation = Operation.SHOW;
+                    } break;
+                    default:
+                        operation = Operation.SHOW;
+                }
+
+                return TaskFragment.newInstance(task.getIdTask(), operation);
             }
 
             /**
@@ -83,6 +108,11 @@ public class TaskPagerActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_TASK_ID, taskId);
 
         return intent;
+    }
+
+    private void gotoLoginPage() {
+        finish();
+        startActivity(LoginActivity.newIntent(this));
     }
 
 }

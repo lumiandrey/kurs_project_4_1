@@ -3,6 +3,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
     private static final String TAG = PersonUseApplicationActivity.class.getName();
     private NavigationView navigationView;
     private DrawerLayout mDrawerLayout;
+    private FragmentManager fm;
 
     protected abstract Fragment createFragment();
 
@@ -40,7 +42,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
 
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.name_person_nav_panel)).setText(ApplicationSettings.getFIO(this));
 
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.frame_person_room_application);
 
         if (fragment == null) {
@@ -52,6 +54,12 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
         }
 
         Log.d(TAG, "create PersonUseApplicationActivity");
+    }
+
+    final protected void replaceFrame(@NonNull Fragment frame){
+        fm.beginTransaction()
+                .replace(R.id.frame_person_room_application, frame)
+                .commit();
     }
 
     private void gotoLoginPage() {
@@ -74,9 +82,11 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
 
             } break;
             case R.id.nav_all_tasks_this_person:{
+                finish();
                 startActivity(new Intent(getApplicationContext(), TaskListFragmentActivity.class));
             } break;
             case R.id.setting_application_person:{
+                finish();
                 startActivity(new Intent(getApplicationContext(), SettingApplicationActivity.class));
             } break;
             case R.id.lot_out_person:{

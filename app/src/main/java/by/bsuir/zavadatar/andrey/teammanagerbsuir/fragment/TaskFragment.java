@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.Date;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.LogTimeSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
@@ -128,6 +128,7 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Add log time!", Toast.LENGTH_LONG).show();
+                startActivity(LogTimeSingleActivity.newIntent(getContext(), mTaskEntity.getName(), mTaskEntity.getIdTask()));
             }
         });
 
@@ -141,6 +142,7 @@ public class TaskFragment extends Fragment {
         mAddTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(getContext(), "Add task!", Toast.LENGTH_LONG).show();
             }
         });
@@ -214,7 +216,7 @@ public class TaskFragment extends Fragment {
         //getFragmentManager().popBackStackImmediate();
     }
 
-    public static TaskFragment newInstance(int idTask, OperationTask operationTask) {
+    public static TaskFragment newInstance(int idTask, Operation operationTask) {
         Bundle args = new Bundle();
 
         args.putInt(ARG_TASK_ID, idTask);
@@ -225,9 +227,4 @@ public class TaskFragment extends Fragment {
         return fragment;
     }
 
-    public enum OperationTask implements Serializable{
-        CREATE,
-        SHOW_OR_UPDATE,
-        SHOW
-    }
 }
