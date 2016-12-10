@@ -2,6 +2,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class TaskEntity implements Entity{
+public class TaskEntity implements Entity, Serializable {
 
     private static final String TAG = TaskEntity.class.getName();
 
@@ -96,7 +97,7 @@ public class TaskEntity implements Entity{
         String date;
         if(dateBegin != null)
             date = DateConvert.getDateAndTimeToString(dateEnd);
-        else date = "Date begin";
+        else date = "Date end";
         return date;
     }
 

@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class PersonEntity implements Entity{
+public class PersonEntity implements Entity, Serializable {
     private int idPerson;
     private String surname;
     private String name;

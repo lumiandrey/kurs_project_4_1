@@ -1,9 +1,11 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class HasTaskPersonEntity implements Entity{
+public class HasTaskPersonEntity implements Entity, Serializable {
     private int idHasTaskPerson;
     private int idTask;
     private int idPerson;

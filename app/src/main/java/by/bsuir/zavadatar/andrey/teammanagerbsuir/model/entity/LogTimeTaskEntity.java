@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
@@ -7,7 +8,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.DateConvert;
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class LogTimeTaskEntity implements Entity{
+public class LogTimeTaskEntity implements Entity, Serializable {
     private int idLog;
     private Date dateLog;
     private String description;

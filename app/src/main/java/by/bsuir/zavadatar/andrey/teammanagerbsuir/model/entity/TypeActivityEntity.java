@@ -1,9 +1,11 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Andrey on 27.11.2016.
  */
-public class TypeActivityEntity implements Entity{
+public class TypeActivityEntity implements Entity, Serializable {
     private int idTypeActivity;
     private String nameActivity;
 
