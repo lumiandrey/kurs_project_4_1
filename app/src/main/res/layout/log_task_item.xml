@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/id_log_task"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="ID"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/log_time_description"
+
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="Description"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:layout_weight="3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/log_time_date"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:text="Date"
+
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/log_time_hours"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:text="Hours"
+
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</LinearLayout>

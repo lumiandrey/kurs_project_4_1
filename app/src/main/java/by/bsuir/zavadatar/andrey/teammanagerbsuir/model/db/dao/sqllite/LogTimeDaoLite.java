@@ -14,6 +14,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.LogTime
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.LogTimeTaskDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
 
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.HasTaskPersonTable;
 import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.LogTimeTaskTable;
 
 /**
@@ -106,6 +107,17 @@ public class LogTimeDaoLite extends AbstractDaoBase<LogTimeTaskEntity> implement
     public List<LogTimeTaskEntity> reads() {
 
         return super.reads(NAME_TABLE);
+    }
+
+    @Override
+    public List<LogTimeTaskEntity> readsByTask(long idTask) {
+        return super.reads(
+                NAME_TABLE + " INNER JOIN " + HasTaskPersonTable.NAME +
+                        " ON " + LogTimeTaskTable.NAME + '.' + LogTimeTaskTable.Colums.ID_HAS_TASK_PERSON +
+                        " = " + HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_HAS_TASK_PERSON,
+                HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_TASK + " = ?",
+                new String[]{String.valueOf(idTask)}
+        );
     }
 
     @Override

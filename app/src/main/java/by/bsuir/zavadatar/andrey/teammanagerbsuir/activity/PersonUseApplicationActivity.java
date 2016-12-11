@@ -80,9 +80,11 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
             } break;
             case R.id.nav_add_task_this_person:{
 
+
+
             } break;
             case R.id.nav_all_tasks_this_person:{
-                finish();
+
                 startActivity(new Intent(getApplicationContext(), TaskListFragmentActivity.class));
             } break;
             case R.id.setting_application_person:{

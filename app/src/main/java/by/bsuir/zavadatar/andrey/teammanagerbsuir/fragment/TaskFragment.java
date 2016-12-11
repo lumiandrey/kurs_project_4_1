@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.Date;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.LogTimeListActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.LogTimeSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
@@ -50,6 +52,10 @@ public class TaskFragment extends Fragment {
     private TextView mIdTaskTxV;
     private CheckBox mDoneTask;
     private ProgressBar mTaskProgressBar;
+
+    @SuppressLint("ValidFragment")
+    private TaskFragment() {
+    }
 
     /**
  * Мы не заполняем представление фрагмента.
@@ -127,15 +133,21 @@ public class TaskFragment extends Fragment {
         mAddLogTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Add log time!", Toast.LENGTH_LONG).show();
-                startActivity(LogTimeSingleActivity.newIntent(getContext(), mTaskEntity.getName(), mTaskEntity.getIdTask()));
+                startActivity(LogTimeSingleActivity.newIntent(getContext(), mTaskEntity.getName(), Long.valueOf(mTaskEntity.getIdTask())));
             }
         });
 
         mShowLogTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Show Log Time!", Toast.LENGTH_LONG).show();
+
+                startActivity(
+                        LogTimeListActivity.newIntent(
+                        getContext(),
+                        Long.valueOf(mTaskEntity.getIdTask()),
+                        mTaskEntity.getName())
+                );
+
             }
         });
 

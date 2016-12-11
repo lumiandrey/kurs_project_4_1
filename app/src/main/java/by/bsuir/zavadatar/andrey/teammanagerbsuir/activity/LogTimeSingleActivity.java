@@ -17,7 +17,6 @@ public class LogTimeSingleActivity extends PersonUseApplicationActivity {
     private static final String ARG_NAME = "Name task";
     private static final String ARG_ID_TASK = "Task id";
 
-
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -25,7 +24,7 @@ public class LogTimeSingleActivity extends PersonUseApplicationActivity {
         if(getIntent().getExtras() != null)
             super.replaceFrame(LogTimeFragment.newInstance(
                     getIntent().getExtras().getString(ARG_NAME),
-                    getIntent().getExtras().getInt(ARG_ID_TASK),
+                    getIntent().getExtras().getLong(ARG_ID_TASK),
                 Operation.CREATE) );
 
         Log.d(TAG, "create LogTimeSingleActivity");
@@ -33,11 +32,10 @@ public class LogTimeSingleActivity extends PersonUseApplicationActivity {
 
     @Override
     protected Fragment createFragment() {
-        Log.d(TAG, "get Fragment");
         return null;
     }
 
-    public static Intent newIntent(Context packageContext, String nameTask, Integer idTask) {
+    public static Intent newIntent(Context packageContext, String nameTask, Long idTask) {
         Intent intent = new Intent(packageContext, LogTimeSingleActivity.class);
 
         intent.putExtra(ARG_NAME, nameTask);

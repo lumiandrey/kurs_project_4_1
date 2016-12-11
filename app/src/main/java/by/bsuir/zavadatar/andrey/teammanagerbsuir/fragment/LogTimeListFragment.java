@@ -1,55 +1,65 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.LogTimePagerActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskPagerActivity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.LogTimeStorage;
 
 
-/**
- * Created by Andrey on 10.11.2016.
- */
+public class LogTimeListFragment extends Fragment {
 
-public class TaskListFragment extends Fragment {
-
-    private static final String TAG = TaskListFragment.class.getName();
-    private static final int REQUEST_CRIME = 1;
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
-    public static final String CREATE_TASK_INTENT = "create task intent";
+    private static final String ARG_TASK_ID = "task_id";
+    private static final String ARG_TASK_NAME = "task_name";
 
+    private Context mContext;
     private RecyclerView mTaskRecyclerView;
-    private TaskAdapter mAdapter;
+    private LogTimeAdapter mAdapter;
     private boolean mSubtitleVisible;//для хранения признака видимости подзаголовка.
     private TextView mMessageEmpty;
+
+    private static Long taskID;
+    private static String nameTask;
+
+
+    @SuppressLint("ValidFragment")
+    private LogTimeListFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mContext = getContext();
+
+        Bundle args = getArguments();
+        if(args != null){
+
+            nameTask = args.getString(ARG_TASK_NAME);
+            taskID = args.getLong(ARG_TASK_ID);
+        } else {
+
+            nameTask = "Empty name";
+            taskID = 0L;
+        }
     }
 
     private void addTask() {
-        TaskEntity entity = new TaskEntity();
 
         //Intent intent = CrimePagerActivity.newIntent(getActivity(), crime.getId());
 
@@ -73,8 +83,6 @@ public class TaskListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //TODO-Andrey add task intent
-                Toast.makeText(getContext(), CREATE_TASK_INTENT, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -100,11 +108,6 @@ public class TaskListFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == REQUEST_CRIME && Activity.RESULT_OK == resultCode) {
-
-        }
-
-        Log.d(TAG, "resultCode " + resultCode);
 
     }
 
@@ -118,7 +121,7 @@ public class TaskListFragment extends Fragment {
 
     private void updateUI() {
 
-        List<TaskEntity> entities = TaskService.mTaskEntities;
+        List<LogTimeTaskEntity> entities = LogTimeStorage.getData(mContext, taskID);;
 
         if(entities.size() < 1){
             mMessageEmpty.setVisibility(View.VISIBLE);
@@ -128,7 +131,7 @@ public class TaskListFragment extends Fragment {
 
         if (mAdapter == null) {
 
-            mAdapter = new TaskAdapter(entities);
+            mAdapter = new LogTimeAdapter(entities);
             mTaskRecyclerView.setAdapter(mAdapter);
 
         } else {
@@ -139,71 +142,58 @@ public class TaskListFragment extends Fragment {
 
     }
 
-    private void updateSubtitle() {
-
-        int crimeCount = TaskService.mTaskEntities.size();
-        String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeCount, crimeCount);
-
-        if (!mSubtitleVisible) {
-            subtitle = null;
-        }
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setSubtitle(subtitle);
-    }
-
     /**
      * хранит ссылку на представление объекта.
      */
-    private class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class LogTimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView mTitleTextView;
-        private TextView mDateTextView;
-        private CheckBox mSolvedCheckBox;
-        private ProgressBar mProgressBar;
+        private TextView mLogTimeID;
+        private TextView mDescription;
+        private TextView mDate;
+        private TextView mHours;
 
-        private TaskEntity mTaskEntity;
+        private LogTimeTaskEntity mTaskEntity;
 
-        public TaskHolder(View itemView) {
+        public LogTimeHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView)
-                    itemView.findViewById(R.id.name_task_item_list);
-            mDateTextView = (TextView)
-                    itemView.findViewById(R.id.date_end_task_item_list);
-            mSolvedCheckBox = (CheckBox)
-                    itemView.findViewById(R.id.done_task_item_list);
-
-            mProgressBar =
-                    (ProgressBar) itemView.findViewById(R.id.progress_bar_item_task_list);
+            mLogTimeID = (TextView) itemView.findViewById(R.id.id_log_task);
+            mDescription = (TextView) itemView.findViewById(R.id.log_time_description);
+            mDate = (TextView) itemView.findViewById(R.id.log_time_date);
+            mHours = (TextView) itemView.findViewById(R.id.log_time_hours);
         }
 
-        public void bindCrime(TaskEntity crime) {
+        @SuppressLint("SetTextI18n")
+        public void bindCrime(LogTimeTaskEntity crime) {
             mTaskEntity = crime;
 
-            mTitleTextView.setText(mTaskEntity.getName());
-            mDateTextView.setText(new SimpleDateFormat("dd MM yyyy").format( mTaskEntity.getDateEnd()));
-            mSolvedCheckBox.setChecked(mTaskEntity.isDone());
-            mProgressBar.setProgress(mTaskEntity.getProgress());
+            mLogTimeID.setText(mTaskEntity.getIdLog());
+            mDescription.setText(mTaskEntity.getDescription().substring(0, 40) + " more");
+            mDate.setText(mTaskEntity.getDateLogString());
+            mHours.setText(String.valueOf(mTaskEntity.getHours()));
+
         }
 
         @Override
         public void onClick(View v) {
 
-            Intent intent = TaskPagerActivity.newIntent(getActivity(),
-                    mTaskEntity.getIdTask());
+            Intent intent = LogTimePagerActivity.newIntent(
+                    getActivity(),
+                    taskID,
+                    nameTask,
+                    mTaskEntity.getIdLog()
+            );
 
-            startActivityForResult(intent, REQUEST_CRIME);
-
+            startActivity(intent);
         }
     }
 
-    private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
+    private class LogTimeAdapter extends RecyclerView.Adapter<LogTimeHolder> {
 
-        private List<TaskEntity> mTaskEntities;
+        private List<LogTimeTaskEntity> mTaskEntities;
 
-        public TaskAdapter(List<TaskEntity> crimes) {
+        public LogTimeAdapter(List<LogTimeTaskEntity> crimes) {
             mTaskEntities = crimes;
         }
 
@@ -220,13 +210,13 @@ public class TaskListFragment extends Fragment {
          * @return
          */
         @Override
-        public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public LogTimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater
                     .inflate(R.layout.task_item_list, parent, false);
 
-            return new TaskHolder(view);
+            return new LogTimeHolder(view);
         }
 
         /**
@@ -236,9 +226,9 @@ public class TaskListFragment extends Fragment {
          *                 правильных данных модели, после чего View обновляется в соответствии с этими данными.
          */
         @Override
-        public void onBindViewHolder(TaskHolder holder, int position) {
+        public void onBindViewHolder(LogTimeHolder holder, int position) {
 
-            TaskEntity crime = mTaskEntities.get(position);
+            LogTimeTaskEntity crime = mTaskEntities.get(position);
 
             holder.bindCrime(crime);
         }
@@ -249,10 +239,20 @@ public class TaskListFragment extends Fragment {
             return mTaskEntities.size();
         }
 
-        public void setTaskEntities(List<TaskEntity> taskEntities) {
+        public void setTaskEntities(List<LogTimeTaskEntity> taskEntities) {
             mTaskEntities = taskEntities;
         }
-
     }
 
+    public static LogTimeListFragment newInstance(String nameTask, Long idTask){
+        Bundle args = new Bundle();
+
+        args.putString(ARG_TASK_NAME, nameTask);
+        args.putLong(ARG_TASK_ID, idTask);
+
+        LogTimeListFragment fragment = new LogTimeListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 }

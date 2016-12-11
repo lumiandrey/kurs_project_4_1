@@ -39,6 +39,9 @@
         <activity
             android:name=".LogTimeSingleActivity">
         </activity>
+        <activity
+            android:name=".LogTimePagerActivity">
+        </activity>
     </application>
 
 </manifest>

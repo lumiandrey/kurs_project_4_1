@@ -31,75 +31,80 @@ public class TaskPagerActivity extends AppCompatActivity {
     private List<TaskEntity> mTaskEntities;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if(!ApplicationSettings.isAuthorisation(this)){
             gotoLoginPage();
-        }
+        } else {
 
-        setContentView(R.layout.activity_tasks_pager);
+            setContentView(R.layout.activity_pager);
 
-        int taskId = getIntent().getIntExtra(EXTRA_TASK_ID, 0);
+            int taskId = getIntent().getIntExtra(EXTRA_TASK_ID, 0);
 
-        mViewPager = (ViewPager) findViewById(R.id.activity_task_pager_view_pager);
-        mTaskEntities = TaskService.mTaskEntities;
+            mViewPager = (ViewPager) findViewById(R.id.activity_task_pager_view_pager);
+            mTaskEntities = TaskService.mTaskEntities;
 
-        FragmentManager fragmentManager = getSupportFragmentManager();//получаем экземпляр FragmentManager для активности.
+            FragmentManager fragmentManager = getSupportFragmentManager();//получаем экземпляр FragmentManager для активности.
 
-        //адаптером назначается безымянный экземпляр FragmentStatePagerAdapter
-        mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
+            //адаптером назначается безымянный экземпляр FragmentStatePagerAdapter
+            mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
-            /**
-             * получает экземпляр Task для заданной позиции в наборе данных,
-             * после чего использует его идентификатор для создания и возвращения
-             * правильно настроенного экземпляра Fragment .
-             * @param position - позиция в списке
-             * @return - настроенный фрагмент
-             */
-            @Override
-            public Fragment getItem(int position) {
-                TaskEntity task = mTaskEntities.get(position);
+                /**
+                 * получает экземпляр Task для заданной позиции в наборе данных,
+                 * после чего использует его идентификатор для создания и возвращения
+                 * правильно настроенного экземпляра Fragment .
+                 *
+                 * @param position - позиция в списке
+                 * @return - настроенный фрагмент
+                 */
+                @Override
+                public Fragment getItem(int position) {
+                    TaskEntity task = mTaskEntities.get(position);
 
-                Operation operation = Operation.SHOW;
+                    Operation operation;
 
-                switch (ApplicationSettings.getAccessLevelName(getApplicationContext())){
-                    case Admin:{
-                        operation = Operation.SHOW_OR_UPDATE;
-                    } break;
-                    case Worker:
-                    case Guest:{
-                        if(task.getIdPersonAdd() == ApplicationSettings.getIdPersonSystem(getApplicationContext()))
+                    switch (ApplicationSettings.getAccessLevelName(getApplicationContext())) {
+                        case Admin: {
                             operation = Operation.SHOW_OR_UPDATE;
-                        else
+                        }
+                        break;
+                        case Worker:
+                        case Guest: {
+                            if (task.getIdPersonAdd() == ApplicationSettings.getIdPersonSystem(getApplicationContext()))
+                                operation = Operation.SHOW_OR_UPDATE;
+                            else
+                                operation = Operation.SHOW;
+                        }
+                        break;
+                        default:
                             operation = Operation.SHOW;
-                    } break;
-                    default:
-                        operation = Operation.SHOW;
+                    }
+
+                    return TaskFragment.newInstance(task.getIdTask(), operation);
                 }
 
-                return TaskFragment.newInstance(task.getIdTask(), operation);
+                /**
+                 * возвращает текущее количество элементов в списке.
+                 *
+                 * @return - текущее количество элементов в списке.
+                 */
+                @Override
+                public int getCount() {
+                    return mTaskEntities.size();
+                }
+            });
+
+            //ищет с определенным индексом объект и запускает именно его
+            for (int i = 0; i < mTaskEntities.size(); i++) {
+                if (mTaskEntities.get(i).getIdTask().equals(taskId)) {
+                    mViewPager.setCurrentItem(i);
+                    break;
+                }
             }
 
-            /**
-             * возвращает текущее количество элементов в списке.
-             * @return - текущее количество элементов в списке.
-             */
-            @Override
-            public int getCount() {
-                return mTaskEntities.size();
-            }
-        });
-
-        //ищет с определенным индексом объект и запускает именно его
-        for (int i = 0; i < mTaskEntities.size(); i++) {
-            if (mTaskEntities.get(i).getIdTask().equals(taskId)) {
-                mViewPager.setCurrentItem(i);
-                break;
-            }
+            Log.d(TAG, "called TaskPagerActivity");
         }
-
-        Log.d(TAG, "called TaskPagerActivity");
     }
 
     public static Intent newIntent(Context packageContext, int taskId) {

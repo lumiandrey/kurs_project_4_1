@@ -5,7 +5,7 @@
               android:orientation="vertical">
 
     <TextView
-        android:id="@+id/message_task_list_empty_layout"
+        android:id="@+id/message_list_empty_layout"
 
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -21,7 +21,7 @@
 
     <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/task_recycler_view"
+        android:id="@+id/list_recycler_view"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"

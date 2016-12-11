@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +53,17 @@ public class LogTimeFragment extends Fragment {
     private Integer idPerson;
     private Operation mOperation;
     private List<TypeActivityEntity> mActivityEntityList = null;
+    private boolean isCorrect =  false;
 
-    public static LogTimeFragment newInstance(String nameTask, Integer idTask, Operation operation){
+    @SuppressLint("ValidFragment")
+    private LogTimeFragment() {
+    }
+
+    public static LogTimeFragment newInstance(String nameTask, Long idTask, Operation operation){
         Bundle args = new Bundle();
 
         args.putString(ARG_NAME, nameTask);
-        args.putInt(ARG_ID_TASK, idTask);
+        args.putLong(ARG_ID_TASK, idTask);
         args.putSerializable(ARG_OPERATION, operation);
 
         LogTimeFragment fragment = new LogTimeFragment();
@@ -65,10 +72,10 @@ public class LogTimeFragment extends Fragment {
         return fragment;
     }
 
-    public static LogTimeFragment newInstance(int idLog, Operation operation){
+    public static LogTimeFragment newInstance(Long idLog, Operation operation){
         Bundle args = new Bundle();
 
-        args.putInt(ARG_ID_LOG, idLog);
+        args.putLong(ARG_ID_LOG, idLog);
         args.putSerializable(ARG_OPERATION, operation);
 
         LogTimeFragment fragment = new LogTimeFragment();
@@ -91,16 +98,20 @@ public class LogTimeFragment extends Fragment {
 
             mOperation = (Operation) args.getSerializable(ARG_OPERATION);
 
+            assert mOperation != null;
             switch (mOperation){
                 case CREATE:{
                     mLogTimeTaskEntity = new LogTimeTaskEntity();
+                    isCorrect = true;
                 } break;
                 case SHOW_OR_UPDATE: {
-                    //mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                    mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                    isCorrect = true;
                 } break;
                 case SHOW:{
                     //TODO-Andrey блокирование всех элементов ввода, только просмотр
-                    //mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                    mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                    isCorrect = false;
                 } break;
 
             }
@@ -132,10 +143,15 @@ public class LogTimeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     int idHas = new HasTaskDaoLite(getContext()).getIDHasByIDPersonIDTask(idPerson, idTask);
+                    String message;
                     if(idHas > 0) {
                         mLogTimeTaskEntity.setIdHasTaskPerson(idHas);
                         mLogTimeTaskEntity.setIdLog((int) new LogTimeDaoLite(getContext()).create(mLogTimeTaskEntity));
+                        message = getString(R.string.add_log_time_message_successfully);
+                    } else {
+                        message = getString(R.string.add_log_time_message_failed);
                     }
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             });
             mAddBtn.setText(R.string.add_log_time_task);
@@ -160,6 +176,14 @@ public class LogTimeFragment extends Fragment {
                 dialog.show(manager, DIALOG_DATE);
             }
         });
+
+        if(!isCorrect){
+            mDateBtn.setClickable(false);
+            mAddBtn.setVisibility(View.GONE);
+            mDescriptionEdTx.setFocusable(false);
+            mHours.setFocusable(false);
+            mTypeActivitySpinner.setClickable(false);
+        }
 
         return view;
     }

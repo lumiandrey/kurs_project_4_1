@@ -15,7 +15,7 @@
     <string name="navigation_drawer_open">Открыть навигационную панель</string>
     <string name="action_settings">Настройки</string>
     <string name="title_activity_user_room">Кабинет пользователя</string>
-    <string name="list_task_empty">Список пустой. Нажмите для создания новой задачи</string>
+    <string name="list_task_empty">Список пустой. Нажмите для создания.</string>
     <string name="nav_bar_title_current_tasks">Актуальные задания</string>
     <string name="nav_bar_title_done_task">Выполненые задания</string>
     <string name="nav_bar_title_my_task">Мои задачи</string>
@@ -62,4 +62,8 @@
     <string name="show_log_task_fragment">Просмотр отметок</string>
     <string name="choice_language_login">Выбрать язык</string>
     <string name="settings_menu">Настройки</string>
+    <string name="add_log_time_message_failed">Ошибка при добавлении</string>
+    <string name="add_log_time_message_successfully">Успешно добавлено</string>
+    <string name="goto_home_screen_nav_bar">Переход на клавный экран</string>
+    <string name="update_log_time_task">Обновление</string>
 </resources>

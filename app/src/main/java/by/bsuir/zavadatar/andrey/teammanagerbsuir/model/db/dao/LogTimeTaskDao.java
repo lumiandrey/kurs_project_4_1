@@ -1,5 +1,7 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao;
 
+import java.util.List;
+
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
 
 /**
@@ -7,5 +9,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity
  */
 
 public interface LogTimeTaskDao extends BaseDao<LogTimeTaskEntity> {
+
+    List<LogTimeTaskEntity> readsByTask(long idTask);
 
 }
