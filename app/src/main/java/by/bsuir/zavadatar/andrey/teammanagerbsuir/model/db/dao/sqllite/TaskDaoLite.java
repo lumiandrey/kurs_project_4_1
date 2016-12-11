@@ -1,19 +1,21 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.TaskCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.TaskDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.HasTaskPersonTable;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.TaskTable;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -31,6 +33,10 @@ public class TaskDaoLite extends AbstractDaoBase<TaskEntity> implements TaskDao 
 
     public TaskDaoLite(SQLiteDatabase mDatabase) {
         super(mDatabase);
+    }
+
+    public TaskDaoLite(Context context){
+        super(ApplicationHelper.getInstance(context));
     }
 
     @Override
@@ -68,9 +74,9 @@ public class TaskDaoLite extends AbstractDaoBase<TaskEntity> implements TaskDao 
         values.put(TaskTable.Colums.DATE_BEGIN, userEntity.getDateBeginString());
         values.put(TaskTable.Colums.DATE_END, userEntity.getDateEndString());
         values.put(TaskTable.Colums.DESCRIPTION, userEntity.getDescription());
-        values.put(TaskTable.Colums.DONE, userEntity.getDone());
+        values.put(TaskTable.Colums.DONE, userEntity.isDone());
         values.put(TaskTable.Colums.ID_PERSON_ADD, userEntity.getIdPersonAdd());
-        values.put(TaskTable.Colums.ID_TYPE_TASK, userEntity.getIdTask());
+        values.put(TaskTable.Colums.ID_TYPE_TASK, userEntity.getIdTypeTask());
         values.put(TaskTable.Colums.NAME, userEntity.getName());
         values.put(TaskTable.Colums.PROGRESS, userEntity.getProgress());
 
@@ -104,6 +110,17 @@ public class TaskDaoLite extends AbstractDaoBase<TaskEntity> implements TaskDao 
     public List<TaskEntity> reads() {
 
         return super.reads(NAME_TABLE);
+    }
+
+    @Override
+    public List<TaskEntity> readsTasksByPerson(long personID) {
+        return super.reads(
+                NAME_TABLE + " INNER JOIN " + HasTaskPersonTable.NAME +
+                        " ON " + TaskTable.NAME + '.' + TaskTable.Colums.ID_TASK +
+                        " = " + HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_TASK,
+                HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_PERSON + " = ?",
+                new String[]{String.valueOf(personID)}
+        );
     }
 
     @Override

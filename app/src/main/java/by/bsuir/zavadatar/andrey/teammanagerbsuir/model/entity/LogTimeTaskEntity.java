@@ -19,6 +19,7 @@ public class LogTimeTaskEntity implements Entity, Serializable {
 
     public LogTimeTaskEntity() {
         dateLog = new Date();
+        linksExtStor = "http://";
     }
 
     public LogTimeTaskEntity(int idLog,

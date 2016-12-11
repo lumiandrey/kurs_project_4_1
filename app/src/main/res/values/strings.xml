@@ -65,6 +65,7 @@
     <string name="show_log_task_fragment">Show log</string>
     <string name="add_log_time_task_fragment">Add Log time</string>
     <string name="add_log_time_message_successfully">Add successfully</string>
+    <string name="update_log_time_message_successfully">Update successfully</string>
     <string name="add_log_time_message_failed">Add failed</string>
 
     <!-- Settings application-->
@@ -85,4 +86,7 @@
         <item>Russian</item>
         <item>English</item>
     </string-array>
+
+    <!-- Task -->
+    <string name="error_correct">Error correct input data!</string>
 </resources>

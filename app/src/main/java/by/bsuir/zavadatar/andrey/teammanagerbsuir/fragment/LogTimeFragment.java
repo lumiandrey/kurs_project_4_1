@@ -1,6 +1,8 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
@@ -32,7 +35,7 @@ public class LogTimeFragment extends Fragment {
 
     private final static String TAG = LogTimeFragment.class.getName();
 
-    private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_DATE = 1_000_111_999;
     private static final String DIALOG_DATE = "DialogDate";
     private static final String ARG_NAME = "Name task";
     private static final String ARG_ID_TASK = "Task id";
@@ -48,8 +51,9 @@ public class LogTimeFragment extends Fragment {
     private Spinner mTypeActivitySpinner;
 
     private LogTimeTaskEntity mLogTimeTaskEntity;
+
     private String mNameTask;
-    private Integer idTask;
+    private Long idTask;
     private Integer idPerson;
     private Operation mOperation;
     private List<TypeActivityEntity> mActivityEntityList = null;
@@ -95,6 +99,8 @@ public class LogTimeFragment extends Fragment {
         if(args != null) {
 
             idPerson = ApplicationSettings.getIdPersonSystem(getContext());
+            mNameTask = args.getString(ARG_NAME);
+            idTask = args.getLong(ARG_ID_TASK);
 
             mOperation = (Operation) args.getSerializable(ARG_OPERATION);
 
@@ -105,19 +111,18 @@ public class LogTimeFragment extends Fragment {
                     isCorrect = true;
                 } break;
                 case SHOW_OR_UPDATE: {
-                    mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                    mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read((int) args.getLong(ARG_ID_LOG));
                     isCorrect = true;
                 } break;
                 case SHOW:{
                     //TODO-Andrey блокирование всех элементов ввода, только просмотр
-                    mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read(args.getInt(ARG_ID_LOG));
+                    mLogTimeTaskEntity = new LogTimeDaoLite(getContext()).read((int) args.getLong(ARG_ID_LOG));
                     isCorrect = false;
                 } break;
 
             }
 
-            mNameTask = args.getString(ARG_NAME);
-            idTask = args.getInt(ARG_ID_TASK);
+
         }
     }
 
@@ -142,14 +147,22 @@ public class LogTimeFragment extends Fragment {
             mAddBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int idHas = new HasTaskDaoLite(getContext()).getIDHasByIDPersonIDTask(idPerson, idTask);
                     String message;
-                    if(idHas > 0) {
-                        mLogTimeTaskEntity.setIdHasTaskPerson(idHas);
-                        mLogTimeTaskEntity.setIdLog((int) new LogTimeDaoLite(getContext()).create(mLogTimeTaskEntity));
-                        message = getString(R.string.add_log_time_message_successfully);
+
+                    if(isCorrectData()) {
+
+                        int idHas = new HasTaskDaoLite(getContext()).getIDHasByIDPersonIDTask(idPerson, idTask.intValue());
+
+                        if (idHas > 0) {
+                            initEntity();
+                            mLogTimeTaskEntity.setIdHasTaskPerson(idHas);
+                            mLogTimeTaskEntity.setIdLog((int) new LogTimeDaoLite(getContext()).create(mLogTimeTaskEntity));
+                            message = getString(R.string.add_log_time_message_successfully);
+                        } else {
+                            message = getString(R.string.add_log_time_message_failed);
+                        }
                     } else {
-                        message = getString(R.string.add_log_time_message_failed);
+                        message = getString(R.string.error_correct);
                     }
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -159,7 +172,20 @@ public class LogTimeFragment extends Fragment {
             mAddBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String message;
 
+                    if(isCorrectData()) {
+
+                        initEntity();
+
+                        new LogTimeDaoLite(getContext()).update(mLogTimeTaskEntity);
+
+                        message = getString(R.string.update_log_time_message_successfully);
+
+                    } else {
+                        message = getString(R.string.error_correct);
+                    }
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             });
             mAddBtn.setText(R.string.update_log_time_task);
@@ -188,6 +214,21 @@ public class LogTimeFragment extends Fragment {
         return view;
     }
 
+    private void initEntity() {
+        mLogTimeTaskEntity.setDescription(mDescriptionEdTx.getText().toString());
+        mLogTimeTaskEntity.setHours(Float.parseFloat(mHours.getText().toString()));
+    }
+
+    private boolean isCorrectData(){
+        boolean result = false;
+
+        if(mDescriptionEdTx.getText().toString().length() > 1 &&
+                Float.parseFloat(mHours.getText().toString()) > 0)
+            result = true;
+
+        return result;
+    }
+
     private void showData(){
 
         if(mLogTimeTaskEntity != null) {
@@ -197,6 +238,8 @@ public class LogTimeFragment extends Fragment {
             mHours.setText(String.valueOf(mLogTimeTaskEntity.getHours()));
             mNameTaskTxV.setText(mNameTask);
             mIdTaskTxV.setText(String.valueOf(idTask));
+
+
 
         }
 
@@ -212,9 +255,8 @@ public class LogTimeFragment extends Fragment {
                     new ArrayAdapter<>(getContext(),
                             android.R.layout.simple_spinner_item,
                             listTypeActivityString.toArray(new String[listTypeActivityString.size()]));
-            mTypeActivitySpinner.setAdapter(adapterActivity);
             adapterActivity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+            mTypeActivitySpinner.setAdapter(adapterActivity);
             mTypeActivitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view,
@@ -230,6 +272,15 @@ public class LogTimeFragment extends Fragment {
                 }
             });
 
+            for(int i = 0; i < mActivityEntityList.size(); i++){
+                if(mActivityEntityList.get(i).getIdTypeActivity() == (mLogTimeTaskEntity.getIdTypeActivity())) {
+                    mTypeActivitySpinner.setSelection(i);
+                        break;
+                    } else {
+                        mTypeActivitySpinner.setSelection(0);
+                }
+            }
+
         }
 
     }
@@ -238,4 +289,21 @@ public class LogTimeFragment extends Fragment {
         mDateBtn.setText(mLogTimeTaskEntity.getDateLogString());
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        switch (requestCode){
+            case REQUEST_DATE:{
+                Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+
+                mLogTimeTaskEntity.setDateLog(date);
+                updateDate();
+            } break;
+        }
+    }
 }

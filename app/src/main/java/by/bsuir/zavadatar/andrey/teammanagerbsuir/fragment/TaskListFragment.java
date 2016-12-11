@@ -15,15 +15,17 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskPagerActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.TaskStorage;
 
 
 /**
@@ -72,9 +74,7 @@ public class TaskListFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-
-                //TODO-Andrey add task intent
-                Toast.makeText(getContext(), CREATE_TASK_INTENT, Toast.LENGTH_LONG).show();
+                startActivity(TaskSingleActivity.newIntent(getContext()));
             }
 
         });
@@ -118,7 +118,11 @@ public class TaskListFragment extends Fragment {
 
     private void updateUI() {
 
-        List<TaskEntity> entities = TaskService.mTaskEntities;
+        List<TaskEntity> entities =
+                TaskStorage.getData(
+                        getContext(),
+                        ApplicationSettings.getIdPersonSystem(getContext())
+                );
 
         if(entities.size() < 1){
             mMessageEmpty.setVisibility(View.VISIBLE);

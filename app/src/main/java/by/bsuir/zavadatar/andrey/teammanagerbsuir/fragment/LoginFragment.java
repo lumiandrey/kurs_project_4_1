@@ -85,9 +85,9 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(ApplicationSettings.isAuthorisation(getContext())){
+        /*if(ApplicationSettings.isAuthorisation(getContext())){
             gotoRoomPerson();
-        }
+        }*/
 
 
     }

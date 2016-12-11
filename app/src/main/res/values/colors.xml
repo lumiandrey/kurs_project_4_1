@@ -4,6 +4,7 @@
     <color name="background">#d0ed8d</color>
     <color name="colorPrimaryDark">#98303f9f</color>
     <color name="colorAccent">#fa1d3f23</color>
+    <color name="white">#FFFAFA</color>
 
     <color name="red">#F44336</color>
     <color name="red_button">#bce48780</color>
@@ -11,4 +12,6 @@
     <color name="gray">#607D8B</color>
     <color name="soothing_blue">#c663bbe3</color>
     <color name="dark_blue">#005A8A</color>
+
+    <color name="background_task_item">#cbada04e</color>
 </resources>

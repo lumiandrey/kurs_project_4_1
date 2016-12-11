@@ -26,6 +26,11 @@ public class TaskEntity implements Entity, Serializable {
     private int idPersonAdd;
 
     public TaskEntity(){
+        long dateLog = new Date().getTime();
+        dateBegin = new Date(dateLog);
+        dateEnd = new Date((long) (dateLog*1.001f));
+        done = 0;
+        progress = 0;
     }
 
     public TaskEntity(Integer idTask, String name, String description, Date dateBegin, Date dateEnd, Integer done, Integer progress, int idTypeTask, int idPersonAdd) {

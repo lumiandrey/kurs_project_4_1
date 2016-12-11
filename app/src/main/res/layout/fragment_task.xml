@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -100,20 +100,30 @@
         </LinearLayout>
 
 
-            <EditText
-                android:id="@+id/description_task_fragment_task_edit_text"
+        <EditText
+            android:id="@+id/description_task_fragment_task_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            tools:inputType="textMultiLine"
 
-                tools:inputType="textMultiLine"
+            android:enabled="false"
 
-                android:enabled="false"
+            android:layout_margin="@dimen/activity_default_margin"
 
-                android:layout_margin="@dimen/activity_default_margin"
+            android:text="Description task"
+            />
 
-                android:text="Description task"
-                />
+        <Spinner
+            android:id="@+id/type_task_spinner"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/activity_default_margin"
+            />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,6 +162,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_log_task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -184,12 +195,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_add_task"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:orientation="horizontal"
+            android:visibility="gone"
 
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/add_task_fragment_btn"
@@ -199,13 +212,9 @@
 
                 android:layout_weight="1"
 
-                android:visibility="gone"
-
                 android:layout_margin="@dimen/activity_default_margin"
 
                 android:text="@string/add_log_time_task"/>
-
-
 
         </LinearLayout>
 

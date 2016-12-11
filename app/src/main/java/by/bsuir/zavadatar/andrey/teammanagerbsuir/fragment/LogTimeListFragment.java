@@ -147,6 +147,7 @@ public class LogTimeListFragment extends Fragment {
      */
     private class LogTimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        public static final int LENGTH_DESCRIPTION = 20;
         private TextView mLogTimeID;
         private TextView mDescription;
         private TextView mDate;
@@ -168,8 +169,11 @@ public class LogTimeListFragment extends Fragment {
         public void bindCrime(LogTimeTaskEntity crime) {
             mTaskEntity = crime;
 
-            mLogTimeID.setText(mTaskEntity.getIdLog());
-            mDescription.setText(mTaskEntity.getDescription().substring(0, 40) + " more");
+            mLogTimeID.setText(String.valueOf(mTaskEntity.getIdLog()));
+            String description = mTaskEntity.getDescription().length() > LENGTH_DESCRIPTION ?
+                    mTaskEntity.getDescription().substring(0, LENGTH_DESCRIPTION) + " more" :
+                    mTaskEntity.getDescription();
+            mDescription.setText(description);
             mDate.setText(mTaskEntity.getDateLogString());
             mHours.setText(String.valueOf(mTaskEntity.getHours()));
 
@@ -214,7 +218,7 @@ public class LogTimeListFragment extends Fragment {
 
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater
-                    .inflate(R.layout.task_item_list, parent, false);
+                    .inflate(R.layout.log_task_item, parent, false);
 
             return new LogTimeHolder(view);
         }

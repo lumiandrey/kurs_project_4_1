@@ -14,9 +14,9 @@ import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.TaskFragment;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.TaskStorage;
 
 /**
  * Created by Andrey on 12.11.2016.
@@ -43,7 +43,10 @@ public class TaskPagerActivity extends AppCompatActivity {
             int taskId = getIntent().getIntExtra(EXTRA_TASK_ID, 0);
 
             mViewPager = (ViewPager) findViewById(R.id.activity_task_pager_view_pager);
-            mTaskEntities = TaskService.mTaskEntities;
+            mTaskEntities = TaskStorage.getData(
+                    getApplicationContext(),
+                    ApplicationSettings.getIdPersonSystem(getApplicationContext())
+            );
 
             FragmentManager fragmentManager = getSupportFragmentManager();//получаем экземпляр FragmentManager для активности.
 

@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -27,12 +28,16 @@ public class DatePickerFragment extends AppCompatDialogFragment {
     public static final String EXTRA_DATE = "TimeManager.date";
 
     private DatePicker mDatePicker;
+    private GregorianCalendar mGregorianCalendar;
 
     public static DatePickerFragment newInstance(Date date) {
         Bundle args = new Bundle();
+
         args.putSerializable(ARG_DATE, date);
+
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -45,17 +50,26 @@ public class DatePickerFragment extends AppCompatDialogFragment {
         calendar.setTime(date);
 
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
+        final int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         final int hour = calendar.get(Calendar.HOUR);
         final int minute = calendar.get(Calendar.MINUTE);
         final int second = calendar.get(Calendar.SECOND);
 
-        View v = LayoutInflater.from(getActivity())
+        mGregorianCalendar = new GregorianCalendar(year, month, day, hour, minute, second);
+
+        @SuppressLint("InflateParams") View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_date, null);
 
         mDatePicker = (DatePicker) v.findViewById(R.id.dialog_date_date_picker);
-        mDatePicker.init(year, month, day, null);
+        mDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mGregorianCalendar.set(year, monthOfYear, dayOfMonth);
+            }
+        });
+
+
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
@@ -65,11 +79,8 @@ public class DatePickerFragment extends AppCompatDialogFragment {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                int year = mDatePicker.getYear();
-                                int month = mDatePicker.getMonth();
-                                int day = mDatePicker.getMonth();
-                                Date date = new GregorianCalendar(year, month, day, hour, minute, second).
-                                        getTime();
+
+                                Date date = mGregorianCalendar.getTime();
                                 sendResult(Activity.RESULT_OK, date);
                             }
 

@@ -11,7 +11,7 @@ import java.util.Date;
 public class DateConvert {
 
     public static String getDateAndTimeToString(Date date){
-        String result = "";
+        String result = "default";
 
         if(date != null)
             result = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(date);

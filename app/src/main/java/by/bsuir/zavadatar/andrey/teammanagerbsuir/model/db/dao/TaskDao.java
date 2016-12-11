@@ -1,5 +1,7 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao;
 
+import java.util.List;
+
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 
 /**
@@ -7,5 +9,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
  */
 
 public interface TaskDao extends BaseDao<TaskEntity> {
+
+    List<TaskEntity> readsTasksByPerson(long personID);
 
 }

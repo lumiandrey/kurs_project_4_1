@@ -43,9 +43,9 @@ public class LogTimePagerActivity extends AppCompatActivity {
 
             setContentView(R.layout.activity_pager);
 
-            taskID = getIntent().getIntExtra(EXTRA_TASK_ID, 0);
+            taskID = getIntent().getLongExtra(EXTRA_TASK_ID, 0);
             nameTask = getIntent().getStringExtra(EXTRA_TASK_NAME);
-            logID = getIntent().getLongExtra(EXTRA_LOG_TIME_ID, 0L);
+            logID = getIntent().getLongExtra(EXTRA_LOG_TIME_ID, 0);
 
             mViewPager = (ViewPager) findViewById(R.id.activity_task_pager_view_pager);
 
@@ -83,7 +83,7 @@ public class LogTimePagerActivity extends AppCompatActivity {
                             operation = Operation.SHOW;
                     }
 
-                    return LogTimeFragment.newInstance(nameTask, taskID, operation);
+                    return LogTimeFragment.newInstance((long) mTaskEntities.get(position).getIdLog(), operation);
                 }
 
                 /**
@@ -118,7 +118,7 @@ public class LogTimePagerActivity extends AppCompatActivity {
 
         intent.putExtra(EXTRA_TASK_ID, taskID);
         intent.putExtra(EXTRA_TASK_NAME, nameTask);
-        intent.putExtra(EXTRA_LOG_TIME_ID, logTimeID);
+        intent.putExtra(EXTRA_LOG_TIME_ID, (long) logTimeID);
 
         return intent;
     }

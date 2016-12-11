@@ -2,6 +2,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
 
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,9 +14,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Converter;
 
 public abstract class PersonUseApplicationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -23,6 +26,9 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
     private NavigationView navigationView;
     private DrawerLayout mDrawerLayout;
     private FragmentManager fm;
+
+    private TextView mTvNamePerson;
+    private ImageView mIvPhotoPerson;
 
     protected abstract Fragment createFragment();
 
@@ -40,7 +46,14 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
         navigationView = (NavigationView) findViewById(R.id.nav_view_person_room_application);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.name_person_nav_panel)).setText(ApplicationSettings.getFIO(this));
+        mTvNamePerson = (TextView) navigationView.getHeaderView(0).findViewById(R.id.name_person_nav_panel);
+        mTvNamePerson.setText(ApplicationSettings.getFIO(this));
+
+        mIvPhotoPerson = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.image_person);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.outHeight = (int) Converter.convertDpToPixel(40, getApplicationContext());
+        options.outWidth = (int) Converter.convertDpToPixel(40, getApplicationContext());
+        mIvPhotoPerson.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.user, options));
 
         fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.frame_person_room_application);
