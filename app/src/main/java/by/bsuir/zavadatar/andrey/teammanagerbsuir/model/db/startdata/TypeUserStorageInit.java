@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserEntity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserName;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 
 /**
  * Created by Andrey on 02.12.2016.

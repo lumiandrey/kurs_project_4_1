@@ -34,7 +34,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeTaskD
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.HasTaskPersonEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeTaskEntity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserName;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 
 /**

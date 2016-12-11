@@ -8,8 +8,8 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CityEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.DepartmentEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PostEntity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.Sex;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.Sex;
 
 /**
  * Created by Andrey on 03.12.2016.

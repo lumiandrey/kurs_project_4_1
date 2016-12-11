@@ -36,7 +36,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PostDaoLi
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CityEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CountryEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.Sex;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.Sex;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 
 /**

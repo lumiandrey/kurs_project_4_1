@@ -9,8 +9,8 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserEntity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserName;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 
 
 /**

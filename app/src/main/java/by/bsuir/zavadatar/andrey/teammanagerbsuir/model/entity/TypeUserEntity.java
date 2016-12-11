@@ -2,6 +2,8 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity;
 
 import java.io.Serializable;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
+
 /**
  * Created by Andrey on 27.11.2016.
  */
