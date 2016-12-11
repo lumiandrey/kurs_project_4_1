@@ -13,5 +13,6 @@
     <color name="soothing_blue">#c663bbe3</color>
     <color name="dark_blue">#005A8A</color>
 
-    <color name="background_task_item">#cbada04e</color>
+    <color name="background_list_item">#cbada04e</color>
+    <color name="background_list_item_progress_bar">#cb81ad4e</color>
 </resources>

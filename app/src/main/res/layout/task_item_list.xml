@@ -5,7 +5,7 @@
               android:layout_height="wrap_content"
 
     android:layout_margin="@dimen/activity_default_margin"
-    android:background="@color/background_task_item"
+    android:background="@color/background_list_item"
     >
 
     <LinearLayout
@@ -40,6 +40,8 @@
     <LinearLayout
         android:orientation="vertical"
 
+        android:background="@color/background_list_item_progress_bar"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -62,6 +64,8 @@
             android:layout_margin="16dp"
 
             android:max="100"
+
+
 
             style="?android:attr/progressBarStyleHorizontal"/>
     </LinearLayout>
