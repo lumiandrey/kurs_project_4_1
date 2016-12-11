@@ -79,9 +79,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
                 startActivity(UserRoomActivity.newIntent(getApplicationContext()));
             } break;
             case R.id.nav_add_task_this_person:{
-
-
-
+                startActivity(TaskSingleActivity.newIntent(getApplicationContext()));
             } break;
             case R.id.nav_all_tasks_this_person:{
 
