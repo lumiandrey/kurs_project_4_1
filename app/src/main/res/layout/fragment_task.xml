@@ -50,7 +50,7 @@
 
                 android:layout_margin="@dimen/activity_default_margin"
 
-                android:text="Name Task"/>
+                android:hint="@string/name_task"/>
         </LinearLayout>
 
         <TextView
@@ -111,7 +111,7 @@
 
             android:layout_margin="@dimen/activity_default_margin"
 
-            android:text="Description task"
+            android:hint="@string/description_task"
             />
 
         <Spinner

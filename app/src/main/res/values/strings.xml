@@ -89,4 +89,6 @@
 
     <!-- Task -->
     <string name="error_correct">Error correct input data!</string>
+    <string name="description_task">Description task</string>
+    <string name="name_task">Name Task</string>
 </resources>
