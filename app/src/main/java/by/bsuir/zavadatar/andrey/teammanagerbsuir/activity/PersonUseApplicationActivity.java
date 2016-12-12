@@ -95,6 +95,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
         int id = item.getItemId();
 
         switch (id){
+            //User  menu item
             case R.id.go_to_home_person:{
                 finish();
                 startActivity(UserRoomActivity.newIntent(getApplicationContext()));
@@ -114,6 +115,12 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
                 ApplicationSettings.logOut(getApplicationContext());
                 finish();
                 startActivity(new Intent(LoginActivity.newIntent(getApplicationContext())));
+            } break;
+            //Admin menu item
+            case R.id.show_person:{
+
+            } break;
+            case R.id.show_users:{
 
             } break;
             default:
