@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/tasks_title_menu_room">
+        <menu>
+            <item
+                android:id="@+id/go_to_home_person"
+                android:icon="@drawable/ic_account_balance_black_24dp"
+                android:title="@string/goto_home_screen_nav_bar"/>
+            <item
+                android:id="@+id/nav_add_task_this_person"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/nav_bar_title_create_task"/>
+            <item
+                android:id="@+id/nav_all_tasks_this_person"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/nav_bar_title_my_task"/>
+            <item
+                android:id="@+id/nav_done_tasks_this_person"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_bar_title_done_task"/>
+            <item
+                android:id="@+id/nav_current_tasks_this_person"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_bar_title_current_tasks"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/managed_person">
+        <menu>
+            <item
+                android:id="@+id/show_person"
+                android:icon="@drawable/ic_action_person"
+                android:title="@string/show_persons"/>
+            <item
+                android:id="@+id/show_users"
+                android:icon="@drawable/ic_action_person"
+                android:title="@string/show_users"/>
+
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/setting_application_person"
+              android:icon="@drawable/ic_settings_application"
+              android:title="@string/settings_menu"
+            />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/lot_out_person"
+              android:icon="@drawable/ic_action_name"
+              android:title="@string/nav_bar_title_log_out"
+            />
+    </group>
+
+</menu>

@@ -105,4 +105,7 @@
     <string name="value_progress_bar_1_to_100">Value progress bar 0 to 100</string>
     <string name="error_range_value_progress_bar">Error range value 1 to 100!</string>
     <string name="error_date_end">The end date may not be less than the start date.</string>
+    <string name="managed_person">Managed person</string>
+    <string name="show_persons">Show persons</string>
+    <string name="show_users">Show users</string>
 </resources>

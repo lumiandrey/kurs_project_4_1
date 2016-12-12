@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Converter;
 
@@ -45,7 +46,13 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
 
         navigationView = (NavigationView) findViewById(R.id.nav_view_person_room_application);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.inflateMenu(R.menu.user_room_drawer);
+
+        int menuResID;
+        if(ApplicationSettings.getAccessLevelName(getApplicationContext()).equals(TypeUserName.Admin))
+            menuResID = R.menu.admin_room_drawer;
+        else
+            menuResID = R.menu.user_room_drawer;
+        navigationView.inflateMenu(menuResID);
 
         mTvNamePerson = (TextView) navigationView.getHeaderView(0).findViewById(R.id.name_person_nav_panel);
         mTvNamePerson.setText(ApplicationSettings.getFIO(this));
