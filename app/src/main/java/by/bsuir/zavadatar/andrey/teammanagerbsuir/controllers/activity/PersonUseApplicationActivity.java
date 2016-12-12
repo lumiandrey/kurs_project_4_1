@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity;
 
 
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Converter;

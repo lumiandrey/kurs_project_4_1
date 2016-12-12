@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity;
 
 
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.LogTimeFragment;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.Operation;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.LogTimeFragment;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.Operation;
 
 public class LogTimeSingleActivity extends PersonUseApplicationActivity {
 

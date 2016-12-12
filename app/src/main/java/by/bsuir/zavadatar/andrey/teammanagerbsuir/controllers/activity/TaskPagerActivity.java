@@ -1,37 +1,35 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
-
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.LogTimeFragment;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.Operation;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.Operation;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.TaskFragment;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.LogTimeStorage;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.TaskStorage;
 
-public class LogTimePagerActivity extends AppCompatActivity {
+/**
+ * Created by Andrey on 12.11.2016.
+ */
 
-    private static final String TAG = LogTimePagerActivity.class.getName();
+public class TaskPagerActivity extends AppCompatActivity {
+
     private static final String EXTRA_TASK_ID = "TaskEntity.taskId";
-    private static final String EXTRA_TASK_NAME = "TaskEntity.name";
-    private static final String EXTRA_LOG_TIME_ID = "LogTimeEntity.ID";
+    private static final String TAG = TaskPagerActivity.class.getName();
 
     private ViewPager mViewPager;
-    private List<LogTimeTaskEntity> mTaskEntities;
-    private long taskID;
-    private long logID;
-    private String nameTask;
+    private List<TaskEntity> mTaskEntities;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,15 +41,14 @@ public class LogTimePagerActivity extends AppCompatActivity {
 
             setContentView(R.layout.activity_pager);
 
-            taskID = getIntent().getLongExtra(EXTRA_TASK_ID, 0);
-            nameTask = getIntent().getStringExtra(EXTRA_TASK_NAME);
-            logID = getIntent().getLongExtra(EXTRA_LOG_TIME_ID, 0);
+            int taskId = getIntent().getIntExtra(EXTRA_TASK_ID, 0);
 
             mViewPager = (ViewPager) findViewById(R.id.activity_task_pager_view_pager);
+            mTaskEntities = TaskStorage.getData(
+                    getApplicationContext(),
+                    ApplicationSettings.getIdPersonSystem(getApplicationContext())
+            );
 
-            mTaskEntities = LogTimeStorage.getData(getApplicationContext(), taskID);
-
-            mTaskEntities = (mTaskEntities != null ? mTaskEntities : new ArrayList<LogTimeTaskEntity>());
             FragmentManager fragmentManager = getSupportFragmentManager();//получаем экземпляр FragmentManager для активности.
 
             //адаптером назначается безымянный экземпляр FragmentStatePagerAdapter
@@ -67,6 +64,7 @@ public class LogTimePagerActivity extends AppCompatActivity {
                  */
                 @Override
                 public Fragment getItem(int position) {
+                    TaskEntity task = mTaskEntities.get(position);
 
                     Operation operation;
 
@@ -77,13 +75,17 @@ public class LogTimePagerActivity extends AppCompatActivity {
                         break;
                         case Worker:
                         case Guest: {
+                            if (task.getIdPersonAdd() == ApplicationSettings.getIdPersonSystem(getApplicationContext()))
+                                operation = Operation.SHOW_OR_UPDATE;
+                            else
                                 operation = Operation.SHOW;
-                        } break;
+                        }
+                        break;
                         default:
                             operation = Operation.SHOW;
                     }
 
-                    return LogTimeFragment.newInstance((long) mTaskEntities.get(position).getIdLog(), operation);
+                    return TaskFragment.newInstance(task.getIdTask(), operation);
                 }
 
                 /**
@@ -99,12 +101,22 @@ public class LogTimePagerActivity extends AppCompatActivity {
 
             //ищет с определенным индексом объект и запускает именно его
             for (int i = 0; i < mTaskEntities.size(); i++) {
-                if (mTaskEntities.get(i).getIdLog() == logID) {
+                if (mTaskEntities.get(i).getIdTask().equals(taskId)) {
                     mViewPager.setCurrentItem(i);
                     break;
                 }
             }
+
+            Log.d(TAG, "called TaskPagerActivity");
         }
+    }
+
+    public static Intent newIntent(Context packageContext, int taskId) {
+        Intent intent = new Intent(packageContext, TaskPagerActivity.class);
+
+        intent.putExtra(EXTRA_TASK_ID, taskId);
+
+        return intent;
     }
 
     private void gotoLoginPage() {
@@ -112,14 +124,4 @@ public class LogTimePagerActivity extends AppCompatActivity {
         startActivity(LoginActivity.newIntent(this));
     }
 
-    public static Intent newIntent(Context context, long taskID, @NonNull String nameTask, int logTimeID){
-
-        Intent intent = new Intent(context, LogTimePagerActivity.class);
-
-        intent.putExtra(EXTRA_TASK_ID, taskID);
-        intent.putExtra(EXTRA_TASK_NAME, nameTask);
-        intent.putExtra(EXTRA_LOG_TIME_ID, (long) logTimeID);
-
-        return intent;
-    }
 }

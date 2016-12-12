@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity;
 
 
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.LogTimeListFragment;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.LogTimeListFragment;
 
 public class LogTimeListActivity extends PersonUseApplicationActivity {
 

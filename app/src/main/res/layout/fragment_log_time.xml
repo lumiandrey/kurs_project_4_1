@@ -5,7 +5,7 @@
 
               android:orientation="vertical"
 
-             tools:context="by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.LogTimeFragment">
+             tools:context="by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.LogTimeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

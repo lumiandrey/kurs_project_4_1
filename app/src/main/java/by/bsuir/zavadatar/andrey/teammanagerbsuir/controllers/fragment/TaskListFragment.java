@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,8 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskPagerActivity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.TaskSingleActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.TaskPagerActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.TaskSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;

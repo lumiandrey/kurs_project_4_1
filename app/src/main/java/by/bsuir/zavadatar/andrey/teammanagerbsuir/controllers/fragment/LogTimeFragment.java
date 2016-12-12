@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

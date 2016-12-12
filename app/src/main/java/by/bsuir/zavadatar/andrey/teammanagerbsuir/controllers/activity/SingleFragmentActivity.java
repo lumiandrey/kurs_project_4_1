@@ -1,10 +1,12 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 
 
 /**

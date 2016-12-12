@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -35,9 +35,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.RegistrationActivity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.SettingApplicationActivity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.UserRoomActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.RegistrationActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.SettingApplicationActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.UserRoomActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.UserDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.UserDaoLite;

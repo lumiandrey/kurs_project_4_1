@@ -1,11 +1,11 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.activity;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment.LoginFragment;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.LoginFragment;
 
 public class LoginActivity extends SingleFragmentActivity  {
 
