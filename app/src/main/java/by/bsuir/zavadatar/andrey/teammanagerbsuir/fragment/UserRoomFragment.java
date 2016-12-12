@@ -1,14 +1,12 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +31,7 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CityDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CountryDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.DepartmentDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PostDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CityEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.CountryEntity;
@@ -49,7 +49,6 @@ public class UserRoomFragment extends Fragment {
     private static final int REQUEST_DATE = 1;
     private static final String DIALOG_DATE = "DialogDate";
 
-    private Context mContext;
     private PersonEntity mPersonEntity;
     private List<CountryEntity> mCountryList = new ArrayList<>();
     private List<CityEntity> mCityList = new ArrayList<>();
@@ -64,6 +63,7 @@ public class UserRoomFragment extends Fragment {
     private TextView mPostTextView;
     private TextView mDepartmentTextView;
     private Button mDateOfBirthBtn;
+    private Button mUpdateBtn;
     private Spinner mCountrySpinner;
     private Spinner mCitySpinner;
     private Spinner mSexSpinner;
@@ -84,11 +84,11 @@ public class UserRoomFragment extends Fragment {
         View view = inflater.inflate(R.layout.content_user_room, container,
                 false);
 
-        mContext = inflater.getContext();
-
         mPersonEntity = ApplicationSettings.sPersonEntity(getContext());
 
         initView(view);
+
+        dataBinding();
 
         return view;
     }
@@ -96,103 +96,28 @@ public class UserRoomFragment extends Fragment {
     private void initView(View root){
 
         mNameTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_name_aut_comp_tv);
+        mSurnameTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_surname_aut_comp_tv);
+        mPatronymicTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_patronymic_aut_comp_tv);
+        mEmailTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_email_aut_comp_tv);
+        mUpdateBtn = (Button) root.findViewById(R.id.edit_button);
+        mMobilePhoneTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_mobile_phone_aut_comp_tv);
+        mHomePhoneTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_home_phone_aut_comp_tv);
+        mPostTextView = (TextView) root.findViewById(R.id.room_content_post_text_view);
+        mDepartmentTextView = (TextView) root.findViewById(R.id.room_content_department_text_view);
+        mDateOfBirthBtn = (Button) root.findViewById(R.id.room_content_date_of_birth_btn);
+        mCountrySpinner = (Spinner) root.findViewById(R.id.room_content_country_spin);
+        mCitySpinner = (Spinner) root.findViewById(R.id.room_content_city_spin);
+        mSexSpinner = (Spinner) root.findViewById(R.id.room_content_sex_spin);
+
+    }
+
+    private void dataBinding() {
         mNameTextView.setText(mPersonEntity.getName());
 
-        mSurnameTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_surname_aut_comp_tv);
         mSurnameTextView.setText(mPersonEntity.getSurname());
 
-        mPatronymicTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_patronymic_aut_comp_tv);
         mPatronymicTextView.setText(mPersonEntity.getPatronymic());
 
-        mEmailTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_email_aut_comp_tv);
-        mEmailTextView.setText(mPersonEntity.geteMail());
-
-        mEmailTextView.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(
-                    CharSequence c, int start, int count, int after) {
-                // Здесь намеренно оставлено пустое место
-            }
-
-            @Override
-            public void onTextChanged(
-                    CharSequence c, int start, int before, int count) {
-
-                //TODO-Andrey изменение текста
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable c) {
-                // И здесь тоже
-            }
-
-        });
-
-        mMobilePhoneTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_mobile_phone_aut_comp_tv);
-        mMobilePhoneTextView.setText(mPersonEntity.getMobilePhone());
-
-        mMobilePhoneTextView.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(
-                    CharSequence c, int start, int count, int after) {
-                // Здесь намеренно оставлено пустое место
-            }
-
-            @Override
-            public void onTextChanged(
-                    CharSequence c, int start, int before, int count) {
-
-                //TODO-Andrey изменение текста
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable c) {
-                // И здесь тоже
-            }
-
-        });
-
-        mHomePhoneTextView = (AutoCompleteTextView) root.findViewById(R.id.room_content_home_phone_aut_comp_tv);
-        mHomePhoneTextView.setText(mPersonEntity.getHomePhone());
-
-        mHomePhoneTextView.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(
-                    CharSequence c, int start, int count, int after) {
-                // Здесь намеренно оставлено пустое место
-            }
-
-            @Override
-            public void onTextChanged(
-                    CharSequence c, int start, int before, int count) {
-
-                //TODO-Andrey изменение текста
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable c) {
-                // И здесь тоже
-            }
-
-        });
-
-        mPostTextView = (TextView) root.findViewById(R.id.room_content_post_text_view);
-        mPostTextView.setText((new PostDaoLite(
-                        ApplicationHelper.getInstance(getContext()))
-                        .read(mPersonEntity.getIdPost()).getNamePost()));
-
-        mDepartmentTextView = (TextView) root.findViewById(R.id.room_content_department_text_view);
-        mDepartmentTextView.setText((new DepartmentDaoLite(
-                ApplicationHelper.getInstance(getContext()))
-                .read(mPersonEntity.getIdPost()).getNameDepartment()));
-
-        mDateOfBirthBtn = (Button) root.findViewById(R.id.room_content_date_of_birth_btn);
         updateDate();
         mDateOfBirthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,12 +131,47 @@ public class UserRoomFragment extends Fragment {
             }
         });
 
-        mCountrySpinner = (Spinner) root.findViewById(R.id.room_content_country_spin);
-        mCitySpinner = (Spinner) root.findViewById(R.id.room_content_city_spin);
+        ArrayAdapter<Sex> sexArrayAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, Sex.values());
+        mSexSpinner.setAdapter(sexArrayAdapter);
+        sexArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSexSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mPersonEntity.setSex(Sex.values()[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        int i = 0;
+        boolean isSelected = false;
+        for (; i < Sex.values().length; i++){
+            if(mPersonEntity.getSex().equals(Sex.values()[i].name())){
+                isSelected = true;
+                break;
+            }
+        }
+        int visible;
+        if(isSelected) {
+            mSexSpinner.setSelection(i);
+            visible = View.VISIBLE;
+        } else {
+            if(mCityList.size() > 0) {
+                mSexSpinner.setSelection(0);
+                visible = View.VISIBLE;
+            } else
+                visible = View.GONE;
+        }
+        mSexSpinner.setVisibility(visible);
 
         mCountryList = new CountryDaoLite(ApplicationHelper.getInstance(getContext())).reads();
         CityEntity cityEntity = new CityDaoLite(ApplicationHelper.getInstance(getContext())).read(mPersonEntity.getIdCity());
         final List<String> listCountry = new ArrayList<>();
+
         for(CountryEntity o: mCountryList)
             listCountry.add(o.getNameCountry());
         ArrayAdapter<String> adapterCountry =
@@ -231,22 +191,51 @@ public class UserRoomFragment extends Fragment {
 
                     mCityList = new CityDaoLite(ApplicationHelper.getInstance(getContext()))
                             .getCityByCountry(mCountryList.get(position).getIdCountry());
+
                     for (CityEntity o : mCityList)
                         listCity.add(o.getName());
+
                     adapterCity = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listCity);
 
                     adapterCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mCitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                            mPersonEntity.setIdCity(mCityList.get(position).getIdCity());
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
                     mCitySpinner.setAdapter(adapterCity);
 
-                    for(int i = 0 ; i < mCityList.size(); i++){
-                        if(mPersonEntity.getIdCity() == mCityList.get(i).getIdCity()) {
-                            mCitySpinner.setSelection(i);
+                    int i = 0;
+                    boolean isSelected = false;
+                    for (; i < mCityList.size(); i++) {
+                        if (mPersonEntity.getIdCity() == mCityList.get(i).getIdCity()) {
+                            isSelected = true;
                             break;
                         }
                     }
 
-                    mCitySpinner.setVisibility(View.VISIBLE);
+                    int visible;
+                    if (isSelected) {
+                        mCitySpinner.setSelection(i);
+                        visible = View.VISIBLE;
+                    } else {
+                        if (mCityList.size() > 0) {
+                            mCitySpinner.setSelection(0);
+                            visible = View.VISIBLE;
+                        } else
+                            visible = View.GONE;
+                    }
+
+                    mCitySpinner.setVisibility(visible);
+
 
                 } catch (Throwable e) {
                     e.printStackTrace();
@@ -259,22 +248,117 @@ public class UserRoomFragment extends Fragment {
 
             }
         });
-        for(int i = 0; i < mCountryList.size(); i++){
-            if(cityEntity.getIdCountry() == mCountryList.get(i).getIdCountry()){
-                mCountrySpinner.setSelection(i);
+
+        i = 0;
+        isSelected = false;
+        for( ; i < mCountryList.size(); i++){
+            if(cityEntity.getIdCountry() == mCountryList.get(i).getIdCountry()) {
+                isSelected = true;
                 break;
             }
         }
 
-        mSexSpinner = (Spinner) root.findViewById(R.id.room_content_sex_spin);
-        ArrayAdapter<Sex> sexArrayAdapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, Sex.values());
-        mSexSpinner.setAdapter(sexArrayAdapter);
-        sexArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSexSpinner.setSelection(0);
+        if(isSelected) {
+            mCountrySpinner.setSelection(i);
+            visible = View.VISIBLE;
+        } else {
+            if(mCountryList.size() > 0) {
+                mCountrySpinner.setSelection(0);
+                visible = View.VISIBLE;
+            } else
+                visible = View.GONE;
+        }
 
+        mCountrySpinner.setVisibility(visible);
+
+        mEmailTextView.setText(mPersonEntity.geteMail());
+
+        mMobilePhoneTextView.setText(mPersonEntity.getMobilePhone());
+
+        mHomePhoneTextView.setText(mPersonEntity.getHomePhone());
+
+        mPostTextView.setText((new PostDaoLite(
+                        ApplicationHelper.getInstance(getContext()))
+                        .read(mPersonEntity.getIdPost()).getNamePost()));
+
+        mDepartmentTextView.setText((new DepartmentDaoLite(
+                ApplicationHelper.getInstance(getContext()))
+                .read(mPersonEntity.getIdDepartment()).getNameDepartment()));
+
+        mUpdateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCorrectData();
+
+            }
+        });
     }
 
+    private void initEntity() {
+        mPersonEntity.setName(mNameTextView.getText().toString());
+        mPersonEntity.setPatronymic(mPatronymicTextView.getText().toString());
+        mPersonEntity.setSurname(mSurnameTextView.getText().toString());
+        mPersonEntity.seteMail(mEmailTextView.getText().toString());
+        mPersonEntity.setHomePhone(mHomePhoneTextView.getText().toString());
+        mPersonEntity.setMobilePhone(mMobilePhoneTextView.getText().toString());
+    }
+
+    private void isCorrectData() {
+
+        String surname = mSurnameTextView.getText().toString();
+        String name = mNameTextView.getText().toString();
+        String patronymic = mPatronymicTextView.getText().toString();
+        String email = mEmailTextView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        if(!TextUtils.isEmpty(surname) && !isNamesValid(surname)){
+            mSurnameTextView.setError(getString(R.string.error_field_required));
+            focusView = mSurnameTextView;
+            cancel = true;
+        }
+
+        if(!TextUtils.isEmpty(name) && !isNamesValid(name)){
+            mNameTextView.setError(getString(R.string.error_field_required));
+            focusView = mNameTextView;
+            cancel = true;
+        }
+
+        if(!TextUtils.isEmpty(patronymic) && !isNamesValid(patronymic)){
+            mPatronymicTextView.setError(getString(R.string.error_field_required));
+            focusView = mPatronymicTextView;
+            cancel = true;
+        }
+
+        if(!TextUtils.isEmpty(email) && !isEmailValid(email)){
+            mEmailTextView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailTextView;
+            cancel = true;
+        }
+
+        if (cancel) {
+
+            focusView.requestFocus();
+        } else {
+
+            initEntity();
+
+            new PersonDaoLite(getContext()).update(mPersonEntity);
+
+            Toast.makeText(getContext(), R.string.update_log_time_message_successfully, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@");
+    }
+
+    private boolean isNamesValid(String name) {
+
+        return name.length() > 1;
+    }
 
 
     @Override
@@ -315,10 +399,6 @@ public class UserRoomFragment extends Fragment {
 
 
         }
-    }
-
-    private void finish(){
-        getActivity().finish();
     }
 
     private void updateDate() {

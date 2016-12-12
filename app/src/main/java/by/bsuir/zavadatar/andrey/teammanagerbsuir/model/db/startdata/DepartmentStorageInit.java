@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.DepartmentEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.DepartEnum;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -20,6 +21,7 @@ public class DepartmentStorageInit {
         mEntityList.add(new DepartmentEntity(3, "Отдел дизайна"));
         mEntityList.add(new DepartmentEntity(4, "Отдел проектирования"));
         mEntityList.add(new DepartmentEntity(5, "Отдел менеджмента и набора персонала"));
+        mEntityList.add(new DepartmentEntity(6, DepartEnum.NONE.name()));
 
         return mEntityList;
     }

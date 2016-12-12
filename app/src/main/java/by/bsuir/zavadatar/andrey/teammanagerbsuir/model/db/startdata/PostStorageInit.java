@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PostEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.PostEnum;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -29,6 +30,7 @@ public class PostStorageInit {
         mEntityList.add(new PostEntity(12, "Designer", 0.25));
         mEntityList.add(new PostEntity(13, "CEO", (double) 1));
         mEntityList.add(new PostEntity(14, "HR", (double) 1));
+        mEntityList.add(new PostEntity(15, PostEnum.NONE.name(), (double) 0));
 
         return mEntityList;
     }

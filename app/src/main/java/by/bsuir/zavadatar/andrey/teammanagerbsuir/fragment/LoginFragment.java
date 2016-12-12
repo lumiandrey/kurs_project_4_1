@@ -30,12 +30,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.RegistrationActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.SettingApplicationActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.UserRoomActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
@@ -135,8 +135,7 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
         mRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO-Andrey called registration activityq
-                Toast.makeText(getContext(), "Register new user!!", Toast.LENGTH_LONG).show();
+                startActivity(RegistrationActivity.newIntent(getContext()));
             }
         });
 
@@ -211,7 +210,7 @@ public class LoginFragment extends Fragment implements LoaderManager.LoaderCallb
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+            mEmailView.setError(getString(R.string.error_invalid_login));
             focusView = mEmailView;
             cancel = true;
         }

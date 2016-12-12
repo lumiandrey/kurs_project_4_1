@@ -17,7 +17,7 @@ public class CountryStorageInit {
 
         mEntityList.add(new CountryEntity(1, "Беларусь", "BY", "375"));
         mEntityList.add(new CountryEntity(1, "Россия", "RU", "9"));
-        mEntityList.add(new CountryEntity(1, "Украина", "BY", "375"));
+        mEntityList.add(new CountryEntity(1, "Украина", "UA", "376"));
 
         return mEntityList;
     }

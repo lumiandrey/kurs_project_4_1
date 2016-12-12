@@ -3,9 +3,9 @@
     <color name="accent_material_light">#b7c0f73e</color>
     <color name="primary_material_dark">#be6d48d7</color>
     <color name="background_material_light">#a085d034</color>
-    <color name="foreground_material_light">#ff8d40</color>
+    <color name="foreground_material_light">#774a2c</color>
     <color name="primary_text_default_material_light">#fe9e2018</color>
-    <color name="primary_text_default_material_dark">#fd261b02</color>
-    <color name="secondary_text_default_material_light">#f33b451a</color>
+    <color name="primary_text_default_material_dark">#fdaed6d1</color>
+    <color name="secondary_text_default_material_light">#f3d0e589</color>
     <color name="secondary_text_default_material_dark">#f2fbf1af</color>
 </resources>

@@ -247,7 +247,7 @@ public class TaskFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                 }
             });
-            mAddTaskBtn.setText(R.string.update_log_time_task);
+            mAddTaskBtn.setText(R.string.update_button);
         }
 
         final List<String> listTypeActivityString = new ArrayList<>();

@@ -1,19 +1,20 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.PostCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.PostDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PostEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.PostTable;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -31,6 +32,10 @@ public class PostDaoLite extends AbstractDaoBase<PostEntity> implements PostDao 
 
     public PostDaoLite(SQLiteDatabase mDatabase) {
         super(mDatabase);
+    }
+
+    public PostDaoLite(Context context){
+        super(ApplicationHelper.getInstance(context));
     }
 
     @Override

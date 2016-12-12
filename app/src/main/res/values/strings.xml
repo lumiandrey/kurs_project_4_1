@@ -4,15 +4,24 @@
     <!-- Strings related to login -->
     <string name="prompt_email">login or email</string>
     <string name="prompt_password">Password (optional)</string>
+    <string name="repeat_prompt_password">Repeat Password (optional)</string>
     <string name="action_sign_in">Sign in</string>
 
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_register_login">Registration</string>
 
-    <string name="error_invalid_email">This login is not valid</string>
+    <string name="error_invalid_login">This login is not valid</string>
+    <string name="error_invalid_email">This e-Mail is not valid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_math_password">Passwords do not match</string>
+    <string name="error_not_unique_login">This user or email already exists for authorization</string>
+    <string name="error_exception_registration">Error when registering</string>
+    <string name="error_add_person">Error when adding Person to base</string>
+    <string name="error_add_user">Error when User to base</string>
+
+
     <string name="permission_rationale">Contacts permissions are needed for providing email
         completions.
     </string>
@@ -57,7 +66,7 @@
 
     <!-- Log Task time-->
     <string name="add_log_time_task">Add</string>
-    <string name="update_log_time_task">Update</string>
+    <string name="update_button">Update</string>
     <string name="description_log_time_task">Description task</string>
     <string name="hours_log_time_task">Hours</string>
     <string name="date_begin_task_fragment">Date begin</string>
@@ -91,4 +100,5 @@
     <string name="error_correct">Error correct input data!</string>
     <string name="description_task">Description task</string>
     <string name="name_task">Name Task</string>
+    <string name="registration">Registration</string>
 </resources>

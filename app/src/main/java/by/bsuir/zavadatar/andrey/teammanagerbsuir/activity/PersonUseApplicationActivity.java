@@ -45,6 +45,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
 
         navigationView = (NavigationView) findViewById(R.id.nav_view_person_room_application);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.inflateMenu(R.menu.user_room_drawer);
 
         mTvNamePerson = (TextView) navigationView.getHeaderView(0).findViewById(R.id.name_person_nav_panel);
         mTvNamePerson.setText(ApplicationSettings.getFIO(this));

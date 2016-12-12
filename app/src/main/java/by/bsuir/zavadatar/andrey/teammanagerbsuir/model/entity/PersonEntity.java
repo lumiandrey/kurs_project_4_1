@@ -26,6 +26,8 @@ public class PersonEntity implements Entity, Serializable {
     private String homePhone;
 
     public PersonEntity() {
+        dateOfBirth = new Date();
+        sex = Sex.Неопределен;
     }
 
     public PersonEntity(int idPerson,

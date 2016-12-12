@@ -1,19 +1,21 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.BaseHelper;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.BaseCustomCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.cursorwrapper.DepartmentCursorWrapper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.DepartmentDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.DepartmentEntity;
 
-import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.*;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.CountryTable;
+import static by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.KorpPortalDBSchema.DepartmentTable;
 
 /**
  * Created by Andrey on 02.12.2016.
@@ -27,6 +29,10 @@ public class DepartmentDaoLite extends AbstractDaoBase<DepartmentEntity> impleme
 
     public DepartmentDaoLite(BaseHelper mDatabase) {
         super(mDatabase);
+    }
+
+    public DepartmentDaoLite(Context context){
+        super(ApplicationHelper.getInstance(context));
     }
 
     @Override

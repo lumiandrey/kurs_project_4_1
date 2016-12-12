@@ -189,7 +189,7 @@
                 android:layout_height="wrap_content"
 
                 android:hint="@string/room_person_mobile_phone"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:maxLines="1"
 
                 android:layout_margin="@dimen/room_margin"
@@ -209,7 +209,7 @@
                 android:layout_height="wrap_content"
 
                 android:hint="@string/room_person_home_phone"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:maxLines="1"
 
                 android:layout_margin="@dimen/room_margin"
@@ -243,6 +243,15 @@
 
             android:text="@string/room_person_post"
             />
+
+        <Button
+            android:id="@+id/edit_button"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:text="@string/update_button"/>
 
     </LinearLayout>
 

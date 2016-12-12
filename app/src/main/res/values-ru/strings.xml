@@ -5,7 +5,7 @@
     <string name="action_sign_in">Вход</string>
     <string name="action_sign_in_short">Вход</string>
     <string name="error_incorrect_password">Пароль не корректно введен</string>
-    <string name="error_invalid_email">Логин некорректен</string>
+    <string name="error_invalid_login">Логин некорректен</string>
     <string name="error_invalid_password">Пароль очень короткий</string>
     <string name="permission_rationale">Разрешение чтения контактов необходимы для обеспечения чтения списка электронных почт.</string>
     <string name="prompt_email">Логин или электронная почта</string>
@@ -65,7 +65,17 @@
     <string name="add_log_time_message_failed">Ошибка при добавлении</string>
     <string name="add_log_time_message_successfully">Успешно добавлено</string>
     <string name="goto_home_screen_nav_bar">Переход на клавный экран</string>
-    <string name="update_log_time_task">Обновление</string>
+    <string name="update_button">Обновление</string>
     <string name="error_correct">Ошибка введённых данных</string>
     <string name="update_log_time_message_successfully">Обновление успешно проведено</string>
+    <string name="name_task">Название задачи</string>
+    <string name="description_task">Описание задачи</string>
+    <string name="repeat_prompt_password">Повторите пароль</string>
+    <string name="registration">Регистрация</string>
+    <string name="error_invalid_email">Некорректный почтовый ящик</string>
+    <string name="error_math_password">Пароли не совпадают</string>
+    <string name="error_not_unique_login">Такой логин или почта уже существует для авторизации</string>
+    <string name="error_add_person">Ошибка при добавлении личности в базу</string>
+    <string name="error_add_user">Ошибка при добавлении пользователя в базу</string>
+    <string name="error_exception_registration">Непредвиденная ошибка при регистрации.</string>
 </resources>

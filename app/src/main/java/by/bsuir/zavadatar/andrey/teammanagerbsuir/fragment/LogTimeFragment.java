@@ -188,7 +188,7 @@ public class LogTimeFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             });
-            mAddBtn.setText(R.string.update_log_time_task);
+            mAddBtn.setText(R.string.update_button);
         }
 
         mDateBtn.setOnClickListener(new View.OnClickListener() {
