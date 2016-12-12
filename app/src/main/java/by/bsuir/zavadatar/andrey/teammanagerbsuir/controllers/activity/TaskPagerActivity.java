@@ -12,7 +12,6 @@ import android.util.Log;
 
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.TaskFragment;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;

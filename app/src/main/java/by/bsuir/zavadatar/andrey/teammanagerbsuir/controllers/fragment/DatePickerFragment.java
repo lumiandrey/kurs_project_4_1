@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 
 /**
  * Created by Andrey on 12.11.2016.

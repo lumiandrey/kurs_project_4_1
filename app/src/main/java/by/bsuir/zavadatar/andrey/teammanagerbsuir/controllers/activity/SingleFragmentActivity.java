@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-
 
 /**
  * Created by Andrey on 10.11.2016.

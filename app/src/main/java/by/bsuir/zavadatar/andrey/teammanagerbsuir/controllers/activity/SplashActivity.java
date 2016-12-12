@@ -3,7 +3,6 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 
 public class SplashActivity extends AppCompatActivity {

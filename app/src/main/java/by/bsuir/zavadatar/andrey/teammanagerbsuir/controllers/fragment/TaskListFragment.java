@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.TaskPagerActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.TaskSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;

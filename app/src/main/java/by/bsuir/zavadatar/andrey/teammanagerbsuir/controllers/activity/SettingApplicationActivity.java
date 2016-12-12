@@ -10,8 +10,6 @@ import android.preference.PreferenceActivity;
 
 import java.util.Locale;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
-
 
 public class SettingApplicationActivity extends PreferenceActivity {
 

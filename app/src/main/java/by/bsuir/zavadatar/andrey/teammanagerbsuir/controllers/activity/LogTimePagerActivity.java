@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.LogTimeFragment;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;

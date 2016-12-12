@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeListActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeSingleActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeTaskDaoLite;

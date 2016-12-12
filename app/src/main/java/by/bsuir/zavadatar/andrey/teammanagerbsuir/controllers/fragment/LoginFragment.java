@@ -34,7 +34,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.RegistrationActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.SettingApplicationActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.UserRoomActivity;

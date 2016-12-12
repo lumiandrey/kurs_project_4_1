@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimePagerActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.LogTimeStorage;
 

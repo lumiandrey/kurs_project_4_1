@@ -15,7 +15,7 @@ import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 
 
 /**
