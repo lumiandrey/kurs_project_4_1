@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -63,6 +66,7 @@ public class TaskFragment extends Fragment {
     private Button mAddTaskBtn;
     private EditText mDescriptionEdTx;
     private EditText mNameTaskEdTx;
+    private EditText mProgressBarEdTx;
     private TextView mNameAddPersonTaskTxV;
     private TextView mIdTaskTxV;
     private CheckBox mDoneTask;
@@ -129,6 +133,7 @@ public class TaskFragment extends Fragment {
         mAddTaskBtn = (Button) view.findViewById(R.id.add_task_fragment_btn);
         mDescriptionEdTx = (EditText) view.findViewById(R.id.description_task_fragment_task_edit_text);
         mNameTaskEdTx = (EditText) view.findViewById(R.id.name_task_fragment_edit_text);
+        mProgressBarEdTx = (EditText) view.findViewById(R.id.edit_progress_bar);
         mNameAddPersonTaskTxV = (TextView) view.findViewById(R.id.add_person_name_task_fragment_text_view);
         mIdTaskTxV = (TextView) view.findViewById(R.id.id_task_fragment_task_text_view);
         mDoneTask = (CheckBox) view.findViewById(R.id.done_task_fragment_check_box);
@@ -137,9 +142,62 @@ public class TaskFragment extends Fragment {
         mAddingLayout = (LinearLayout) view.findViewById(R.id.layout_add_task);
         mTypeTaskSpinner = (Spinner) view.findViewById(R.id.type_task_spinner);
 
-        showData();
 
-        updateDate();
+        mDoneTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    mTaskEntity.setProgress(100);
+                    mTaskEntity.setDone(1);
+
+                } else {
+                    mTaskEntity.setProgress(1);
+                    mTaskEntity.setDone(0);
+                }
+                mTaskProgressBar.setProgress(mTaskEntity.getProgress());
+                mProgressBarEdTx.setText(String.valueOf(mTaskEntity.getProgress()));
+            }
+        });
+
+        mProgressBarEdTx.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(
+                    CharSequence c, int start, int count, int after) {
+                // Здесь намеренно оставлено пустое место
+            }
+
+            @Override
+            public void onTextChanged(
+                    CharSequence c, int start, int before, int count) {
+
+                mProgressBarEdTx.setError(null);
+
+                if(c.toString().length() > 0) {
+                    int valueProgressBar = Integer.valueOf(mProgressBarEdTx.getText().toString());
+                    if (valueProgressBar < 0 || valueProgressBar > 101) {
+                        mProgressBarEdTx.setError(getString(R.string.error_range_value_progress_bar));
+                        mProgressBarEdTx.requestFocus();
+                    } else {
+
+                        if(valueProgressBar == 100) {
+                            mDoneTask.setChecked(true);
+                        }
+                        mTaskEntity.setProgress(valueProgressBar);
+                    }
+                } else {
+                    mProgressBarEdTx.setError(getString(R.string.error_field_required));
+                    mProgressBarEdTx.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable c) {
+                mTaskProgressBar.setProgress(mTaskEntity.getProgress());
+            }
+
+        });
+
         mDateBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,6 +242,135 @@ public class TaskFragment extends Fragment {
 
             }
         });
+
+        final List<String> listTypeActivityString = new ArrayList<>();
+        for(TypeTaskEntity o: mTypeTaskEntities)
+            listTypeActivityString.add(o.getNameType());
+
+        ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<>(getContext(),
+                        android.R.layout.simple_spinner_item,
+                        listTypeActivityString.toArray(new String[listTypeActivityString.size()]));
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mTypeTaskSpinner.setAdapter(arrayAdapter);
+        mTypeTaskSpinner.setEnabled(false);
+        mTypeTaskSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mTaskEntity.setIdTypeTask(mTypeTaskEntities.get(position).getIdTypeTask());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        for(int i = 0; i < mTypeTaskEntities.size(); i++){
+            if(mTypeTaskEntities.get(i).getIdTypeTask() == mTaskEntity.getIdTypeTask()) {
+                mTypeTaskSpinner.setSelection(i);
+                break;
+            } else {
+                mTypeTaskSpinner.setSelection(0);
+            }
+        }
+
+        updateDate();
+
+        changeOperation();
+
+        return view;
+    }
+
+    private boolean isCorrectTask(){
+
+        boolean result = true;
+
+        mDateEndBtn.setError(null);
+        mProgressBarEdTx.setError(null);
+        mNameTaskEdTx.setError(null);
+
+        if(mTaskEntity.getDateBegin().getTime() > mTaskEntity.getDateEnd().getTime()){
+            mDateEndBtn.setError(getString(R.string.error_date_end));
+            mDateEndBtn.requestFocus();
+            result = false;
+        }
+        if(mNameTaskEdTx.getText().toString().length() < 1){
+            mNameTaskEdTx.setError(getString(R.string.error_field_required));
+            mNameTaskEdTx.requestFocus();
+            result = false;
+        }
+
+        if(mDescriptionEdTx.getText().toString().length() < 1){
+            mDescriptionEdTx.setError(getString(R.string.error_field_required));
+            mDescriptionEdTx.requestFocus();
+            result = false;
+        }
+
+        if(mProgressBarEdTx.getText().toString().length() > 0) {
+
+            int valueProgressBar = Integer.valueOf(mProgressBarEdTx.getText().toString());
+
+            if (valueProgressBar < 0 && valueProgressBar > 101) {
+                mProgressBarEdTx.setError(getString(R.string.error_range_value_progress_bar));
+                mProgressBarEdTx.requestFocus();
+                result = false;
+            }
+        } else {
+            mProgressBarEdTx.setError(getString(R.string.error_field_required));
+            mProgressBarEdTx.requestFocus();
+            result = false;
+        }
+
+        return result;
+    }
+
+    private void initEntity(){
+
+        mTaskEntity.setName(mNameTaskEdTx.getText().toString());
+        mTaskEntity.setDescription(mDescriptionEdTx.getText().toString());
+
+
+    }
+
+    private void changeOperation(){
+
+        switch (mOperation){
+
+            case CREATE:{
+
+                mAddingLayout.setVisibility(View.VISIBLE);
+                mLayoutLogTask.setVisibility(View.GONE);
+                mDateBeginBtn.setEnabled(true);
+                mDateEndBtn.setEnabled(true);
+                mTypeTaskSpinner.setEnabled(true);
+                mDescriptionEdTx.setEnabled(true);
+                mNameTaskEdTx.setEnabled(true);
+            } break;
+            case SHOW_OR_UPDATE:
+            case SHOW:{
+
+                mAddingLayout.setVisibility(View.GONE);
+
+                mLayoutLogTask.setVisibility(View.VISIBLE);
+
+                mAddingLayout.setVisibility(View.VISIBLE);
+
+                if(ApplicationSettings.getAccessLevelName(getContext()).equals(TypeUserName.Admin) ||
+                        mTaskEntity.getIdPersonAdd() == ApplicationSettings.getIdPersonSystem(getContext())){
+
+                    mDateBeginBtn.setEnabled(true);
+                    mDateEndBtn.setEnabled(true);
+                    mDescriptionEdTx.setEnabled(true);
+                    mNameTaskEdTx.setEnabled(true);
+                    mTypeTaskSpinner.setEnabled(true);
+                } else {
+
+                    mAddingLayout.setVisibility(View.GONE);
+                }
+            } break;
+        }
 
         if(mOperation.equals(Operation.CREATE)) {
             mAddTaskBtn.setOnClickListener(new View.OnClickListener() {
@@ -250,100 +437,7 @@ public class TaskFragment extends Fragment {
             mAddTaskBtn.setText(R.string.update_button);
         }
 
-        final List<String> listTypeActivityString = new ArrayList<>();
-        for(TypeTaskEntity o: mTypeTaskEntities)
-            listTypeActivityString.add(o.getNameType());
-
-        ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<>(getContext(),
-                        android.R.layout.simple_spinner_item,
-                        listTypeActivityString.toArray(new String[listTypeActivityString.size()]));
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mTypeTaskSpinner.setAdapter(arrayAdapter);
-        mTypeTaskSpinner.setEnabled(false);
-        mTypeTaskSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mTaskEntity.setIdTypeTask(mTypeTaskEntities.get(position).getIdTypeTask());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        for(int i = 0; i < mTypeTaskEntities.size(); i++){
-            if(mTypeTaskEntities.get(i).getIdTypeTask() == mTaskEntity.getIdTypeTask()) {
-                mTypeTaskSpinner.setSelection(i);
-                break;
-            } else {
-                mTypeTaskSpinner.setSelection(0);
-            }
-        }
-
-        changeOperation();
-
-        return view;
-    }
-
-    private boolean isCorrectTask(){
-
-        boolean result = false;
-
-        if( (mTaskEntity.getDateBegin().getTime() < mTaskEntity.getDateEnd().getTime()) &&
-                (mNameTaskEdTx.getText().toString().length() > 0) &&
-                mDescriptionEdTx.getText().toString().length() > 0)
-            result = true;
-
-        return result;
-    }
-
-    private void initEntity(){
-
-        mTaskEntity.setName(mNameTaskEdTx.getText().toString());
-        mTaskEntity.setDescription(mDescriptionEdTx.getText().toString());
-
-    }
-
-    private void changeOperation(){
-
-        switch (mOperation){
-
-            case CREATE:{
-
-                mAddingLayout.setVisibility(View.VISIBLE);
-                mLayoutLogTask.setVisibility(View.GONE);
-                mDateBeginBtn.setEnabled(true);
-                mDateEndBtn.setEnabled(true);
-                mTypeTaskSpinner.setEnabled(true);
-                mDescriptionEdTx.setEnabled(true);
-                mNameTaskEdTx.setEnabled(true);
-            } break;
-            case SHOW_OR_UPDATE:
-            case SHOW:{
-
-                mAddingLayout.setVisibility(View.GONE);
-
-                mLayoutLogTask.setVisibility(View.VISIBLE);
-
-                mAddingLayout.setVisibility(View.VISIBLE);
-
-                if(ApplicationSettings.getAccessLevelName(getContext()).equals(TypeUserName.Admin) ||
-                        mTaskEntity.getIdPersonAdd() == ApplicationSettings.getIdPersonSystem(getContext())){
-
-                    mDateBeginBtn.setEnabled(true);
-                    mDateEndBtn.setEnabled(true);
-                    mDescriptionEdTx.setEnabled(true);
-                    mNameTaskEdTx.setEnabled(true);
-                    mTypeTaskSpinner.setEnabled(true);
-                } else {
-
-                    mAddingLayout.setVisibility(View.GONE);
-                }
-            } break;
-        }
+        showData();
     }
 
     private void showData(){
@@ -358,6 +452,7 @@ public class TaskFragment extends Fragment {
             mIdTaskTxV.setText(String.valueOf(mTaskEntity.getIdTask()));
             mDoneTask.setChecked(mTaskEntity.isDone());
             mTaskProgressBar.setProgress(mTaskEntity.getProgress());
+            mProgressBarEdTx.setText(String.valueOf(mTaskEntity.getProgress()));
         }
 
     }

@@ -118,7 +118,18 @@ public class TaskDaoLite extends AbstractDaoBase<TaskEntity> implements TaskDao 
                 NAME_TABLE + " INNER JOIN " + HasTaskPersonTable.NAME +
                         " ON " + TaskTable.NAME + '.' + TaskTable.Colums.ID_TASK +
                         " = " + HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_TASK,
-                HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_PERSON + " = ?",
+                HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_PERSON + " = ? ",
+                new String[]{String.valueOf(personID)}
+        );
+    }
+
+    @Override
+    public List<TaskEntity> readsTasksByPersonDone(long personID) {
+        return super.reads(
+                NAME_TABLE + " INNER JOIN " + HasTaskPersonTable.NAME +
+                        " ON " + TaskTable.NAME + '.' + TaskTable.Colums.ID_TASK +
+                        " = " + HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_TASK,
+                HasTaskPersonTable.NAME + '.' + HasTaskPersonTable.Colums.ID_PERSON + " = ? AND " + TaskTable.Colums.DONE + " <> 0",
                 new String[]{String.valueOf(personID)}
         );
     }

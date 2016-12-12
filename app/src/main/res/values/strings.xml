@@ -101,4 +101,8 @@
     <string name="description_task">Description task</string>
     <string name="name_task">Name Task</string>
     <string name="registration">Registration</string>
+    <string name="done">Done</string>
+    <string name="value_progress_bar_1_to_100">Value progress bar 0 to 100</string>
+    <string name="error_range_value_progress_bar">Error range value 1 to 100!</string>
+    <string name="error_date_end">The end date may not be less than the start date.</string>
 </resources>

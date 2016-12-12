@@ -11,5 +11,6 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 public interface TaskDao extends BaseDao<TaskEntity> {
 
     List<TaskEntity> readsTasksByPerson(long personID);
+    List<TaskEntity> readsTasksByPersonDone(long personID);
 
 }

@@ -85,6 +85,7 @@
 
                 style="?android:attr/progressBarStyleHorizontal"/>
 
+
             <CheckBox
                 android:id="@+id/done_task_fragment_check_box"
 
@@ -96,8 +97,28 @@
                 android:gravity="center"
                 android:layout_margin="@dimen/activity_default_margin"
 
-                android:text="Done"/>
+                android:text="@string/done"/>
         </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_progress_bar"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/value_progress_bar_1_to_100"
+                android:inputType="number"
+                android:maxLines="1"
+
+                android:layout_margin="@dimen/room_margin"
+
+                android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
 
 
         <EditText

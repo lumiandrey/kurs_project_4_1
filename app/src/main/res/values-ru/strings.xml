@@ -78,4 +78,8 @@
     <string name="error_add_person">Ошибка при добавлении личности в базу</string>
     <string name="error_add_user">Ошибка при добавлении пользователя в базу</string>
     <string name="error_exception_registration">Непредвиденная ошибка при регистрации.</string>
+    <string name="done">Завершено</string>
+    <string name="error_date_end">Дата окончания не может быть раньше даты начала</string>
+    <string name="error_range_value_progress_bar">Значение должно быть от 1 до 100</string>
+    <string name="value_progress_bar_1_to_100">Значение должно быть от 0 до 100</string>
 </resources>
