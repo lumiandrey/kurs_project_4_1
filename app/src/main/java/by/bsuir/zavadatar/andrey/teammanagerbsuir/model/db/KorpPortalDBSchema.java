@@ -202,9 +202,7 @@ public class KorpPortalDBSchema {
         public static final String REF_TYPE_ACTIVITY = "FOREIGN KEY (" + Colums.ID_TYPE_ACTIVITY +
                 ") REFERENCES " + TypeActivityTable.NAME + '(' + TypeActivityTable.Colums.ID_TYPE_ACTIVITY +')' + "  ON UPDATE CASCADE ON DELETE CASCADE";
         public static final String REF_HAS_TASK_PERSON = "FOREIGN KEY (" + Colums.ID_HAS_TASK_PERSON +
-                ") REFERENCES " + HasTaskPersonTable.NAME + '(' + HasTaskPersonTable.Colums.ID_HAS_TASK_PERSON +')' + "  ON UPDATE CASCADEON DELETE CASCADE";
-
+                ") REFERENCES " + HasTaskPersonTable.NAME + '(' + HasTaskPersonTable.Colums.ID_HAS_TASK_PERSON +')' + "  ON UPDATE CASCADE ON DELETE CASCADE";
 
     }
-
 }
