@@ -2,6 +2,7 @@ package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,37 +18,67 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.TypeShowTaskList;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.TaskPagerActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.TaskSingleActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.LoaderTaskData;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.UpdateData;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.utilsview.ShowProgress;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.TaskService;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.TaskStorage;
 
 
 /**
  * Created by Andrey on 10.11.2016.
  */
 
-public class TaskListFragment extends Fragment {
+public class TaskListFragment extends Fragment implements UpdateData<TaskEntity> {
 
     private static final String TAG = TaskListFragment.class.getName();
     private static final int REQUEST_CRIME = 1;
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+    private static final String ARG_KEY_TYPE_SHOW_TASK_LIST = "_type_show_task_list";
     public static final String CREATE_TASK_INTENT = "create task intent";
 
     private RecyclerView mTaskRecyclerView;
     private TaskAdapter mAdapter;
+    private TypeShowTaskList mTypeShowTaskList;
     private boolean mSubtitleVisible;//для хранения признака видимости подзаголовка.
+    private ShowProgress mShowProgress;
+    private LoaderTaskData mLoaderTaskData = null;
     private TextView mMessageEmpty;
+
+    private TaskListFragment() {
+    }
+
+    public static TaskListFragment newInstance(TypeShowTaskList typeShowTaskList){
+
+        Bundle args = new Bundle();
+
+        args.putSerializable(ARG_KEY_TYPE_SHOW_TASK_LIST, typeShowTaskList);
+
+        TaskListFragment fragment = new TaskListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        Bundle args = getArguments();
+        if(args != null) {
+
+            mTypeShowTaskList = (TypeShowTaskList) args.getSerializable(ARG_KEY_TYPE_SHOW_TASK_LIST);
+        } else {
+            mTypeShowTaskList = TypeShowTaskList.SHOW_All_PERSON_TASK;
+        }
     }
 
     private void addTask() {
@@ -85,6 +116,8 @@ public class TaskListFragment extends Fragment {
         mTaskRecyclerView.setLayoutManager(new LinearLayoutManager
                 (getActivity()));
 
+        mShowProgress = new ShowProgress(view.findViewById(R.id.progress_view), view.findViewById(R.id.data_view), getContext());
+
         updateUI();
 
         return view;
@@ -108,23 +141,19 @@ public class TaskListFragment extends Fragment {
 
     }
 
-
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
     }
 
-    private void updateUI() {
+    @Override
+    public void endLoader(List<TaskEntity> data) {
 
-        List<TaskEntity> entities =
-                TaskStorage.getData(
-                        getContext(),
-                        ApplicationSettings.getIdPersonSystem(getContext())
-                );
+        if(data == null)
+            data = new ArrayList<>();
 
-        if(entities.size() < 1){
+        if(data.size() < 1){
             mMessageEmpty.setVisibility(View.VISIBLE);
         } else {
             mMessageEmpty.setVisibility(View.GONE);
@@ -132,13 +161,56 @@ public class TaskListFragment extends Fragment {
 
         if (mAdapter == null) {
 
-            mAdapter = new TaskAdapter(entities);
+            mAdapter = new TaskAdapter(data);
             mTaskRecyclerView.setAdapter(mAdapter);
 
         } else {
-            mAdapter.setTaskEntities(entities);
+            mAdapter.setTaskEntities(data);
             mAdapter.notifyDataSetChanged();
 
+        }
+    }
+
+    private void updateUI() {
+
+        if ((mLoaderTaskData != null) && mLoaderTaskData.getStatus() != AsyncTask.Status.RUNNING) {
+            if (mLoaderTaskData.isCancelled()) {
+                mLoaderTaskData = new LoaderTaskData(
+                        mTypeShowTaskList,
+                        this,
+                        mShowProgress,
+                        getContext());
+
+                mLoaderTaskData.execute((Void[]) null);
+            }
+
+        } else if(mLoaderTaskData != null && mLoaderTaskData.getStatus() == AsyncTask.Status.PENDING) {
+
+            mLoaderTaskData = new LoaderTaskData(
+                    mTypeShowTaskList,
+                    this,
+                    mShowProgress,
+                    getContext());
+
+            mLoaderTaskData.execute((Void[]) null);
+        } else if ((mLoaderTaskData != null) && mLoaderTaskData.getStatus() == AsyncTask.Status.FINISHED) {
+
+            mLoaderTaskData = new LoaderTaskData(
+                    mTypeShowTaskList,
+                    this,
+                    mShowProgress,
+                    getContext());
+
+            mLoaderTaskData.execute((Void[]) null);
+        } else if (mLoaderTaskData == null) {
+
+            mLoaderTaskData = new LoaderTaskData(
+                    mTypeShowTaskList,
+                    this,
+                    mShowProgress,
+                    getContext());
+
+            mLoaderTaskData.execute((Void[]) null);
         }
 
     }
@@ -256,7 +328,5 @@ public class TaskListFragment extends Fragment {
         public void setTaskEntities(List<TaskEntity> taskEntities) {
             mTaskEntities = taskEntities;
         }
-
     }
-
 }

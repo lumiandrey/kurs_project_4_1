@@ -82,4 +82,8 @@
     <string name="error_date_end">Дата окончания не может быть раньше даты начала</string>
     <string name="error_range_value_progress_bar">Значение должно быть от 1 до 100</string>
     <string name="value_progress_bar_1_to_100">Значение должно быть от 0 до 100</string>
+    <string name="managed_person">Управление пользователями и персоналом</string>
+    <string name="show_persons">Просмотр персонала</string>
+    <string name="show_users">Просмотр пользователей</string>
+    <string name="menu_delete_item">Удаление</string>
 </resources>

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.TypeShowTaskList;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Converter;
@@ -105,7 +106,15 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
             } break;
             case R.id.nav_all_tasks_this_person:{
 
-                startActivity(new Intent(getApplicationContext(), TaskListFragmentActivity.class));
+                startActivity(TaskListFragmentActivity.newInstance(getApplicationContext(), TypeShowTaskList.SHOW_All_PERSON_TASK));
+            } break;
+            case R.id.nav_done_tasks_this_person:{
+
+                startActivity(TaskListFragmentActivity.newInstance(getApplicationContext(), TypeShowTaskList.SHOW_DONE_PERSON_TASK));
+            } break;
+            case R.id.nav_current_tasks_this_person:{
+
+                startActivity(TaskListFragmentActivity.newInstance(getApplicationContext(), TypeShowTaskList.SHOW_CURRENT_PERSON_TASK));
             } break;
             case R.id.setting_application_person:{
                 finish();
@@ -117,12 +126,16 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
                 startActivity(new Intent(LoginActivity.newIntent(getApplicationContext())));
             } break;
             //Admin menu item
+            case R.id.nav_show_all_tasks_person:{
+                startActivity(TaskListFragmentActivity.newInstance(getApplicationContext(), TypeShowTaskList.SHOW_ALL_TASK));
+            } break;
             case R.id.show_person:{
 
             } break;
             case R.id.show_users:{
 
             } break;
+
             default:
                 Log.d(TAG, "Default Action (no action)");
         }

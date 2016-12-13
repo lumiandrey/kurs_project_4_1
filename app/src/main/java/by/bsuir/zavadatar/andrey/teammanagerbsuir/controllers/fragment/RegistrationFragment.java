@@ -1,7 +1,5 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -43,6 +41,7 @@ import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.UserRoomActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.utilsview.ShowProgress;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CityDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.CountryDaoLite;
@@ -87,6 +86,7 @@ public class RegistrationFragment extends Fragment implements LoaderManager.Load
     //Fields view
     private View mProgressView;
     private View mRegistrationFormView;
+    private ShowProgress mShowProgress;
 
     private AutoCompleteTextView mEmailOrLoginView;
     private EditText mPasswordView;
@@ -127,7 +127,9 @@ public class RegistrationFragment extends Fragment implements LoaderManager.Load
 
         initView(view);
 
-        showProgress(true);
+        mShowProgress = new ShowProgress(mProgressView, mRegistrationFormView, getContext());
+
+        mShowProgress.showProgress(true);
 
         final List<TypeUserEntity> typeUserEntities = new TypeUserDaoLite(getContext()).reads();
         for(TypeUserEntity o: typeUserEntities){
@@ -150,7 +152,7 @@ public class RegistrationFragment extends Fragment implements LoaderManager.Load
             }
         }
 
-        showProgress(false);
+        mShowProgress.showProgress(false);
 
         dataBinding();
 
@@ -458,7 +460,7 @@ public class RegistrationFragment extends Fragment implements LoaderManager.Load
 
             initEntity();
 
-            showProgress(true);
+            mShowProgress.showProgress(true);
             mAuthTask = new RegistrationTask(mUserEntity, mPersonEntity);
             mAuthTask.execute((Void) null);
         }
@@ -517,36 +519,6 @@ public class RegistrationFragment extends Fragment implements LoaderManager.Load
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();
             }
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mRegistrationFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mRegistrationFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mRegistrationFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mRegistrationFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -700,7 +672,7 @@ public class RegistrationFragment extends Fragment implements LoaderManager.Load
         @Override
         protected void onPostExecute(Integer resultCode) {
             mAuthTask = null;
-            showProgress(false);
+            mShowProgress.showProgress(false);
 
             switch (resultCode){
                 case CODE_SUCCESSFULLY:{
@@ -731,7 +703,7 @@ public class RegistrationFragment extends Fragment implements LoaderManager.Load
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+            mShowProgress.showProgress(false);
         }
     }
 

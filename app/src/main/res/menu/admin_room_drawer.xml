@@ -23,6 +23,10 @@
                 android:id="@+id/nav_current_tasks_this_person"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/nav_bar_title_current_tasks"/>
+            <item
+                android:id="@+id/nav_show_all_tasks_person"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_bar_title_current_tasks"/>
         </menu>
     </item>
 

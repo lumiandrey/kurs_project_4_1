@@ -12,5 +12,6 @@ public interface TaskDao extends BaseDao<TaskEntity> {
 
     List<TaskEntity> readsTasksByPerson(long personID);
     List<TaskEntity> readsTasksByPersonDone(long personID);
+    List<TaskEntity> readsCurrentTasksByPerson(long personID);
 
 }

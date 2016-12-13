@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -77,6 +80,18 @@ public class TaskFragment extends Fragment {
 
     @SuppressLint("ValidFragment")
     private TaskFragment() {
+    }
+
+    public static TaskFragment newInstance(int idTask, Operation operationTask) {
+        Bundle args = new Bundle();
+
+        args.putInt(ARG_TASK_ID, idTask);
+        args.putSerializable(ARG_TASK_OPERATION, operationTask);
+
+        TaskFragment fragment = new TaskFragment();
+        fragment.setArguments(args);
+
+        return fragment;
     }
 
     /**
@@ -281,6 +296,39 @@ public class TaskFragment extends Fragment {
         changeOperation();
 
         return view;
+    }
+
+    /**
+     * заполняет меню, определенное в файле fragment_task.xml
+     * @param menu
+     * @param inflater
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        if(ApplicationSettings.getAccessLevelName(getContext()).equals(TypeUserName.Admin) ||
+                mTaskEntity.getIdPersonAdd() == ApplicationSettings.getIdPersonSystem(getContext()))
+            inflater.inflate(R.menu.fragment_task, menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean result;
+        switch (item.getItemId()) {
+            case R.id.menu_item_delete:
+
+                new TaskDaoLite(getContext()).delete(mTaskEntity);
+
+                finish();
+
+                result = true;
+                break;
+
+            default:
+                result = super.onOptionsItemSelected(item);
+        }
+        return result;
     }
 
     private boolean isCorrectTask(){
@@ -511,16 +559,6 @@ public class TaskFragment extends Fragment {
         //getFragmentManager().popBackStackImmediate();
     }
 
-    public static TaskFragment newInstance(int idTask, Operation operationTask) {
-        Bundle args = new Bundle();
 
-        args.putInt(ARG_TASK_ID, idTask);
-        args.putSerializable(ARG_TASK_OPERATION, operationTask);
-
-        TaskFragment fragment = new TaskFragment();
-        fragment.setArguments(args);
-
-        return fragment;
-    }
 
 }

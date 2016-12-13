@@ -21,6 +21,7 @@
     <string name="error_add_person">Error when adding Person to base</string>
     <string name="error_add_user">Error when User to base</string>
 
+    <string name="menu_delete_item">Remove</string>
 
     <string name="permission_rationale">Contacts permissions are needed for providing email
         completions.
