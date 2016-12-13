@@ -153,6 +153,8 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
         if(data == null)
             data = new ArrayList<>();
 
+        Log.d(TAG, "endLoader " + data.toString());
+
         if(data.size() < 1){
             mMessageEmpty.setVisibility(View.VISIBLE);
         } else {
@@ -163,6 +165,7 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
 
             mAdapter = new TaskAdapter(data);
             mTaskRecyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
 
         } else {
             mAdapter.setTaskEntities(data);
@@ -173,8 +176,19 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
 
     private void updateUI() {
 
+        Log.d(TAG, "Update UI called");
+
         if ((mLoaderTaskData != null) && mLoaderTaskData.getStatus() != AsyncTask.Status.RUNNING) {
             if (mLoaderTaskData.isCancelled()) {
+                mLoaderTaskData = new LoaderTaskData(
+                        mTypeShowTaskList,
+                        this,
+                        mShowProgress,
+                        getContext());
+
+                mLoaderTaskData.execute((Void[]) null);
+            } else {
+                mLoaderTaskData.cancel(true);
                 mLoaderTaskData = new LoaderTaskData(
                         mTypeShowTaskList,
                         this,
