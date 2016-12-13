@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.utilsview.IShowProgress;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.UserDaoLite;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 
 
-public class LoaderUserData extends AsyncTask<Void, Void, List<UserEntity>> {
+public class LoaderPersonData extends AsyncTask<Void, Void, List<PersonEntity>> {
 
-    private final UpdateData<UserEntity> mUpdateData;
+    private final UpdateData<PersonEntity> mUpdateData;
     private final IShowProgress mIShowProgress;
     private final Context mContext;
 
-    public LoaderUserData(UpdateData<UserEntity> updateData, IShowProgress iShowProgress, Context context) {
+    public LoaderPersonData(UpdateData<PersonEntity> updateData, IShowProgress iShowProgress, Context context) {
         mUpdateData = updateData;
         mIShowProgress = iShowProgress;
         mContext = context;
@@ -30,20 +30,20 @@ public class LoaderUserData extends AsyncTask<Void, Void, List<UserEntity>> {
     }
 
     @Override
-    protected List<UserEntity> doInBackground(Void... params) {
+    protected List<PersonEntity> doInBackground(Void... params) {
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
 
-        return new UserDaoLite(mContext).reads();
+        return new PersonDaoLite(mContext).reads();
     }
 
     @Override
-    protected void onPostExecute(List<UserEntity> resultData) {
+    protected void onPostExecute(List<PersonEntity> resultData) {
         mIShowProgress.showProgress(false);
 
         if(resultData == null)
@@ -57,5 +57,4 @@ public class LoaderUserData extends AsyncTask<Void, Void, List<UserEntity>> {
 
         mIShowProgress.showProgress(false);
     }
-
 }

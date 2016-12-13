@@ -130,7 +130,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
                 startActivity(TaskListFragmentActivity.newInstance(getApplicationContext(), TypeShowTaskList.SHOW_ALL_TASK));
             } break;
             case R.id.show_person:{
-
+                startActivity(PersonListActivity.newInstance(this));
             } break;
             case R.id.show_users:{
                 startActivity(UserListFragmentActivity.newInstance(this));
