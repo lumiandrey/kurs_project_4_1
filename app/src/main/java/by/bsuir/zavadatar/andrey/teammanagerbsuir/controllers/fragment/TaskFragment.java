@@ -35,9 +35,11 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeLi
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TypeTaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.HasTaskPersonEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeTaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
@@ -496,7 +498,8 @@ public class TaskFragment extends Fragment {
             mDateEndBtn.setText(mTaskEntity.getDateEndString());
             mDescriptionEdTx.setText(mTaskEntity.getDescription());
             mNameTaskEdTx.setText(mTaskEntity.getName());
-            mNameAddPersonTaskTxV.setText(ApplicationSettings.getFIO(getContext()));
+
+            mNameAddPersonTaskTxV.setText(getIO(new PersonDaoLite(getContext()).read(mTaskEntity.getIdPersonAdd())));
             mIdTaskTxV.setText(String.valueOf(mTaskEntity.getIdTask()));
             mDoneTask.setChecked(mTaskEntity.isDone());
             mTaskProgressBar.setProgress(mTaskEntity.getProgress());
@@ -559,6 +562,9 @@ public class TaskFragment extends Fragment {
         //getFragmentManager().popBackStackImmediate();
     }
 
+    private String getIO(PersonEntity personEntity){
+        return personEntity.getName() + ' ' + personEntity.getPatronymic();
+    }
 
 
 }

@@ -77,6 +77,9 @@ public class LoaderTaskData extends AsyncTask<Void, Void, List<TaskEntity>> {
     protected void onPostExecute(List<TaskEntity> resultData) {
         mIShowProgress.showProgress(false);
 
+        if(resultData == null)
+            resultData = new ArrayList<>();
+
         mUpdateData.endLoader(resultData);
     }
 

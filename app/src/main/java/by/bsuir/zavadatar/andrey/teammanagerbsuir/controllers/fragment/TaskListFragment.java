@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.TypeShowTaskList;
@@ -148,12 +148,7 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
     }
 
     @Override
-    public void endLoader(List<TaskEntity> data) {
-
-        if(data == null)
-            data = new ArrayList<>();
-
-        Log.d(TAG, "endLoader " + data.toString());
+    public void endLoader(@NonNull List<TaskEntity> data) {
 
         if(data.size() < 1){
             mMessageEmpty.setVisibility(View.VISIBLE);
@@ -175,8 +170,6 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
     }
 
     private void updateUI() {
-
-        Log.d(TAG, "Update UI called");
 
         if ((mLoaderTaskData != null) && mLoaderTaskData.getStatus() != AsyncTask.Status.RUNNING) {
             if (mLoaderTaskData.isCancelled()) {
@@ -282,7 +275,7 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
         public void onClick(View v) {
 
             Intent intent = TaskPagerActivity.newIntent(getActivity(),
-                    mTaskEntity.getIdTask());
+                    mTaskEntity.getIdTask(), mTypeShowTaskList);
 
             startActivityForResult(intent, REQUEST_CRIME);
 
