@@ -109,4 +109,5 @@
     <string name="managed_person">Managed person</string>
     <string name="show_persons">Show persons</string>
     <string name="show_users">Show users</string>
+    <string name="all_tasks_person">All tasks person</string>
 </resources>
