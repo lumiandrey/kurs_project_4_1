@@ -284,13 +284,19 @@ public class TaskFragment extends Fragment {
             }
         });
 
-        for(int i = 0; i < mTypeTaskEntities.size(); i++){
+        int i = 0;
+        boolean isSelected = false;
+        for(; i < mTypeTaskEntities.size(); i++){
             if(mTypeTaskEntities.get(i).getIdTypeTask() == mTaskEntity.getIdTypeTask()) {
-                mTypeTaskSpinner.setSelection(i);
+                isSelected = true;
                 break;
-            } else {
-                mTypeTaskSpinner.setSelection(0);
             }
+        }
+
+        if(isSelected) {
+            mTypeTaskSpinner.setSelection(i);
+        } else {
+            mTypeTaskSpinner.setSelection(0);
         }
 
         updateDate();

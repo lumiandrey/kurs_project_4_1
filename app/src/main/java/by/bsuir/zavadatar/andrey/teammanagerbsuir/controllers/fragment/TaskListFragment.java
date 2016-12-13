@@ -81,14 +81,6 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
         }
     }
 
-    private void addTask() {
-        TaskEntity entity = new TaskEntity();
-
-        //Intent intent = CrimePagerActivity.newIntent(getActivity(), crime.getId());
-
-        //startActivity(intent);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

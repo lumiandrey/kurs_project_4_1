@@ -71,8 +71,6 @@ public class LoaderTaskData extends AsyncTask<Void, Void, List<TaskEntity>> {
         return entities;
     }
 
-
-
     @Override
     protected void onPostExecute(List<TaskEntity> resultData) {
         mIShowProgress.showProgress(false);

@@ -43,6 +43,8 @@
         </activity>
         <activity android:name=".RegistrationActivity">
         </activity>
+        <activity android:name=".UserListFragmentActivity">
+        </activity>
     </application>
 
 </manifest>

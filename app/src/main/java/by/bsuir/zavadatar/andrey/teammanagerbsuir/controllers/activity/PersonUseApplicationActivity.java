@@ -133,7 +133,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
 
             } break;
             case R.id.show_users:{
-
+                startActivity(UserListFragmentActivity.newInstance(this));
             } break;
 
             default:
