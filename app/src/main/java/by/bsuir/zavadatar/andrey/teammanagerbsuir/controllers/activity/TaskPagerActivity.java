@@ -22,7 +22,6 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.TaskFragm
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.utilsview.ShowProgress;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.TaskStorage;
 
 /**
  * Created by Andrey on 12.11.2016.
@@ -53,10 +52,6 @@ public class TaskPagerActivity extends AppCompatActivity implements UpdateData<T
             mTypeShowTaskList = (TypeShowTaskList) getIntent().getSerializableExtra(ARG_KEY_TYPE_SHOW_TASK_LIST);
 
             mViewPager = (ViewPager) findViewById(R.id.activity_task_pager_view_pager);
-            mTaskEntities = TaskStorage.getData(
-                    getApplicationContext(),
-                    ApplicationSettings.getIdPersonSystem(getApplicationContext())
-            );
 
             mShowProgress = new ShowProgress(findViewById(R.id.progress_view), findViewById(R.id.data_view), this);
 

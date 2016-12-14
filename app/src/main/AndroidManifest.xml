@@ -47,6 +47,8 @@
         </activity>
         <activity android:name=".PersonListActivity">
         </activity>
+        <activity android:name=".PersonPagerActivity">
+        </activity>
     </application>
 
 </manifest>

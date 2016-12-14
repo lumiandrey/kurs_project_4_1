@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_user_room"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.UserRoomActivity"
+    >
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+
+                app:srcCompat="@drawable/user"
+
+                android:id="@+id/imageView4"
+
+                android:contentDescription="@string/room_person_photo"
+
+                android:layout_marginRight="@dimen/room_margin"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/room_content_surname_aut_comp_tv"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:hint="@string/room_person_surname"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/room_content_name_aut_comp_tv"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:hint="@string/room_person_name"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/room_content_patronymic_aut_comp_tv"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:hint="@string/room_person_patronymic"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/room_content_date_of_birth_btn"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+
+                android:text="@string/room_person_date_of_birth"
+
+                android:layout_margin="@dimen/room_margin"/>
+
+            <Spinner
+                android:id="@+id/room_content_sex_spin"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+
+                android:layout_margin="@dimen/room_margin"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/room_margin">
+
+            <Spinner
+                android:id="@+id/room_content_country_spin"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:visibility="visible"
+
+                android:layout_margin="@dimen/room_margin"/>
+
+            <Spinner
+                android:id="@+id/room_content_city_spin"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:visibility="gone"
+
+                android:layout_margin="@dimen/room_margin"/>
+
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/room_content_email_aut_comp_tv"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/room_person_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+
+                android:layout_margin="@dimen/room_margin"
+
+                android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/room_content_mobile_phone_aut_comp_tv"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/room_person_mobile_phone"
+                android:inputType="phone"
+                android:maxLines="1"
+
+                android:layout_margin="@dimen/room_margin"
+
+                android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/room_content_home_phone_aut_comp_tv"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/room_person_home_phone"
+                android:inputType="phone"
+                android:maxLines="1"
+
+                android:layout_margin="@dimen/room_margin"
+
+                android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <Spinner
+            android:id="@+id/room_content_department_text_view"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textSize="20sp"
+
+            android:layout_margin="@dimen/room_margin"
+
+            android:text="@string/room_person_department"
+            />
+
+        <Spinner
+            android:id="@+id/room_content_post_text_view"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textSize="20sp"
+
+            android:layout_margin="@dimen/room_margin"
+
+            android:text="@string/room_person_post"
+            />
+
+        <Button
+            android:id="@+id/edit_button"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_default_margin"
+
+            android:text="@string/update_button"/>
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+
+
+</ScrollView>

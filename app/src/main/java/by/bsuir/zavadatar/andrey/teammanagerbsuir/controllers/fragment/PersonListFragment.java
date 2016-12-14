@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.PersonPagerActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.LoaderPersonData;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.UpdateData;
@@ -140,17 +142,25 @@ public class PersonListFragment extends Fragment implements UpdateData<PersonEnt
         }
     }
 
-    private class PersonHolder extends RecyclerView.ViewHolder{
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        updateUI();
+    }
+
+    private class PersonHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
 
         private TextView mFIOTextView;
         private TextView mDepartmentTextView;
         private TextView mPostTextView;
-
+        private Snackbar mSnackbar;
 
         private PersonEntity mPersonEntity;
 
         public PersonHolder(View itemView) {
             super(itemView);
+            itemView.setOnLongClickListener(this);
 
             mFIOTextView = (TextView) itemView.findViewById(R.id.fio_item);
             mDepartmentTextView = (TextView) itemView.findViewById(R.id.department_item);
@@ -174,6 +184,18 @@ public class PersonListFragment extends Fragment implements UpdateData<PersonEnt
 
         }
 
+        @Override
+        public boolean onLongClick(View v) {
+            mSnackbar = Snackbar.make(v, "Перейти к редактированию?", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Да", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(PersonPagerActivity.newIntent(getContext(), mPersonEntity.getIdPerson()));
+                        }
+                    });
+            mSnackbar.show();
+            return false;
+        }
     }
 
     private class PersonAdapter extends RecyclerView.Adapter<PersonHolder> {
