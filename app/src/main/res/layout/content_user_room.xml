@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="by.bsuir.zavadatar.andrey.teammanagerbsuir.activity.by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.UserRoomActivity"
+    tools:context="by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.UserRoomActivity"
     >
 
     <LinearLayout

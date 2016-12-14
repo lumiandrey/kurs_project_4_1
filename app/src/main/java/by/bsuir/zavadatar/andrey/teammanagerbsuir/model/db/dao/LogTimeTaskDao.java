@@ -11,5 +11,6 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity
 public interface LogTimeTaskDao extends BaseDao<LogTimeTaskEntity> {
 
     List<LogTimeTaskEntity> readsByTask(long idTask);
+    boolean isCorrectDelete(long personID, LogTimeTaskEntity logTimeTaskEntity);
 
 }

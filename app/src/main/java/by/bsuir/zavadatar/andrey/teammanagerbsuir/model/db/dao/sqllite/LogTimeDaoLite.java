@@ -121,6 +121,13 @@ public class LogTimeDaoLite extends AbstractDaoBase<LogTimeTaskEntity> implement
     }
 
     @Override
+    public boolean isCorrectDelete(long personID, LogTimeTaskEntity logTimeTaskEntity) {
+
+
+        return false;
+    }
+
+    @Override
     public void deleteAll(){
         super.deleteAll(NAME_TABLE);
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimePagerActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.LogTimeDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.LogTimeTaskEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.LogTimeStorage;
 
 
@@ -93,6 +98,7 @@ public class LogTimeListFragment extends Fragment {
         mTaskRecyclerView.setLayoutManager(new LinearLayoutManager
                 (getActivity()));
 
+
         updateUI();
 
         return view;
@@ -145,19 +151,21 @@ public class LogTimeListFragment extends Fragment {
     /**
      * хранит ссылку на представление объекта.
      */
-    private class LogTimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class LogTimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         public static final int LENGTH_DESCRIPTION = 20;
         private TextView mLogTimeID;
         private TextView mDescription;
         private TextView mDate;
         private TextView mHours;
+        private Snackbar mSnackbar;
 
         private LogTimeTaskEntity mTaskEntity;
 
         public LogTimeHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
             mLogTimeID = (TextView) itemView.findViewById(R.id.id_log_task);
             mDescription = (TextView) itemView.findViewById(R.id.log_time_description);
@@ -191,6 +199,35 @@ public class LogTimeListFragment extends Fragment {
 
             startActivity(intent);
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            mSnackbar = Snackbar.make(v, "Подтвердите удаление!", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Удалить", snackbarOnClickListener);
+            mSnackbar.show();
+            return true;
+        }
+
+        View.OnClickListener snackbarOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int idPerson = ApplicationSettings.getIdPersonSystem(getContext());
+
+                int idHas = new HasTaskDaoLite(getContext()).getIDHasByIDPersonIDTask(idPerson, taskID.intValue());
+                String message;
+
+                if (idHas > 0) {
+                    new LogTimeDaoLite(getContext()).delete(mTaskEntity);
+                    updateUI();
+                    message = "Удалние произведено!";
+                } else {
+                    message = "Ошибка удаления у вас нет прав!";
+                }
+
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        };
     }
 
     private class LogTimeAdapter extends RecyclerView.Adapter<LogTimeHolder> {
