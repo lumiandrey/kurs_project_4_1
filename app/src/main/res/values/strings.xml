@@ -119,4 +119,8 @@
     <string name="error_access_message">Error access</string>
     <string name="post">"Post: "</string>
     <string name="department">"Department: "</string>
+
+    <string name="select_person_edit">Edit Person</string>
+    <string name="select_person_delete">Delete Person</string>
+
 </resources>
