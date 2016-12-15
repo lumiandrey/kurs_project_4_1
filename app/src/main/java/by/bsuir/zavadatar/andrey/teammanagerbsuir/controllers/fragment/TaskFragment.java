@@ -165,7 +165,8 @@ public class TaskFragment extends Fragment {
         mAddPersonToTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //TODO-Andrey add support dialog select variant link example
+                //@link = http://www.worldbestlearningcenter.com/tips/Android-dialog-ListView.htm
             }
         });
 
