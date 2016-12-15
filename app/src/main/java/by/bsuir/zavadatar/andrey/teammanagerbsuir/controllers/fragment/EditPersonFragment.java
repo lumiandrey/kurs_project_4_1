@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class EditPersonFragment extends Fragment {
     private Spinner mSexSpinner;
     private Snackbar mSnackbar;
 
+    @SuppressLint("ValidFragment")
     private EditPersonFragment(){}
 
     public static EditPersonFragment newInstance(@NonNull PersonEntity personEntity){

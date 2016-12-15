@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +39,7 @@ public class PersonListFragment extends Fragment implements UpdateData<PersonEnt
     private ShowProgress mShowProgress;
     private LoaderPersonData mLoaderUserData = null;
 
+    @SuppressLint("ValidFragment")
     private PersonListFragment() {
     }
 

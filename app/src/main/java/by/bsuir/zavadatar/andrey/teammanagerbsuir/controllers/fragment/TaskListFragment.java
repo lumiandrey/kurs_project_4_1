@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -52,6 +53,7 @@ public class TaskListFragment extends Fragment implements UpdateData<TaskEntity>
     private LoaderTaskData mLoaderTaskData = null;
     private TextView mMessageEmpty;
 
+    @SuppressLint("ValidFragment")
     private TaskListFragment() {
     }
 
