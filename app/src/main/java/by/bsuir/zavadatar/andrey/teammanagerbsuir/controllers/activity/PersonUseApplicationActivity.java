@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.TypeShowTaskList;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration.PersonShowFilter;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.storage.ApplicationSettings;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.utils.Converter;
@@ -130,7 +131,7 @@ public abstract class PersonUseApplicationActivity extends AppCompatActivity imp
                 startActivity(TaskListFragmentActivity.newInstance(getApplicationContext(), TypeShowTaskList.SHOW_ALL_TASK));
             } break;
             case R.id.show_person:{
-                startActivity(PersonListActivity.newInstance(this));
+                startActivity(PersonListActivity.newInstance(this, PersonShowFilter.ADMIN_SHOW));
             } break;
             case R.id.show_users:{
                 startActivity(UserListFragmentActivity.newInstance(this));

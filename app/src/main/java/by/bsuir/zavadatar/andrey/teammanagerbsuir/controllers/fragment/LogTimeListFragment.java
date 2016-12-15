@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimePagerActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.LogTimeDaoLite;
@@ -87,7 +88,7 @@ public class LogTimeListFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-
+                startActivity(LogTimeSingleActivity.newIntent(getContext(), nameTask, taskID));
             }
 
         });

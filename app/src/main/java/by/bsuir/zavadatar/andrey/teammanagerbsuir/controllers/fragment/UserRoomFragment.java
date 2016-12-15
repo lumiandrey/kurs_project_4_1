@@ -91,6 +91,8 @@ public class UserRoomFragment extends Fragment {
 
         dataBinding();
 
+        view.requestFocusFromTouch();
+
         return view;
     }
 

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -20,17 +21,22 @@ import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.PersonPag
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.LoaderPersonData;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.UpdateData;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration.PersonShowFilter;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.utilsview.ShowProgress;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.HasTaskPersonDao;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.DepartmentDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PostDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.DepartmentEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.HasTaskPersonEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PostEntity;
 
 
 public class PersonListFragment extends Fragment implements UpdateData<PersonEntity> {
 
-    private final static String KEY_ARG_HANDLE = "message_users";
+    private final static String KEY_ARG_PERSON_SHOW_FILTER= "message_users";
+    private final static String KEY_ARG_TASK = "TASK_ID";
 
     private RecyclerView mTaskRecyclerView;
     private PersonAdapter mAdapter;
@@ -38,14 +44,36 @@ public class PersonListFragment extends Fragment implements UpdateData<PersonEnt
     private List<PostEntity> mPostEntities;
     private ShowProgress mShowProgress;
     private LoaderPersonData mLoaderUserData = null;
+    private PersonShowFilter personShowFilter;
+    private int taskID;
 
     @SuppressLint("ValidFragment")
     private PersonListFragment() {
     }
 
-    public static PersonListFragment newInstance(){
+    public static PersonListFragment newInstance(@NonNull PersonShowFilter personShowFilter){
+
+        Bundle args = new Bundle();
+
+        args.putSerializable(KEY_ARG_PERSON_SHOW_FILTER, personShowFilter);
+
+        if(personShowFilter.equals(PersonShowFilter.ADD_PERSON_TO_TASK))
+            throw new RuntimeException("Error! no ID TASK!!!");
+        PersonListFragment fragment = new PersonListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    public static PersonListFragment newInstanceAddToTask(int taskID){
+
+        Bundle args = new Bundle();
+
+        args.putInt(KEY_ARG_TASK, taskID);
+        args.putSerializable(KEY_ARG_PERSON_SHOW_FILTER, PersonShowFilter.ADD_PERSON_TO_TASK);
 
         PersonListFragment fragment = new PersonListFragment();
+        fragment.setArguments(args);
 
         return fragment;
     }
@@ -57,6 +85,12 @@ public class PersonListFragment extends Fragment implements UpdateData<PersonEnt
 
         mDepartmentEntities = new DepartmentDaoLite(getContext()).reads();
         mPostEntities = new PostDaoLite(getContext()).reads();
+
+        personShowFilter = (PersonShowFilter) getArguments().getSerializable(KEY_ARG_PERSON_SHOW_FILTER);
+
+        if (personShowFilter != null && personShowFilter.equals(PersonShowFilter.ADD_PERSON_TO_TASK))
+            taskID = getArguments().getInt(KEY_ARG_TASK);
+
     }
 
     @Override
@@ -188,13 +222,47 @@ public class PersonListFragment extends Fragment implements UpdateData<PersonEnt
 
         @Override
         public boolean onLongClick(View v) {
-            mSnackbar = Snackbar.make(v, "Перейти к редактированию?", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Да", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(PersonPagerActivity.newIntent(getContext(), mPersonEntity.getIdPerson()));
+
+            View.OnClickListener clickListener = null;
+            String message = null;
+            String titleAction = null;
+
+            if (personShowFilter != null && personShowFilter.equals(PersonShowFilter.ADD_PERSON_TO_TASK)){
+                clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String messageToast = getString(R.string.error_add_to_base);
+                        HasTaskPersonDao hasTaskPersonDao = new HasTaskDaoLite(getContext());
+                        int hasTaskPersonID = hasTaskPersonDao
+                                .getIDHasByIDPersonIDTask(mPersonEntity.getIdPerson(), taskID);
+                        if( hasTaskPersonID < 0){
+                            long id = hasTaskPersonDao.create(new HasTaskPersonEntity(0, taskID, mPersonEntity.getIdPerson()));
+
+                            if(id > 0)
+                                messageToast = getString(R.string.add_log_time_message_successfully);
+                            else
+                                messageToast = getString(R.string.add_log_time_message_failed);
+                        } else {
+                            messageToast = "Пользователь уже добавлен к проекту!";
                         }
-                    });
+                        Toast.makeText(getContext(), messageToast, Toast.LENGTH_LONG).show();
+                    }
+                };
+                message = "Добавить в текущий проект?";
+                titleAction = "Да";
+            } else {
+                clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(PersonPagerActivity.newIntent(getContext(), mPersonEntity.getIdPerson()));
+                    }
+                };
+                message = "Перейти к редактированию?";
+                titleAction = "Да";
+            }
+            mSnackbar = Snackbar.make(v, message, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(titleAction, clickListener);
             mSnackbar.show();
             return false;
         }

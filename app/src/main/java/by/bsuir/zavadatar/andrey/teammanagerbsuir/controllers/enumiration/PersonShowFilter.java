@@ -1,9 +1,12 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration;
 
 
-public enum PersonShowFilter {
+import java.io.Serializable;
+
+public enum PersonShowFilter implements Serializable {
 
     WORKER_SHOW,
     ALL_SHOW,
-    ADMIN_SHOW
+    ADMIN_SHOW,
+    ADD_PERSON_TO_TASK
 }

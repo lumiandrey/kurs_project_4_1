@@ -20,6 +20,7 @@
     <string name="error_exception_registration">Error when registering</string>
     <string name="error_add_person">Error when adding Person to base</string>
     <string name="error_add_user">Error when User to base</string>
+    <string name="error_add_to_base">Error when adding to base</string>
 
     <string name="menu_delete_item">Remove</string>
 

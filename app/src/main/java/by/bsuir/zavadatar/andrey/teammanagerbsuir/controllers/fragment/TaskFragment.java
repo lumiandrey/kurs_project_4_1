@@ -33,6 +33,7 @@ import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeListActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeSingleActivity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.PersonListActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
@@ -167,16 +168,9 @@ public class TaskFragment extends Fragment {
             public void onClick(View v) {
                 //TODO-Andrey add support dialog select variant link example
                 //@link = http://www.worldbestlearningcenter.com/tips/Android-dialog-ListView.htm
+                startActivity(PersonListActivity.newInstanceAddToTask(getContext(), mTaskEntity.getIdTask()));
             }
         });
-
-        if(ApplicationSettings.isWorking(getContext())) {
-
-            mAddPersonToTaskBtn.setVisibility(View.VISIBLE);
-        } else {
-
-            mAddPersonToTaskBtn.setVisibility(View.GONE);
-        }
 
         mDoneTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -416,6 +410,7 @@ public class TaskFragment extends Fragment {
 
                 mAddingLayout.setVisibility(View.VISIBLE);
                 mLayoutLogTask.setVisibility(View.GONE);
+                mAddPersonToTaskBtn.setVisibility(View.GONE);
                 mDateBeginBtn.setEnabled(true);
                 mDateEndBtn.setEnabled(true);
                 mTypeTaskSpinner.setEnabled(true);
@@ -442,6 +437,14 @@ public class TaskFragment extends Fragment {
                 } else {
 
                     mAddingLayout.setVisibility(View.GONE);
+                }
+
+                if(ApplicationSettings.isWorking(getContext())) {
+
+                    mAddPersonToTaskBtn.setVisibility(View.VISIBLE);
+                } else {
+
+                    mAddPersonToTaskBtn.setVisibility(View.GONE);
                 }
             } break;
         }
