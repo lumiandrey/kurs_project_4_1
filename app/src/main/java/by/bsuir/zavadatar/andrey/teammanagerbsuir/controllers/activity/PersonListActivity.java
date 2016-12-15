@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.PersonListFragment;
 
 public class PersonListActivity extends PersonUseApplicationActivity {
+
     @Override
     protected Fragment createFragment() {
         return PersonListFragment.newInstance();

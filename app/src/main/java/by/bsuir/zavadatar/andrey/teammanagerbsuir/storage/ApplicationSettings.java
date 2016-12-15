@@ -6,10 +6,16 @@ import android.content.SharedPreferences;
 import java.util.List;
 
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.ApplicationHelper;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.DepartmentDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PostDaoLite;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.DepartmentEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PersonEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.PostEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TypeUserEntity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.UserEntity;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.DepartEnum;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.PostEnum;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.enumiration.TypeUserName;
 
 
@@ -109,5 +115,22 @@ public class ApplicationSettings {
     public static int getIdPersonSystem(Context context){
 
         return getStorageSettings(context).getInt(ID_PERSON, DEF_ID_PERSON);
+    }
+
+    public static boolean isWorking(Context context){
+        boolean result = false;
+        PersonEntity personEntity = sPersonEntity(context);
+        if(personEntity != null){
+
+            DepartmentEntity departmentEntity = new DepartmentDaoLite(context).read(personEntity.getIdDepartment());
+            PostEntity postEntity = new PostDaoLite(context).read(personEntity.getIdPost());
+
+            if((departmentEntity != null && postEntity != null) &&
+                    !postEntity.getNamePost().equals(PostEnum.NONE.name()) &&
+                    !departmentEntity.getNameDepartment().equals(DepartEnum.NONE.name()) )
+                result = true;
+
+        }
+        return result;
     }
 }

@@ -110,4 +110,13 @@
     <string name="show_persons">Show persons</string>
     <string name="show_users">Show users</string>
     <string name="all_tasks_person">All tasks person</string>
+    <string name="add_person_to_task">add person to task</string>
+    <string name="more">more</string>
+    <string name="confirm_deletion">Confirm deletion!</string>
+    <string name="delete_successfully">Delete successfully</string>
+    <string name="delete_fail">Delete failed</string>
+
+    <string name="error_access_message">Error access</string>
+    <string name="post">"Post: "</string>
+    <string name="department">"Department: "</string>
 </resources>

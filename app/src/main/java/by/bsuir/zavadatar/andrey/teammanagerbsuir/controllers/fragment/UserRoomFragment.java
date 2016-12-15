@@ -1,5 +1,6 @@
 package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -111,6 +112,7 @@ public class UserRoomFragment extends Fragment {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void dataBinding() {
         mNameTextView.setText(mPersonEntity.getName());
 
@@ -277,11 +279,11 @@ public class UserRoomFragment extends Fragment {
 
         mHomePhoneTextView.setText(mPersonEntity.getHomePhone());
 
-        mPostTextView.setText((new PostDaoLite(
+        mPostTextView.setText(getString(R.string.post) + (new PostDaoLite(
                         ApplicationHelper.getInstance(getContext()))
                         .read(mPersonEntity.getIdPost()).getNamePost()));
 
-        mDepartmentTextView.setText((new DepartmentDaoLite(
+        mDepartmentTextView.setText(getString(R.string.department) + (new DepartmentDaoLite(
                 ApplicationHelper.getInstance(getContext()))
                 .read(mPersonEntity.getIdDepartment()).getNameDepartment()));
 

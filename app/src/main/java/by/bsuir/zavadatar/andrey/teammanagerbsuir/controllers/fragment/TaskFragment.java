@@ -34,6 +34,7 @@ import java.util.List;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeListActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.LogTimeSingleActivity;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.activity.R;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.HasTaskDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.PersonDaoLite;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.db.dao.sqllite.TaskDaoLite;
@@ -69,6 +70,7 @@ public class TaskFragment extends Fragment {
     private Button mAddLogTimeBtn;
     private Button mShowLogTimeBtn;
     private Button mAddTaskBtn;
+    private Button mAddPersonToTaskBtn;
     private EditText mDescriptionEdTx;
     private EditText mNameTaskEdTx;
     private EditText mProgressBarEdTx;
@@ -148,6 +150,7 @@ public class TaskFragment extends Fragment {
         mAddLogTimeBtn = (Button) view.findViewById(R.id.add_log_time_task_fragment_btn);
         mShowLogTimeBtn = (Button) view.findViewById(R.id.show_logs_task_fragment_btn);
         mAddTaskBtn = (Button) view.findViewById(R.id.add_task_fragment_btn);
+        mAddPersonToTaskBtn = (Button) view.findViewById(R.id.add_poerson_to_task_fragment_btn);
         mDescriptionEdTx = (EditText) view.findViewById(R.id.description_task_fragment_task_edit_text);
         mNameTaskEdTx = (EditText) view.findViewById(R.id.name_task_fragment_edit_text);
         mProgressBarEdTx = (EditText) view.findViewById(R.id.edit_progress_bar);
@@ -159,6 +162,20 @@ public class TaskFragment extends Fragment {
         mAddingLayout = (LinearLayout) view.findViewById(R.id.layout_add_task);
         mTypeTaskSpinner = (Spinner) view.findViewById(R.id.type_task_spinner);
 
+        mAddPersonToTaskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        if(ApplicationSettings.isWorking(getContext())) {
+
+            mAddPersonToTaskBtn.setVisibility(View.VISIBLE);
+        } else {
+
+            mAddPersonToTaskBtn.setVisibility(View.GONE);
+        }
 
         mDoneTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

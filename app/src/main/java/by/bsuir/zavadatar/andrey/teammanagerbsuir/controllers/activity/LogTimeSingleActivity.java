@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.LogTimeFragment;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.Operation;
 
 public class LogTimeSingleActivity extends PersonUseApplicationActivity {
 

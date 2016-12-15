@@ -17,7 +17,7 @@ import java.util.List;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.TypeShowTaskList;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.LoaderTaskData;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.asynctask.UpdateData;
-import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.Operation;
+import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration.Operation;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment.TaskFragment;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.utilsview.ShowProgress;
 import by.bsuir.zavadatar.andrey.teammanagerbsuir.model.entity.TaskEntity;

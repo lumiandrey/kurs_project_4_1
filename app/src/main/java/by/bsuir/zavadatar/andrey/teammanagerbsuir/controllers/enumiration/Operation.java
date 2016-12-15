@@ -1,4 +1,4 @@
-package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.fragment;
+package by.bsuir.zavadatar.andrey.teammanagerbsuir.controllers.enumiration;
 
 
 import java.io.Serializable;

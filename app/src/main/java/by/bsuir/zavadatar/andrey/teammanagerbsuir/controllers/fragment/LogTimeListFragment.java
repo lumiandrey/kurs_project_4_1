@@ -177,7 +177,7 @@ public class LogTimeListFragment extends Fragment {
 
             mLogTimeID.setText(String.valueOf(mTaskEntity.getIdLog()));
             String description = mTaskEntity.getDescription().length() > LENGTH_DESCRIPTION ?
-                    mTaskEntity.getDescription().substring(0, LENGTH_DESCRIPTION) + " more" :
+                    mTaskEntity.getDescription().substring(0, LENGTH_DESCRIPTION) + ' ' + getString(R.string.more) :
                     mTaskEntity.getDescription();
             mDescription.setText(description);
             mDate.setText(mTaskEntity.getDateLogString());
@@ -200,7 +200,7 @@ public class LogTimeListFragment extends Fragment {
 
         @Override
         public boolean onLongClick(View v) {
-            mSnackbar = Snackbar.make(v, "Подтвердите удаление!", Snackbar.LENGTH_INDEFINITE)
+            mSnackbar = Snackbar.make(v, R.string.confirm_deletion, Snackbar.LENGTH_INDEFINITE)
                     .setAction("Удалить", snackbarOnClickListener);
             mSnackbar.show();
             return true;
@@ -216,11 +216,14 @@ public class LogTimeListFragment extends Fragment {
                 String message;
 
                 if (idHas > 0) {
-                    new LogTimeDaoLite(getContext()).delete(mTaskEntity);
-                    updateUI();
-                    message = "Удалние произведено!";
+                    if(new LogTimeDaoLite(getContext()).delete(mTaskEntity) > 0) {
+                        updateUI();
+                        message = getString(R.string.delete_successfully);
+                    } else {
+                        message = getString(R.string.delete_fail);
+                    }
                 } else {
-                    message = "Ошибка удаления у вас нет прав!";
+                    message = getString(R.string.error_access_message);
                 }
 
                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();

@@ -87,4 +87,10 @@
     <string name="show_users">Просмотр пользователей</string>
     <string name="menu_delete_item">Удаление</string>
     <string name="all_tasks_person">Все задачи пользователей</string>
+    <string name="add_person_to_task">Присоединить</string>
+    <string name="more">подробнее</string>
+    <string name="confirm_deletion">Подтвердите удаление!</string>
+    <string name="delete_successfully">Удаление произведено!</string>
+    <string name="delete_fail">Ошибка удаления</string>
+    <string name="error_access_message">Ошибка удаления у вас нет прав!</string>
 </resources>

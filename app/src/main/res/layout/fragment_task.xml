@@ -221,9 +221,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:visibility="gone"
 
             android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/add_poerson_to_task_fragment_btn"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:layout_margin="@dimen/activity_default_margin"
+
+                android:text="@string/add_person_to_task"/>
 
             <Button
                 android:id="@+id/add_task_fragment_btn"
@@ -236,6 +247,8 @@
                 android:layout_margin="@dimen/activity_default_margin"
 
                 android:text="@string/add_log_time_task"/>
+
+
 
         </LinearLayout>
 
