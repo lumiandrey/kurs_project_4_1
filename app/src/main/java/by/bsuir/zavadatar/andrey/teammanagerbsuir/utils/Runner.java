@@ -17,7 +17,9 @@ import java.util.Locale;
 /**
  * Created by Andrey on 26.11.2016.
  */
-
+/*@ReportsCrashes(mailTo = "reports@yourdomain.com",
+        mode = ReportingInteractionMode.TOAST,
+        resToastText = R.string.crash_message)*/
 public class Runner extends Application {
 
     private final static String TAG = Runner.class.getName();
