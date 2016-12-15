@@ -56,14 +56,14 @@ public class LogTimeDaoLite extends AbstractDaoBase<LogTimeTaskEntity> implement
 
         return super.update(entity, NAME_TABLE,
                 ID_WHERE + " = ?",
-                new String[] {String.valueOf(entity.getIdHasTaskPerson())});
+                new String[] {String.valueOf(entity.getIdLog())});
     }
 
     @Override
     public int delete(LogTimeTaskEntity entity) {
 
         return super.delete(NAME_TABLE, ID_WHERE + " = ?",
-                new String[] {String.valueOf(entity.getIdHasTaskPerson())});
+                new String[] {String.valueOf(entity.getIdLog())});
     }
 
     @Override
